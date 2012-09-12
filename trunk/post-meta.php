@@ -4,7 +4,7 @@ Plugin Name: Post Meta
 Plugin URI: http://postmeta.warezdl.org/
 Description: This is a post meta generator plugin.
 Author: Mahbubur Rahman
-Version: 0.1
+Version: 1.0
 Author URI: http://postmeta.warezdl.org/
 */
 
@@ -17,7 +17,7 @@ require_once ( 'lib/init.php' );
 if (!class_exists( 'metaOption' )){
     class metaOption extends pluginCore {
         public $name    = 'Post Meta';
-        public $version = '0.1';
+        public $version = '1.0';
         public $prefix  = 'mo_';       
         
 
