@@ -24,7 +24,7 @@ Post Meta is a wordpress CMS custom post meta field generator. From the back end
 * Will add more custom field
 * Will add more custom feature for both(Developer and user)user
 
-[Developer Website](http://postmeta.warezdl.org)
+[Developer Website](http://post-meta.com)
 == Installation ==
 
 1. Upload "post-meta.zip" to the "/wp-content/plugins/" directory and extracted it or search for "Post Meta" Key word from your add new plugin page and thn just click to install.
