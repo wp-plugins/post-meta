@@ -8,15 +8,15 @@ Stable tag: 0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This is a post meta generator plugin. From the back end it will provide smart and modern (ajax and jquery based) interface to create post meta option or custom meta by group or field.
+Post Meta is a custom post meta field generator plugin. 
 
 == Description ==
-
+Post Meta is a wordpress CMS custom post meta field generator. From the back end it will provide smart and modern (ajax and jquery based) interface to create post meta option or custom meta field as group or field.
 
 
 == Installation ==
 
-1. Upload `post-meta.zip` to the `/wp-content/plugins/` directory and extracted it
+1. Upload "post-meta.zip" to the "/wp-content/plugins/" directory and extracted it or search for "Post Meta" Key word from your add new plugin page and thn just click to install.
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently asked questions ==
