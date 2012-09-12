@@ -4,7 +4,7 @@ Donate link:
 Tags: Post Meta, Meta, Option Meta, Custom post field, custom field
 Requires at least: 3.3
 Tested up to: 3.4
-Stable tag: 0.1
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,21 +14,23 @@ Post Meta is a custom post meta field generator plugin.
 Post Meta is a wordpress CMS custom post meta field generator. From the back end it will provide smart and modern (ajax and jquery based) interface to create post meta option or custom meta field as group or field.
 
 <h4>Current Feature:</h4>
-1. Fully jQuery and ajax based Management
-2. Group and Field
-3. Sorting group and field by dragging
-4. It build for All user(Developer and user)
+* Fully jQuery and ajax based Management
+* Group and Field
+* Sorting group and field by dragging
+* It build for All user(Developer and user)
 
-<h4>Coming Feature:</h4>
-1. Manage Custom Post type and Taxonomy
-2. Will add more custom field
-3. Will add more custom feature for both(Developer and user)user
+<b>Coming Feature:</h4>
+* Manage Custom Post type and Taxonomy
+* Will add more custom field
+* Will add more custom feature for both(Developer and user)user
 
-
+[Developer Website](http://postmeta.warezdl.org)
 == Installation ==
 
 1. Upload "post-meta.zip" to the "/wp-content/plugins/" directory and extracted it or search for "Post Meta" Key word from your add new plugin page and thn just click to install.
-1. Activate the plugin through the 'Plugins' menu in WordPress
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Go to "Admin Theme" under 'Appearance' menu
+4. Choose a theme among available themes
 
 == Frequently asked questions ==
 
@@ -43,7 +45,9 @@ An answer to that question.
 
 == Changelog ==
 
+**1.0**
 
+Initial Release
 
 == Upgrade notice ==
 
