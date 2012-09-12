@@ -2,7 +2,7 @@
 /*
 Plugin Name: Post Meta
 Plugin URI: http://postmeta.warezdl.org/
-Description: This is a post meta generator plugin
+Description: This is a post meta generator plugin.
 Author: Mahbubur Rahman
 Version: 0.1
 Author URI: http://postmeta.warezdl.org/

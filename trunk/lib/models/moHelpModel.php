@@ -28,9 +28,9 @@ class moHelpModel {
                                                 $html .="<li>{$field['meta_key']}</li>";
                                             $html .="</ul>"; 
                                         }
-                                    }else{echo "No Custom Field Found";}
+                                    }else{$html .= "No Custom Field Found";}
                             } 
-                        }else{ echo "No Custom Field Found";}
+                        }else{ $html .= "No Custom Group Found";}
                           
                     endforeach;
                     
