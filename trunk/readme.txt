@@ -2,7 +2,7 @@
 Contributors: Mahbubur Rahman
 Donate link: 
 Tags: Post Meta, Meta, Option Meta, Custom post field, custom field
-Requires at least: 3.3
+Requires at least: 3.0
 Tested up to: 3.4
 Stable tag: 1.0
 License: GPLv2 or later
@@ -19,7 +19,7 @@ Post Meta is a wordpress CMS custom post meta field generator. From the back end
 * Sorting group and field by dragging
 * It build for All user(Developer and user)
 
-<b>Coming Feature:</h4>
+<h4>Coming Feature:</h4>
 * Manage Custom Post type and Taxonomy
 * Will add more custom field
 * Will add more custom feature for both(Developer and user)user
@@ -45,9 +45,9 @@ An answer to that question.
 
 == Changelog ==
 
-**1.0**
+1.0
 
-Initial Release
+*Initial Release
 
 == Upgrade notice ==
 
