@@ -14,18 +14,15 @@ Post Meta is a custom post meta field generator plugin.
 Post Meta is a wordpress CMS custom post meta field generator. From the back end it will provide smart and modern (ajax and jquery based) interface to create post meta option or custom meta field as group or field.
 
 <h4>Current Feature:</h4>
-    <ul>
-        <li>1. Fully jQuery and ajax based Management</li>
-        <li>2. Group and Field</li>
-        <li>3. Sorting group and field by dragging</li>
-        <li>4. It build for All user(Developer and user)</li>
-    </ul>
+1. Fully jQuery and ajax based Management
+2. Group and Field
+3. Sorting group and field by dragging
+4. It build for All user(Developer and user)
+
 <h4>Coming Feature:</h4>
-    <ul>
-        <li>1. Manage Custom Post type and Taxonomy</li>
-        <li>2. Will add more custom field</li>
-        <li>3. Will add more custom feature for both(Developer and user)user</li>
-    </ul>
+1. Manage Custom Post type and Taxonomy
+2. Will add more custom field
+3. Will add more custom feature for both(Developer and user)user
 
 
 == Installation ==
