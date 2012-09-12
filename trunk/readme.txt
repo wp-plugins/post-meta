@@ -1,7 +1,7 @@
 === Post Meta ===
 Contributors: Mahbubur Rahman
 Donate link: 
-Tags: Post Meta, Meta, Option Meta, Custom post field, custopm field
+Tags: Post Meta, Meta, Option Meta, Custom post field, custom field
 Requires at least: 3.3
 Tested up to: 3.4
 Stable tag: 0.1
