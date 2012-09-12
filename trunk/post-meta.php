@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Post Meta
-Plugin URI: http://postmeta.warezdl.org/
+Plugin URI: http://post-meta.com
 Description: This is a post meta generator plugin.
 Author: Mahbubur Rahman
 Version: 1.0
-Author URI: http://postmeta.warezdl.org/
+Author URI: http://post-meta.com
 */
 
 if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
