@@ -14,12 +14,16 @@ class moArrayModel {
                                             'title'         => 'Paragraph',
                                             'is_free'       => true,   
                                         ),
+                                        'rich_text' => array(
+                                            'title'         => 'Rich Text',
+                                            'is_free'       => true,   
+                                        ),
                                         'email' => array(
                                             'title'         => 'Email',
                                             'is_free'       => true,  
                                         ),
                                         'url' => array(
-                                            'title'         => 'Url',
+                                            'title'         => 'Website',
                                             'is_free'       => true,  
                                         ),
                                         'Phone' => array(
@@ -29,7 +33,11 @@ class moArrayModel {
                                         'number' => array(
                                             'title'         => 'Number',
                                             'is_free'       => true,  
-                                        ),                       
+                                        ),
+                                        'datetime' => array(
+                                            'title'         => 'Date / Time',
+                                            'is_free'       => true,   
+                                        ),                      
                                         'select' => array(
                                             'title'         => 'Drop Down',
                                             'is_free'       => true,   

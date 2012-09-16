@@ -28,11 +28,7 @@ if( !class_exists( 'moPostController' ) ) :
                             'on_preview'=>PM_ASSECTS_URL.'images/nopreview.gif',       
                     );
                     wp_localize_script( 'jquery', 'pm_jsvar', $data );
-                
-                wp_register_script( 'postmeta-fileuploader', PM_ASSECTS_URL.'js/jquery/fileuploader.js',array('jquery') );
-                wp_enqueue_script('postmeta-fileuploader' );
-                wp_register_style( 'postmeta-fileuploader', PM_ASSECTS_URL.'css/jquery/fileuploader.css');
-                wp_enqueue_style('postmeta-fileuploader' );
+                    
                  
                  /* rich text */
                 wp_register_script( 'jquery-wysiwyg', PM_ASSECTS_URL.'js/jquery/jquery.wysiwyg.js',array('jquery') );
@@ -55,7 +51,22 @@ if( !class_exists( 'moPostController' ) ) :
                 wp_enqueue_script('jquery-tools-min' );
                 /* End rich text */
                            
-                
+                wp_register_script( 'jquery-ui-core', PM_ASSECTS_URL.'js/ui/jquery.ui.core.js',array('jquery') );
+                wp_enqueue_script('jquery-ui-core' );
+                wp_register_script( 'jquery-ui-widget', PM_ASSECTS_URL.'js/ui/jquery.ui.widget.js',array('jquery') );
+                wp_enqueue_script('jquery-ui-widget' );
+                wp_register_script( 'jquery-ui-datepicker', PM_ASSECTS_URL.'js/ui/jquery.ui.datepicker.js',array('jquery') );
+                wp_enqueue_script('jquery-ui-datepicker' );
+                wp_register_script( 'jquery-ui-mouse', PM_ASSECTS_URL.'js/ui/jquery.ui.mouse.js',array('jquery') );
+                wp_enqueue_script('jquery-ui-mouse' );
+                wp_register_script( 'jquery-ui-slider', PM_ASSECTS_URL.'js/ui/jquery.ui.slider.js',array('jquery','jquery-ui-mouse','jquery-ui-core','jquery-ui-widget') );
+                wp_enqueue_script('jquery-ui-slider' );
+                wp_register_script( 'jquery-ui-timepicker-addon', PM_ASSECTS_URL.'js/ui/jquery-ui-timepicker-addon.js',array('jquery') );
+                wp_enqueue_script('jquery-ui-timepicker-addon' );
+                wp_register_style( 'jquery-ui-all', PM_ASSECTS_URL.'css/ui/jquery.ui.all.css');
+                wp_enqueue_style('jquery-ui-all' );
+                wp_register_style( 'jquery-ui-datepicker', PM_ASSECTS_URL.'css/ui/jquery.ui.datepicker.css');
+                wp_enqueue_style('jquery-ui-datepicker' );
                 
                 
                 wp_register_style( 'meta-option-validationEngine-css', PM_ASSECTS_URL.'/css/jquery/validationEngine.css' );
