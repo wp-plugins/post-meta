@@ -233,7 +233,7 @@ $output .= "$fieldCssClass $fieldCssStyle";
         $output = "$fielsTitle $fieldType $fieldMetaKey $fieldId";
     }
  
-$output .= "<div class='mo_note'><p>By default, <b>Required</b> and <b>Unique</b> validation will be set with this field. <b>Read Only</b> will be set conditionaly.</p></div>";   
+$output .= "<div class='mo_note' style='padding:5px;'>By default, <b>Required</b>validation will be set with this field.<br/></div>";   
 
                               
                         $html ='';
