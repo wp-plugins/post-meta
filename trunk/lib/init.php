@@ -27,8 +27,10 @@ if (!class_exists( 'pluginCore' )){
             $this->modelsPath      = $this->pluginCorePath . '/models/';
             $this->controllersPath = $this->pluginCorePath . '/controllers/';
             $this->viewsPath       = $this->pluginCorePath . '/views/';
+            $this->helpersPath       = $this->pluginCorePath . '/helpers/';
             
             $this->loadModels( $this->modelsPath );
+            //$this->loadModels( $this->helpersPath );
             //$this->pluginPath      = $this->directoryUp( $this->frameworkPath );            
             //$this->frameworkUrl    = plugins_url( '' , __FILE__ );                                         
             //$this->pluginUrl       = $this->directoryUp( $this->frameworkUrl );

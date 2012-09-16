@@ -14,15 +14,11 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
 
 require_once ( 'lib/init.php' );  
 
-if (!class_exists( 'metaOption' )){
-    class metaOption extends pluginCore {
+if (!class_exists( 'postMeta' )){
+    class postMeta extends pluginCore {
         public $name    = 'Post Meta';
         public $version = '1.0';
-        public $prefix  = 'mo_';       
-        
-
-        public $options;
-        public $transient;
+        public $prefix  = 'pm_';      
         
         public $pluginPath;
         public $modelsPath;
@@ -39,19 +35,26 @@ if (!class_exists( 'metaOption' )){
             $this->modelsPath       = $this->pluginPath . '/lib/models/';
             $this->controllersPath  = $this->pluginPath . '/lib/controllers/';
             $this->viewsPath        = $this->pluginPath . '/lib/views/';
+            $this->viewsPath        = $this->pluginPath . '/lib/helper/';
             
             $this->pluginUrl        = plugins_url( '' , __FILE__ ); 
-            $this->assetsUrl        = $this->pluginUrl  . '/assets/';  
-               
-          
+            $this->assetsUrl        = $this->pluginUrl  . '/assets/'; 
+            $this->helperUrl        = $this->pluginUrl  .'/lib/helper/';
+            define('PM_PATH',dirname( __FILE__ )); 
+            define('PM_PLUGIN_URL',plugins_url( '' , __FILE__ )).'/';
+            define('PM_ASSECTS_URL', PM_PLUGIN_URL.'/assets/');
+            
           $posttypes=$pluginCore->meta_option_get_post_types();
           foreach($posttypes as  $pt){
             $this->options[$pt->name]='meta_options_'.$pt->name;
             //$this->all_fields[$pt->name]=array();
           }
-                                                       
+          
         }
+        
     }
-    global $metaOption;
-    $metaOption = new metaOption;
+    global $postMeta;
+    $postMeta = new postMeta;
+    
+    
 }

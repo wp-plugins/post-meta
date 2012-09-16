@@ -30,7 +30,7 @@ global $pluginCore;
                                                                         "by_key"    => true,
                                                                      ), array('normal'=>'normal','advanch' => 'advanch','side' => 'side') );
                                                         $html .=$pluginCore->create_input( "group[$id][priority]", "select", array( 
-                                                                        "value"     => isset($meta_box['priority']) ? $meta_box['priority'] : "default",
+                                                                        "value"     => isset($meta_box['priority']) ? $meta_box['priority'] : null,
                                                                         "label"     => "Context Type", 
                                                                         "class"     => "mo_input",
                                                                         "enclose"   => "div class='mo_segment'",

@@ -17,13 +17,11 @@ if( !class_exists( 'moSettingsController' ) ) :
             
              $pluginCore->render("settings", $settings); 
         }
-        function meta_option_sc(){
-            global $metaOption;
-            
-            wp_register_style( 'meta-option-admin-style', $metaOption->assetsUrl.'/css/meta_option_admin.css' );
+        function meta_option_sc(){            
+            wp_register_style( 'meta-option-admin-style', PM_ASSECTS_URL.'/css/meta_option_admin.css' );
             wp_enqueue_style('meta-option-admin-style' );
              
-            wp_register_script( 'meta-option-admin-script', $metaOption->assetsUrl.'/js/meta_option_admin.js'); 
+            wp_register_script( 'meta-option-admin-script', PM_ASSECTS_URL.'/js/meta_option_admin.js'); 
             wp_enqueue_script('meta-option-admin-script' ); 
         
                  

@@ -11,13 +11,25 @@ if( !class_exists( 'moManageController' ) ) :
             add_action( 'wp_ajax_mo_add_field', array($this, 'meta_option_add_field' ) );
             add_action( 'wp_ajax_mo_change_field', array($this, 'meta_option_change_field' ) );
             add_action( 'wp_ajax_meta_option_group_save', array($this, 'meta_option_group_save' ) );
-            
-            
+            add_action('wp_enqueue_scripts', array($this,'load_fe_scripts'));
+
+                    
             
         }
+        function set_my_js_var() {
+            // logic here for setting the right JS var
+            return "some value";
+        }
+        function load_fe_scripts() {
+            
+            $localize_array = array(
+                'my_js_var' => set_my_js_var()
+            );
+            wp_localize_script( 'meta-option-post-script', 'my_global', $localize_array );
+        }
+
         function meta_option_menu(){
-            global $metaOption;
-            $page = add_utility_page( 'Post Meta', 'Post Meta', 'administrator', 'post-meta', array( $this, 'post_meta_menu_page' ) , $metaOption->assetsUrl.'images/icon_gray.png'); 
+            $page = add_menu_page( 'Post Meta', 'Post Meta', 'administrator', 'post-meta', array( $this, 'post_meta_menu_page' ) , PM_ASSECTS_URL.'images/icon_gray.png'); 
             $page = add_submenu_page( 'post-meta', 'Manage Post Meta', 'Manage Post Meta', 'administrator', 'post-meta', array( $this, 'post_meta_menu_page' ));
             
         //$page = add_options_page('Meta Option', 'Meta Option','manage_options' ,'meta_option', array( $this, 'meta_option_menu_page' ));
@@ -25,7 +37,6 @@ if( !class_exists( 'moManageController' ) ) :
         }   
         
         function meta_option_sc(){
-            global $metaOption;
         wp_enqueue_script('jquery-ui-tabs');
         wp_enqueue_script('jquery-ui-sortable');
         wp_enqueue_script('jquery-ui-draggable');
@@ -34,20 +45,20 @@ if( !class_exists( 'moManageController' ) ) :
         wp_enqueue_script('jquery-ui-resizable');
         wp_enqueue_script('jquery-ui-dialog');
         
-        wp_register_style( 'pluginCore-style', $metaOption->assetsUrl.'/css/pluginCore.css' );
+        wp_register_style( 'pluginCore-style', PM_ASSECTS_URL.'css/pluginCore.css' );
         wp_enqueue_style('pluginCore-style' );
-        wp_register_style( 'meta-option-admin-style', $metaOption->assetsUrl.'/css/meta_option_admin.css' );
+        wp_register_style( 'meta-option-admin-style', PM_ASSECTS_URL.'css/meta_option_admin.css' );
         wp_enqueue_style('meta-option-admin-style' );
-        wp_register_style( 'meta-option-validationEngine-css', $metaOption->assetsUrl.'/css/jquery/validationEngine.css' );
+        wp_register_style( 'meta-option-validationEngine-css', PM_ASSECTS_URL.'css/jquery/validationEngine.css' );
         wp_enqueue_style('meta-option-validationEngine-css' ); 
          
-        wp_register_script( 'meta-option-admin-script', $metaOption->assetsUrl.'/js/meta_option_admin.js'); 
+        wp_register_script( 'meta-option-admin-script', PM_ASSECTS_URL.'js/meta_option_admin.js'); 
         wp_enqueue_script('meta-option-admin-script' ); 
-        wp_register_script( 'meta-option-third-party-slug-string', $metaOption->assetsUrl.'js/third_party/jquery.stringToSlug.js'); 
+        wp_register_script( 'meta-option-third-party-slug-string', PM_ASSECTS_URL.'js/jquery/jquery.stringToSlug.js'); 
         wp_enqueue_script('meta-option-third-party-slug-string'); 
-        wp_register_script( 'meta-option-validationEngine', $metaOption->assetsUrl.'/js/jquery/validationEngine.js'); 
+        wp_register_script( 'meta-option-validationEngine', PM_ASSECTS_URL.'js/jquery/validationEngine.js'); 
         wp_enqueue_script('meta-option-validationEngine'); 
-        wp_register_script( 'meta-option-validationEngine-en', $metaOption->assetsUrl.'/js/jquery/validationEngine-en.js'); 
+        wp_register_script( 'meta-option-validationEngine-en', PM_ASSECTS_URL.'js/jquery/validationEngine-en.js'); 
         wp_enqueue_script('meta-option-validationEngine-en');
         
                  
@@ -93,7 +104,7 @@ if( !class_exists( 'moManageController' ) ) :
         
         
         function meta_option_group_save(){
-            global $metaOption,$pluginCore;
+            global $postMeta,$pluginCore;
             
             if ( wp_verify_nonce( $_REQUEST['mo_nonce'],'nonce') ){
                 
@@ -106,7 +117,7 @@ if( !class_exists( 'moManageController' ) ) :
                  
                 $groups =  $_REQUEST ;           
                 
-                update_option($metaOption->options[$post_type], $groups );
+                update_option($postMeta->options[$post_type], $groups );
                 
                 echo $pluginCore->showMessage("Settings Successfully Saved", 'success');
                 die();
@@ -119,7 +130,6 @@ if( !class_exists( 'moManageController' ) ) :
         }
         function post_meta_menu_page(){
             global $pluginCore;
-           global $metaOption;
                             //Section
                     if( !empty( $_GET['section'] ) ) {
                       $section = urlencode($_GET['section']);
@@ -144,8 +154,7 @@ if( !class_exists( 'moManageController' ) ) :
         
         
         function form_custom_group( $parameter ) {
-            global $pluginCore;
-             global $metaOption;
+            global $pluginCore,$postMeta;
             if( $parameter ) extract($parameter); 
             ?>
             <div class="wrap">
@@ -165,7 +174,7 @@ if( !class_exists( 'moManageController' ) ) :
         <div class="metabox-holder">
                     <div id="mo_group_container" class="meta-group-holder  ui-sortable ui-droppable">             
                                 <?php
-                                     $meta_boxs=get_option($metaOption->options[$post_type]);
+                                     $meta_boxs=get_option($postMeta->options[$post_type]);
                                      if($meta_boxs){
                                      
                                              $i=0;

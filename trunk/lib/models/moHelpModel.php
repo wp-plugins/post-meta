@@ -9,7 +9,7 @@ class moHelpModel {
      */
     
      function getMetaKeyList(){
-        global $metaOption,$pluginCore;
+        global $postMeta,$pluginCore;
         
             $posttypes=$pluginCore->meta_option_get_post_types();
             $html = '';
@@ -17,7 +17,7 @@ class moHelpModel {
             $html .= "<div class='mo_meta_key_list'>";
                   foreach($posttypes as  $pt):
             
-                        $data = get_option($metaOption->options[$pt->name]);
+                        $data = get_option($postMeta->options[$pt->name]);
                        $html .="<h4>Meta Key For $pt->name </h4>";
                        
                         if($data['group']){

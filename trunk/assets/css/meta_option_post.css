@@ -104,3 +104,27 @@ border: 1px solid #DCCD4D;
     background-color: #DFF2BF;
     
 }
+
+/* file */
+
+.file_wrapper{
+    display: inline-block;
+}
+.file_preview{
+    float: left;
+    position: relative;
+}
+.file_preview_thum{
+    margin-right: 20px;
+    width: 155px;
+    background: #fff;
+    text-align: center;
+}
+.file_thum_manage{
+    position: absolute;
+    right: 0px;    
+}
+.file_input{
+    padding: 0 20px;
+    float: left;
+}

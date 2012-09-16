@@ -61,6 +61,11 @@
             $style .= "height:{$field['height']} ";
          }
          
+         if($field['rich_text']){
+            $class .='pm_rich_text ';
+        }
+         
+         
          
         if($field['type']=='textarea'){
             
@@ -105,8 +110,11 @@
         $required = ($field['required'])?"<span class='required_label'>*</span>":"";
         $label_extra = "<em style='display: none; '>(<span class='mo_field_count'>1</span>)</em>$required";
         
+        if($field['type']=='image_media'){
+            $class .='pc_uploaded_url ';
+        }
+
         if( $validation ) $class .= "validate[" . rtrim( $validation, ',') . "]";
-                        
                         $html .= $pluginCore->create_input("mofields[{$field['meta_key']}]",$field['type'], array( 
                                         "value"             =>isset($meta)?$meta: null,
                                         "label"             => "<span class='name'>$field[title]</span>",
