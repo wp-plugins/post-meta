@@ -182,7 +182,17 @@ $fieldMaxNumber = $pluginCore->create_input( "group[$group_id][field][$id][max_n
                                         "class"     => "mo_input",
                                         "after"     => "<div class='mo_note'>(e.g. 40;)</div>",
                                         "enclose"   => "div class='mo_field_segment'",
-                                     ) );                                      
+                                     ) ); 
+$fieldDateTimeSelection = $pluginCore->create_input( "group[$group_id][field][$id][datetime_selection]", "select", array( 
+                                        "value"         => isset($field['datetime_selection']) ? $field['datetime_selection'] : null,
+                                        "label"         => 'Type Selection',
+                                        "id"        => "mo_datetime_$id",
+                                        "class"         => "mo_input",
+                                        "enclose"       => "div class='mo_field_segment'",
+                                        "by_key"        => true,
+                                     ), array( 'date'=>'Date', 'time'=>'Time', 'datetime'=>'Date and Time') ); 
+ 
+                                                                       
 
 $output = "$fielsTitle $fieldType $fieldMetaKey $fieldDescription $fieldId $fieldSize";
 $output .= "<div class='mo_field_segment'>";
@@ -211,12 +221,16 @@ $output .= "</div>";
     
     if($field['type'] == 'number'){
         $output .= "$fieldNimNumber $fieldMaxNumber";
-    }    
+    }
+    if($field['type'] == 'datetime'){
+        $output .= "$fieldDateTimeSelection";
+    } 
+    
 
 $output .= "$fieldCssClass $fieldCssStyle"; 
 
     if($field['type'] == 'hidden'){
-        $output = " $fieldType $fieldMetaKey $fieldId";
+        $output = "$fielsTitle $fieldType $fieldMetaKey $fieldId";
     }
  
 $output .= "<div class='mo_note'><p>By default, <b>Required</b> and <b>Unique</b> validation will be set with this field. <b>Read Only</b> will be set conditionaly.</p></div>";   

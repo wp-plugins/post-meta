@@ -1,4 +1,3 @@
-
 (function($){
         $(document).ready(function(){         
             jQuery("#publish").live('click',function(){
@@ -29,28 +28,19 @@
                 $('.formError').hide();
               });
             
-           /* umPageNavi( 1, false );
-            
-            $(".um_rich_text").wysiwyg({initialContent:""});  
-            
-            $(".um_datetime").datetimepicker({ dateFormat: 'yy-mm-dd', timeFormat: 'hh:mm:ss' });
-            $(".um_date").datepicker({ dateFormat: 'yy-mm-dd' });   
-            $(".um_time").timepicker({timeFormat: 'hh:mm:ss'});  
-            
-            $(".pass_strength").password_strength();    
-            
-            umFileUploader( '<?php  echo $userMeta->pluginUrl . '/framework/helper/uploader.php' ?>' ); */
                
                       
         });      
-    })(jQuery)
+})(jQuery);
 
 
 //load button for image media
 jQuery(document).ready(function() {
     jQuery(".pm_rich_text").wysiwyg({initialContent:" "});
-    
-    
+    jQuery(".pm_datetime").datetimepicker({ dateFormat: 'yy-mm-dd', timeFormat: 'hh:mm:ss', changeYear: true });
+    jQuery(".pm_date").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true });   
+    jQuery(".pm_time").timepicker({timeFormat: 'hh:mm:ss'});  
+
     jQuery('.pc_media_upload_button').click(function() {
         var item = jQuery(this);
          targetfield = jQuery(this).prev('.pc_uploaded_url');

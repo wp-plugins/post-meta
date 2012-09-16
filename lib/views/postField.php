@@ -34,11 +34,7 @@
         }
         if($field['type']=="phone"){
             $validation .= "custom[phone],";
-        }
-        if($field['type']=="number"){
-            $validation .= "custom[number],";
-        }
-        
+        }       
 
         
         if( isset( $field['css_class'] ) ){
@@ -113,6 +109,45 @@
         if($field['type']=='image_media'){
             $class .='pc_uploaded_url ';
         }
+        if( $field['type'] == 'rich_text' ){  
+            $field['type'] = 'textarea';
+            $class    .= "pm_rich_text ";
+          }
+          
+
+if( $field['type'] == 'number' ){  
+    $validation     .= "custom[integer],";
+    if( isset( $field['min_number'] ) ) :
+        $validation .= "min[{$field['min_number']}],";
+    endif;
+    if( isset( $field['max_number'] ) ) :
+        $validation .= "max[{$field['max_number']}],";
+    endif;     
+}
+  
+
+if( $field['type'] == 'datetime' ){ 
+    if( $field['datetime_selection'] == 'date' ) :
+        $validation .= "custom[date],";
+        $class      .= "pm_date ";
+    elseif( $field['datetime_selection'] == 'time' ) :
+        $validation .= "custom[time],";
+        $class      .= "pm_time ";  
+    elseif( $field['datetime_selection'] == 'datetime' ) :
+        $validation .= "custom[datetime],";
+        $class      .= "pm_datetime ";                
+    endif;
+}
+
+
+
+
+
+
+
+
+
+
 
         if( $validation ) $class .= "validate[" . rtrim( $validation, ',') . "]";
                         $html .= $pluginCore->create_input("mofields[{$field['meta_key']}]",$field['type'], array( 
