@@ -6,16 +6,7 @@ $field_type_data    = $pluginCore->getFields('key');
 
 if(!$field['title']){$field['title']='Untitled Field';}
 $field_type = isset($field_type) ? $field_type : $field['type'] ;
-/*
-$meta_key=$post_type."_".$group_id."_".$id;
-if($field[meta_key]){
-    $meta_key=$field[meta_key];
-}
 
-echo '<pre>';
-print_r($field);
-echo '</pre>';
-*/
 $style=($toggle)?"block":"none";
 
 

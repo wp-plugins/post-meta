@@ -8,7 +8,7 @@
 .required_label{
     color:red;
 }
-.pc_info, .pc_success, .pc_warning, div.pc_error, .pc_validation {
+.pc_info, .pc_success, .pc_warning, div.pc_error, div.pc-error, .pc_validation {
     border: 1px solid;
     margin: 10px 0px;
     padding:5px 10px 5px 35px;
@@ -30,7 +30,7 @@
     background-color: #FEEFB3;
     background-image: url('../images/warning.png');
 }
-div.pc_error {
+div.pc_error ,div.pc-error {
     color: #D8000C;
     background-color: #FFBABA;
     background-image: url('../images/error.png');

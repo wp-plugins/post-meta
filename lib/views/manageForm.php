@@ -1,5 +1,5 @@
 <?php  
-global $metaOption,$pluginCore;
+global $postMeta,$pluginCore;
 
 ?>
 <input type="hidden" name="post_type" id="mo_post_type" value="<?php echo $post_type; ?>" />
@@ -20,7 +20,7 @@ global $metaOption,$pluginCore;
                                     
                                     
                                     
-                                     $meta_boxs=get_option($metaOption->options[$post_type]);
+                                     $meta_boxs=get_option($postMeta->options[$post_type]);
                                      if($meta_boxs){
                                      
                                              $i=0;

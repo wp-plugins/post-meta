@@ -1,4 +1,4 @@
-<?php global $metaOption,$pluginCore; ?>
+<?php global $pluginCore; ?>
 
 <div class="wrap">
     <div id="icon-options-general" class="icon32 icon32-posts-page"><br /></div>  

@@ -57,12 +57,11 @@ class initModel {
     }
     
     function loadUi($uis=array()){
-        global $metaOption;
         if($uis){
             foreach($uis as $ui){
-            wp_register_style( 'pluginCore-style-'.$ui, $metaOption->assetsUrl.'css/ui/jquery.ui.'.$ui.'.css' );
+            wp_register_style( 'pluginCore-style-'.$ui, PM_ASSECTS_URL.'css/ui/jquery.ui.'.$ui.'.css' );
             wp_register_style('pluginCore-style-'.$ui);
-            wp_register_script( 'pluginCore-script-'.$ui, $metaOption->assetsUrl.'js/ui/jquery.ui.'.$ui.'.js'); 
+            wp_register_script( 'pluginCore-script-'.$ui, PM_ASSECTS_URL.'js/ui/jquery.ui.'.$ui.'.js'); 
             wp_enqueue_script('pluginCore-script-'.$ui);
             } 
         }
@@ -166,8 +165,32 @@ class initModel {
                 $html .= "<input type='$type' $name $include />";
                 
             }elseif($type == 'image_media'){
-                $html .= "<div id='upload_response_{$attr['id']}'></div>";
-                $html .="<a class='button thickbox update_field_media_upload' id='thumb_{$attr['id']}' href='media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=1&amp;width=640&amp;height=255'>Set Image</a>";
+                global $pluginCore;
+                if($attr['value']){
+                    $style ="block";
+                    $preview_url= $pluginCore->generate_thumb($attr['value'],150,150);
+                }else{
+                    $style ="none";
+                    $preview_url = PM_ASSECTS_URL.'images/nopreview.gif';
+                }
+                
+                $img_media='';
+                $img_media .="<div class='file_wrapper'>";
+                    $img_media .="<div class ='file_preview'>";
+                    $img_media .="<div class='file_thum_manage' style='display:$style;'><a href='#delete' class='delete' onclick='pmDeleteFile(this); return false' >delete</a></div>";
+                                $img_media .="<div class='file_preview_thum'><img src='$preview_url' /></div>";
+                    $img_media .="</div>";  
+                    $img_media .="<div class='file_input'>";
+                        $img_media .= "<div id='upload_response_{$attr['id']}'></div>";
+                        $img_media .="<input type='hidden' $name $include  value='' />";
+                        //$img_media .="<input type='text' class='upload-url'  value='' />";
+                        //                        $img_media .="<a class='button thickbox update_field_media_upload' id='thumb_{$attr['id']}' href='media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=1&amp;width=640&amp;height=255'>Set Image</a>";
+                        $img_media .="<input id='media_upload_{$attr['id']}' class='button pc_media_upload_button' type='button' name='pc_media_upload_button' value='Upload Image' />";
+                    $img_media .="</div>";
+                
+                $img_media .="</div>";
+                
+                $html .=$img_media;
                 
             }else{
                 $html .= "<input type='$type' $name $include />";
@@ -225,7 +248,45 @@ class initModel {
             $html  .= $inAdmin ? "<div class='updated'><p>$message</p></div>" : "<div class='$class'>$message</div>";
             
             return $html;
-        }    
+        }
+        
+            
+            //   
+            function generate_thumb($file, $width, $height, $cut = true){
+                
+                
+                $uploads    = wp_upload_dir();
+                $fullPath   = $uploads['basedir'] . $file;
+                $fullUrl    = $uploads['baseurl'] . $file;
+                
+                if(preg_match('/\/wp-content\/uploads\//',$file ,$match)){
+                    
+                   $fullPath = $uploads['basedir'].str_replace( $uploads['baseurl'] , '', $file);
+                   $fullUrl = $file;
+                    
+                }
+                $fileData   = pathinfo( $fullPath );
+                $fileName   = $fileData['basename'];
+            
+                if( !file_exists( $fullPath ) ) return;               
+            
+                // In case of image
+                if( is_array( getimagesize( "$fullUrl" ) ) ){
+                    if( @$width AND @$height ){
+                        $resizedImage = image_resize( $fullPath, $width, $height );
+                        if( is_wp_error($resizedImage) )
+                            $error[] = $resizedImage->get_error_message();               
+                        if( !isset($error) )
+                            $fullUrl = str_replace( $uploads['basedir'], $uploads['baseurl'], $resizedImage );
+                    }        
+                    return $fullUrl;  
+                }   
+                
+            }
+            
+            
+            
+            
     
 }
     

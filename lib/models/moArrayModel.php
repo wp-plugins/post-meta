@@ -9,6 +9,10 @@ class moArrayModel {
                                         'text' => array(
                                             'title'         => 'Textbox',
                                             'is_free'       => true,  
+                                        ), 
+                                        'textarea' => array(
+                                            'title'         => 'Paragraph',
+                                            'is_free'       => true,   
                                         ),
                                         'email' => array(
                                             'title'         => 'Email',
@@ -25,11 +29,7 @@ class moArrayModel {
                                         'number' => array(
                                             'title'         => 'Number',
                                             'is_free'       => true,  
-                                        ), 
-                                        'textarea' => array(
-                                            'title'         => 'Paragraph',
-                                            'is_free'       => true,   
-                                        ),                      
+                                        ),                       
                                         'select' => array(
                                             'title'         => 'Drop Down',
                                             'is_free'       => true,   
@@ -49,7 +49,7 @@ class moArrayModel {
                                         'image_media' => array(
                                             'title'         => 'Image Media',
                                             'is_free'       => true,   
-                                        )      
+                                        )     
                                         /*'datetime' => array(
                                             'title'         => 'Date / Time',
                                             'is_free'       => false,

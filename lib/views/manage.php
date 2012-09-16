@@ -5,7 +5,7 @@ global $pluginCore;
 
 <div class="wrap">
     <div id="pm-icon-edit-pages" class="icon32 icon32-posts-page"><br /></div>  
-    <h2>Meta Option Management</h2>   
+    <h2>Post Meta Management Panel</h2>   
     <?php do_action( 'mo_notice' ); ?>
     <div id="dashboard-widgets-wrap">
         <div class="metabox-holder">
