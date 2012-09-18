@@ -1,6 +1,6 @@
 === Post Meta ===
 Contributors: Mahbubur Rahman
-Donate link: 
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JEZQ8VP43Y6FQ
 Tags: Post Meta, Meta, Option Meta, Custom post field, custom field
 Requires at least: 3.0
 Tested up to: 3.4
