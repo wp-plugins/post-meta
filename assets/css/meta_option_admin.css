@@ -92,7 +92,12 @@
     background: #F0F7FD;
 }
 
-.mo_meta_key_list{
+.mo_meta_key_list ul{
+    padding-left: 10px;
+}
+.mo_meta_key_list ul li{
+    padding-left: 35px;
+    list-style: inherit;
 }
 .mo_meta_key_use{
     width: 75%;
@@ -122,7 +127,6 @@
     padding: 2px;
 }
 
-
 /* manage Group */
 
 
@@ -131,5 +135,10 @@
     padding: 0 0 10px 0;
 }
 
+/* Post Type and Taxonomy */
 
+.pm_menu_button{
+    margin: 20px 0 10px 0;
+     
+} 
 

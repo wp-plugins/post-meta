@@ -1,24 +1,161 @@
-/*jQuery(function() {
-                jQuery('.meta-group-holder').sortable();
-                jQuery('.metabox-fields-holder').sortable();
+/* Post type Manage Page  */
+
+function pmUpdatePostType(element){
+    jQuery(element).validationEngine();
+    if( !jQuery(element).validationEngine("validate") ) {
+                    
+                    jQuery('.pc_error').remove(); 
+                    jQuery('.pc_success').remove(); 
+                    }else{
+                        arg=jQuery( element ).serialize();
+                        alert(arg);
+                        bindElement =jQuery('#submit');
+                        jQuery('.pc_error').remove(); 
+                        jQuery('.pc_success').remove();
+                        
+                        AjaxCall( bindElement, 'pm_post_type_update', arg, function(data){
+                            jQuery('.msg').children(".pc_error").remove();
+                            jQuery('.msg').html(data);
+                            //jQuery('#pm_posttype_menu').append("<div class='mo_type_manage_option'><div class='mo_type_option'><b>{$post_type['type']}</b><span class='mo_edit_link'> <a href='#Edit' rel='$key' onclick='editPostType(this); return false;' >Edit</a> | | <a href='#Delete' rel='$key' onclick='deletePostType(this); return false;' >Delete</a></span></div></div>");
+                             window.location.reload(true);
+                        });
+                        
+                        /*JsonAjaxCall( jQuery(element), "pm_post_type_update", '', function(data){
+                                    jQuery('.msg').children(".pc_error").remove();
+                                    jQuery('.msg').html(data.msg);
+                                    jQuery('#pm_posttype_menu').append(data.menu);
+                        });*/
+                        
+                        
+                    }
+    
+}
+
+
+function editPostType(element){
+    
+    arg = "post_type_key="+jQuery(element).attr('rel');
+    AjaxCall( jQuery(element), 'pm_post_type_edit', arg, function(data){
+        jQuery("#mo_loading_area").html( data ); 
+    });
+    
+}
+
+function deletePostType(element){
+    if( confirm('Confirm to remove?') ){
+        arg = "post_type_key="+jQuery(element).attr('rel');
+        AjaxCall( jQuery(element), 'pm_post_type_delete', arg, function(data){
+            jQuery(element).parents('.mo_edit_link').parents('.mo_type_option').remove(); 
+            window.location.reload(true);
+        });
+    }
+}
+
+function addPostType(element){
+    AjaxCall( jQuery(element), 'pm_post_type_add','', function(data){
+        jQuery("#mo_loading_area").html( data ); 
+    });
+}
+
+/*  End */
+
+/* Taxonomy manage page */
+function pmUpdateTaxonomy(element){
+    jQuery(element).validationEngine();
+                    if( !jQuery(element).validationEngine("validate") ) {
+                    
+                        jQuery('.pc_error').remove(); 
+                        jQuery('.pc_success').remove(); 
+                    }else{
+                        arg=jQuery( element ).serialize();
+                        bindElement = jQuery('#submit');
+                        jQuery('.pc_error').remove(); 
+                        jQuery('.pc_success').remove();
+                        
+                        AjaxCall( bindElement, 'pm_taxonomy_update', arg, function(data){
+                            jQuery('.msg').children(".pc_error").remove();
+                            jQuery('.msg').html(data);
+                            //jQuery('#pm_posttype_menu').append("<div class='mo_type_manage_option'><div class='mo_type_option'><b>{$post_type['type']}</b><span class='mo_edit_link'> <a href='#Edit' rel='$key' onclick='editPostType(this); return false;' >Edit</a> | | <a href='#Delete' rel='$key' onclick='deletePostType(this); return false;' >Delete</a></span></div></div>");
+                            // window.location.reload(true);
+                        });
+                        
+                        /*JsonAjaxCall( jQuery(element), "pm_post_type_update", '', function(data){
+                                    jQuery('.msg').children(".pc_error").remove();
+                                    jQuery('.msg').html(data.msg);
+                                    jQuery('#pm_posttype_menu').append(data.menu);
+                        });*/
+                        
+                        
+                    }
+    
+}
+
+function editTaxonomy(element){
+    
+    arg = "taxonomy_key="+jQuery(element).attr('rel');
+    AjaxCall( jQuery(element), 'pm_taxonomy_edit', arg, function(data){
+        jQuery("#mo_loading_area").html( data ); 
+    });
+    
+}
+
+function deleteTaxonomy(element){
+    if( confirm('Confirm to remove?') ){
+        arg = "taxonomy_key="+jQuery(element).attr('rel');
+        AjaxCall( jQuery(element), 'pm_taxonomy_delete', arg, function(data){
+            jQuery(element).parents('.mo_edit_link').parents('.mo_type_option').remove(); 
+        });
+    }
+}
+
+function addTaxonomy(element){
+    AjaxCall( jQuery(element), 'pm_taxonomy_add', '', function(data){
+        jQuery("#mo_loading_area").html( data ); 
+    });
+}
+
+
+function pmTaxonomySuggetion(element){
+    jQuery('#advanced-label input[name*=pm_taxonomy]:text').each(function(index,value) {
+              rel = jQuery(this).attr('rel');
+              label = jQuery('#pm_taxonomy_name').val();
+              if(!rel){
+                rel =label;
+              }else{
+                if(rel=='Search'){
+                    rel='Search '+label;
+                }else if(rel=='Add New'){
+                    rel='Add New '+label;
+                }else if(rel=='Popular'){
+                    rel='Popular '+label;
+                }else if(rel=='All'){
+                    rel='All '+label;
+                }else if(rel=='Parent'){
+                    rel='Parent '+label;
+                }else if(rel=='Parent:'){
+                    rel='Parent '+label+':';
+                }else if(rel=='Edit'){
+                    rel='Edit '+label;
+                }else if(rel=='Update'){
+                    rel='Update '+label;
+                }else if(rel=='New Name'){
+                    rel='New '+label+' Name';
+                }else if(rel=='Separate  with commas'){
+                    rel='Separate '+label+' with commas';
+                }else if(rel=='Choose from the most used'){
+                    rel='Choose from the most used '+label;
+                }else{
+                    rel=jQuery(this).attr('rel')+label;
+                }
                 
-                if( !jQuery('#group_form').validationEngine("validate")) return false;
-                //jQuery(toggleIcon).parents('.postbox').children('.inside').toggle();
-                //jQuery('.postbox').children('.inside').toggle(); 
+              }
+              jQuery(this).val(rel);
+            });
+            jQuery('#pm_taxonomy_label').val(jQuery(element).val()+'s');
+    
+}
 
-
-});
-/*
-jQuery(document).ready(function(){
-                    jQuery('#toplevel_page_meta_option').hover(function () {
-                                                               var src = jQuery(this).children('.wp-menu-image').children('a').children('img').attr('src');
-                                                               new_src = src.replace("icon_gray", "icon");
-                                                             },
-                                                             function () {
-                                                                jQuery(this).children('.wp-menu-image').children('a').children('img').attr('src',new_src);
-                                                             }
-                                                             );
-});*/
+/* End Taxonomy */
 jQuery('.mo_field_meta_key').click(function(){
         
         label=jQuery(this).parents('.inside').children('.mo_field_segment').children('.mo_field_label');
@@ -212,6 +349,22 @@ function moChangeField(element ,fieldID, groupID){
     });
 }
 
+function pmSuggetion(element){
+    jQuery('#advanced-label input[name*=pm_posttype]:text').each(function(index,value) {
+              rel = jQuery(this).attr('rel');
+              label = jQuery('#pm_posttype_labal').val();
+              //rel = str_replace('%s',label,rel);//
+              rel=rel.replace('%s',label);
+             // rel=jQuery(this).attr('rel')+label;
+              jQuery(this).val(rel);
+            });
+}
+
+
+
+
+
+
 
 function AjaxCall( element, action, arg, handle){
     if(action) data = "action=" + action;
@@ -233,3 +386,25 @@ function AjaxCall( element, action, arg, handle){
 		}
 	});    
 }
+
+
+function JsonAjaxCall( element, action, arg, handle){
+	jQuery.ajax({
+		type: "post",
+        url: ajaxurl,
+        data: {
+            'action':action
+            },
+        dataType:'JSON',            
+		beforeSend: function() { jQuery("<span class='mo_loading'></span>").insertAfter(element); },
+        success:function(data){
+                    jQuery(".mo_loading").remove();
+                        handle(data);
+                             },
+          error: function(errorThrown){
+               alert('error');
+               console.log(errorThrown);
+          }
+	});    
+}
+

@@ -17,12 +17,14 @@ Post Meta is a wordpress CMS custom post meta field generator. From the back end
 * Fully jQuery and ajax based Management
 * Group and Field
 * Sorting group and field by dragging
+* Managing Custom Post type
+* Managing Custom Taxonomy
 * It build for All user(Developer and user)
 
 <h4>Coming Feature:</h4>
-* Manage Custom Post type and Taxonomy
 * Will add more custom field
 * Will add more custom feature for both(Developer and user)user
+* Will add short code 
 
 [Developer Website](http://post-meta.com)
 == Installation ==
@@ -42,6 +44,8 @@ An answer to that question.
 
 1. screenshot-1
 2. screenshot-2
+3. screenshot-3
+4. screenshot-4
 
 == Changelog ==
 

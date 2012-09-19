@@ -25,7 +25,7 @@ $fieldMetaKey = $pluginCore->create_input("group[$group_id][field][$id][meta_key
                                         "value"     => isset($field['meta_key'])?$field['meta_key']:$post_type."_".$group_id."_".$id,
                                         "label"     => "Meta Key", 
                                         "id"        => "mo_metakey_$id",
-                                        "class"     => "mo_input mo_field_meta_key ",
+                                        "class"     => "mo_input mo_field_meta_key validate[required,custom[onlyLcNs]]",
                                         "onkeyup"     => "moChangeFieldMetaKey(this)",
                                         "after"     => "<div class='mo_note mo_required'>Must be unique and have no space</div>",
                                         "enclose"   => "div class='mo_field_segment'",
