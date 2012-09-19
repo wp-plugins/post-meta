@@ -1,17 +1,17 @@
 === Post Meta ===
 Contributors: Mahbubur Rahman
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JEZQ8VP43Y6FQ
-Tags: Post Meta, Meta, Option Meta, Custom post field, custom field
+Tags: Post Meta, Meta, Option Meta, Custom post field, custom field, custom taxonomy
 Requires at least: 3.0
 Tested up to: 3.4
 Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Post Meta is a custom post meta field generator plugin. 
+Post Meta is a custom post meta field generator and management plugin. Also can manage custom post type and taxonomy. 
 
 == Description ==
-Post Meta is a wordpress CMS custom post meta field generator. From the back end it will provide smart and modern (ajax and jquery based) interface to create post meta option or custom meta field as group or field.
+Post Meta is a wordpress CMS custom post meta field generator. It has smart and modern (ajax and jquery based) interface to create post meta option or custom meta field as group or field. Can easily manage custom post type and taxonomy.
 
 <h4>Current Feature:</h4>
 * Fully jQuery and ajax based Management
@@ -50,6 +50,7 @@ An answer to that question.
 == Changelog ==
 
 1.2
+
 * Manage custom post type and taxonomy
 
 1.0
