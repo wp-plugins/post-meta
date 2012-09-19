@@ -76,7 +76,7 @@ function pmUpdateTaxonomy(element){
                             jQuery('.msg').children(".pc_error").remove();
                             jQuery('.msg').html(data);
                             //jQuery('#pm_posttype_menu').append("<div class='mo_type_manage_option'><div class='mo_type_option'><b>{$post_type['type']}</b><span class='mo_edit_link'> <a href='#Edit' rel='$key' onclick='editPostType(this); return false;' >Edit</a> | | <a href='#Delete' rel='$key' onclick='deletePostType(this); return false;' >Delete</a></span></div></div>");
-                            // window.location.reload(true);
+                             window.location.reload(true);
                         });
                         
                         /*JsonAjaxCall( jQuery(element), "pm_post_type_update", '', function(data){
