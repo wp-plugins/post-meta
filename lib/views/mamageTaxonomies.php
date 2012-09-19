@@ -5,7 +5,7 @@ global $pluginCore;
 
 <div class="wrap">
     <div id="pm-icon-edit-pages" class="icon32 icon32-posts-page"><br /></div>  
-    <h2>Custopm Texonomy Management Panel</h2>   
+    <h2>Custopm Taxonomy Management Panel</h2>   
     <?php do_action( 'mo_notice' ); ?>
     <div id="dashboard-widgets-wrap">
         <div class="metabox-holder">
