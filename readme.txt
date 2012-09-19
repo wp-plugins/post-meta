@@ -49,9 +49,12 @@ An answer to that question.
 
 == Changelog ==
 
+1.2
+* Manage custom post type and taxonomy
+
 1.0
 
-*Initial Release
+* Initial Release
 
 == Upgrade notice ==
 
