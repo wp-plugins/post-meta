@@ -29,7 +29,7 @@ class moSupportModel {
         *
         *  @return array
         */
-        function meta_option_get_post_types( $args = array('public' => true), $output = 'object', $operator = 'and' ){
+        function pm_get_post_types( $args = array('public' => true), $output = 'object', $operator = 'and' ){
         global $wpdb;
         
         $post_types = get_post_types( $args, $output, $operator );

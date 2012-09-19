@@ -98,6 +98,14 @@
                     "regex": /^[a-zA-Z\ \']+$/,
                     "alertText": "* Letters only"
                 },
+                "onlyLc": {
+                    "regex": /^[a-z ']+$/,
+                    "alertText": "* Lower Case only"
+                },
+                "onlyLcNs": {
+                    "regex": /^[0-9a-z_]+$/,
+                    "alertText": "* Lower Case only, No space(use '_') "
+                },
                 "onlyLetterNumber": {
                     "regex": /^[0-9a-zA-Z]+$/,
                     "alertText": "* No special characters allowed"

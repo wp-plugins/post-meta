@@ -11,7 +11,7 @@ class moHelpModel {
      function getMetaKeyList(){
         global $postMeta,$pluginCore;
         
-            $posttypes=$pluginCore->meta_option_get_post_types();
+            $posttypes=$pluginCore->pm_get_post_types();
             $html = '';
             
             $html .= "<div class='mo_meta_key_list'>";
@@ -80,22 +80,22 @@ class moHelpModel {
                             </div>
         */
              //$html .= "<span post_type='$pt->label' class='button add-new-h2 mo_add_button' onclick='moNewGroup(this);' >Add New</span>";
-              $posttypes=$pluginCore->meta_option_get_post_types();
+              $posttypes=$pluginCore->pm_get_post_types();
               foreach($posttypes as  $pt):
               $html .="<div class='mo_type_manage_option'>
                             
                             <div class='mo_type_option'>
                                 <b>$pt->label</b><small>({$pt->labels->menu_name})</small>
                                 <span class='mo_edit_link'>
-                                    <a href='admin.php?page=meta_option&section=form_custom_group&type=$pt->name' rel='$pt->name' onclick='manageGroup(this); return false;' >Manage Group/Fields</a>
+                                    <a href='#ManaagePostMeta' rel='$pt->name' onclick='manageGroup(this); return false;' >Manage Group/Fields</a>
                                 </span>
                             </div>
                         </div>";
              endforeach;
-             
+            
             
        elseif($type=="taxonomy"):
-              $posttypes=$pluginCore->meta_option_get_post_types();
+              $posttypes=$pluginCore->pm_get_post_types();
               foreach($posttypes as  $pt):
               $html .="<div class='mo_type_manage_option'>
                             <div class='mo_type_option'>
@@ -111,6 +111,57 @@ class moHelpModel {
          return $html;
     }
     
+    function pmPostTypeList(){
+        $pm_post_types = get_option( 'pm_post_types' );
+        $html ='';
+        $html .='<div id="pm_posttype_menu">';
+        if($pm_post_types){
+            foreach($pm_post_types as $key => $post_type){
+                $html .="<div class='mo_type_manage_option'>
+                            
+                            <div class='mo_type_option'>
+                                <b>{$post_type['type']}</b>
+                                <span class='mo_edit_link'>
+                                    <a href='#Edit' rel='$key' onclick='editPostType(this); return false;' >Edit</a> | | <a href='#Delete' rel='$key' onclick='deletePostType(this); return false;' >Delete</a>
+                                </span>
+                            </div>
+                        </div>";
+            }
+        }else{
+            $html .="<div class='pm_nodata'> No Custom Post Type found</div>";
+        }
+        $html .="</div>";
+        $html .="<input type='button' class='button button-primary pm_menu_button pm_menu_button' onclick='addPostType(this); return false;' value='Add New Post Type' />";
+        
+        return $html;
+    }
+    
+    function pmTaxonomyList(){
+        $pm_taxonomies = get_option( 'pm_taxonomies' );
+        $html ='';
+        $html .='<div id="pm_posttype_menu">';
+        if($pm_taxonomies){
+            foreach($pm_taxonomies as $key => $pm_taxonomy){
+                $html .="<div class='mo_type_manage_option'>
+                            
+                            <div class='mo_type_option'>
+                                <b>{$pm_taxonomy['type']}</b>
+                                <span class='mo_edit_link'>
+                                    <a href='#Edit' rel='$key' onclick='editTaxonomy(this); return false;' >Edit</a> | | <a href='#Delete' rel='$key' onclick='deleteTaxonomy(this); return false;' >Delete</a>
+                                </span>
+                            </div>
+                        </div>";
+            }
+        }else{
+            $html .="<div class='pm_nodata'> No Custom Taxonomy found</div>";
+        }
+        $html .="</div>";
+        $html .="<input type='button' class='button button-primary pm_menu_button' onclick='addTaxonomy(this); return false;' value='Add New Taxonomy' />";
+        
+        return $html;
+    }
+    
+    
     function featuredData(){
         $html ='';
         $html .='<h4>Current Feature:</h4>
@@ -118,14 +169,16 @@ class moHelpModel {
                         <li>1. Fully jQuery and ajax based Management</li>
                         <li>2. Group and Field</li>
                         <li>3. Sorting group and field by dragging</li>
-                        <li>4. It build for All user(Developer and user)</li>
+                        <li>4. Managing Custom Post type</li>
+                        <li>5. Managing Custom Taxonomy</li>
+                        <li>6. It build for All user(Developer and user)</li>
                     </ul>
                 ';
         $html .='<h4>Coming Feature:</h4>
                     <ul>
-                        <li>1. Manage Custom Post type and Taxonomy</li>
-                        <li>2. Will add more custom field</li>
-                        <li>3. Will add more custom feature for both(Developer and user)user</li>
+                        <li>1. Will add more custom field</li>
+                        <li>2. Will add more custom feature for both(Developer and user)user</li>
+                        <li>3. Will add short code </li>
                     </ul>
                 ';
                 

@@ -141,15 +141,8 @@ if( $field['type'] == 'datetime' ){
 
 
 
-
-
-
-
-
-
-
-
         if( $validation ) $class .= "validate[" . rtrim( $validation, ',') . "]";
+        
                         $html .= $pluginCore->create_input("mofields[{$field['meta_key']}]",$field['type'], array( 
                                         "value"             =>isset($meta)?$meta: null,
                                         "label"             => "<span class='name'>$field[title]</span>",
@@ -171,7 +164,6 @@ if( $field['type'] == 'datetime' ){
                                      ),$fieldOptions); 
                                      
                                      
-        $html = "<div class='mo_group'>$html
-        </div>";
+        $html = "<div class='mo_group'>$html</div>";
 
 ?>

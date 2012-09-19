@@ -11,7 +11,9 @@ class initModel {
      */
     function controllersOrder(){
         return array(
-            'moManageController',
+            'pmPostMetaController',
+            'pmPostTypeController',
+            'pmTaxonomyController',
             'moPostController',
             'moHelpController',
             'moSettingsController'        
@@ -25,7 +27,7 @@ class initModel {
             if( preg_match( "/.php$/i" , $file ) )
                 $classes[ str_replace( ".php", "", $file ) ] = $pluginCore->controllersPath . $file;            
         }          
-        
+        /*
         $pluginCore->isPro = true;
         if( @$pluginCore->isPro ){
             $proDir = $pluginCore->controllersPath . 'pro/';
@@ -35,7 +37,7 @@ class initModel {
                         $classes[ str_replace( ".php", "", $file ) ] = $proDir . $file; 
                 }                  
             }          
-        }
+        }*/
         
         foreach( $classes as $classPath )
             require_once( $classPath );

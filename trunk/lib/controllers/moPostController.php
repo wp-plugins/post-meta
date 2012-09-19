@@ -51,22 +51,29 @@ if( !class_exists( 'moPostController' ) ) :
                 wp_enqueue_script('jquery-tools-min' );
                 /* End rich text */
                            
+                           
+                wp_enqueue_script('jquery');
+                wp_enqueue_script('jquery-ui-core');
+                wp_enqueue_script( 'jquery-ui-widget');
+                wp_enqueue_script( 'jquery-ui-mouse');
+                /*
                 wp_register_script( 'jquery-ui-core', PM_ASSECTS_URL.'js/ui/jquery.ui.core.js',array('jquery') );
                 wp_enqueue_script('jquery-ui-core' );
                 wp_register_script( 'jquery-ui-widget', PM_ASSECTS_URL.'js/ui/jquery.ui.widget.js',array('jquery') );
                 wp_enqueue_script('jquery-ui-widget' );
-                wp_register_script( 'jquery-ui-datepicker', PM_ASSECTS_URL.'js/ui/jquery.ui.datepicker.js',array('jquery') );
-                wp_enqueue_script('jquery-ui-datepicker' );
                 wp_register_script( 'jquery-ui-mouse', PM_ASSECTS_URL.'js/ui/jquery.ui.mouse.js',array('jquery') );
                 wp_enqueue_script('jquery-ui-mouse' );
+                */
+
+                wp_register_script( 'jquery-ui-datepicker', PM_ASSECTS_URL.'js/ui/jquery.ui.datepicker.js',array('jquery') );
+                wp_enqueue_script('jquery-ui-datepicker' );
+                
                 wp_register_script( 'jquery-ui-slider', PM_ASSECTS_URL.'js/ui/jquery.ui.slider.js',array('jquery','jquery-ui-mouse','jquery-ui-core','jquery-ui-widget') );
                 wp_enqueue_script('jquery-ui-slider' );
                 wp_register_script( 'jquery-ui-timepicker-addon', PM_ASSECTS_URL.'js/ui/jquery-ui-timepicker-addon.js',array('jquery') );
                 wp_enqueue_script('jquery-ui-timepicker-addon' );
                 wp_register_style( 'jquery-ui-all', PM_ASSECTS_URL.'css/ui/jquery.ui.all.css');
                 wp_enqueue_style('jquery-ui-all' );
-                wp_register_style( 'jquery-ui-datepicker', PM_ASSECTS_URL.'css/ui/jquery.ui.datepicker.css');
-                wp_enqueue_style('jquery-ui-datepicker' );
                 
                 
                 wp_register_style( 'meta-option-validationEngine-css', PM_ASSECTS_URL.'/css/jquery/validationEngine.css' );
@@ -93,7 +100,7 @@ if( !class_exists( 'moPostController' ) ) :
             function add_custom_meta_box(){
                 global $postMeta;
                 global $pluginCore, $post_type;
-                $posttypes=$pluginCore->meta_option_get_post_types();
+                $posttypes=$pluginCore->pm_get_post_types();
         
                   foreach($posttypes as  $pt){
                     $meta_boxs=get_option($postMeta->options[$pt->name]);

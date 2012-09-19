@@ -44,7 +44,7 @@ if (!class_exists( 'postMeta' )){
             define('PM_PLUGIN_URL',plugins_url( '' , __FILE__ )).'/';
             define('PM_ASSECTS_URL', PM_PLUGIN_URL.'/assets/');
             
-          $posttypes=$pluginCore->meta_option_get_post_types();
+          $posttypes=$pluginCore->pm_get_post_types();
           foreach($posttypes as  $pt){
             $this->options[$pt->name]='meta_options_'.$pt->name;
             //$this->all_fields[$pt->name]=array();
