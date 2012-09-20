@@ -8,7 +8,6 @@ function pmUpdatePostType(element){
                     jQuery('.pc_success').remove(); 
                     }else{
                         arg=jQuery( element ).serialize();
-                        alert(arg);
                         bindElement =jQuery('#submit');
                         jQuery('.pc_error').remove(); 
                         jQuery('.pc_success').remove();
