@@ -145,7 +145,7 @@ if($field['duplicate']){
 
         if( $validation ) $class .= "validate[" . rtrim( $validation, ',') . "]";
         
-                        $html .= $pluginCore->create_input("mofields[{$field['meta_key']}][8][7]",$field['type'], array( 
+                        $html .= $pluginCore->create_input("mofields[{$field['meta_key']}]",$field['type'], array( 
                                         "value"             =>isset($meta)?$meta: null,
                                         "label"             => "<span class='name'>$field[title]</span>",
                                         "label_class"     => "mo_field_title",
