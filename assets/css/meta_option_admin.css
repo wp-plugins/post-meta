@@ -1,0 +1,144 @@
+
+#pm-icon-edit-pages{
+    background: transparent url(../images/icon32.png) no-repeat;
+    
+}
+.mo_segment{
+    display: inline-block;
+    width: 25%;
+    padding-bottom: 20px;
+    vertical-align: top;
+}
+.mo_field_segment{
+    display: inline-block;
+    padding: 0 3px 10px;
+    width: 31%;
+    vertical-align: top;
+}
+.field-holder{
+    background: #F0F7FD;
+}
+.mo_label {
+    display: block;
+    font-weight: bold;
+    padding: 5px;
+}
+.mo_note{
+    font-style: italic;
+    font-size: 10px;
+}
+.mo_required{
+    color: red;
+}
+.mo_input{
+    width: 165px;
+}
+.meta_option_field_selecor {
+    display: inline-block;
+    margin: 2px;
+    padding: 8px;
+    text-align: center;
+    width: 115px;
+}
+.metabox-option-list{
+    overflow: hidden;
+}
+.metabox-fields-holder{
+    float: left;
+    width: 64%;
+}
+.meta-option-fields-list{
+    float: right;
+    width: 35%;
+}
+
+.mo_loading{
+    background: url('jquery/loading.gif') no-repeat center center;
+    padding: 10px;
+}
+.mo_trash {
+    float: right;
+    background: url('../images/trash.png') no-repeat center center;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+
+.mo_metakey_handl{
+    float: right;
+    padding-right: 50px;
+}
+
+#mo_post_taxonomy_list{
+    width: 24%;
+    float: left;
+}
+#mo_loading_area{
+    width: 75%;
+    float: right;
+}
+
+/* Meta option Help */
+#mo_meta_key_help{
+    overflow: hidden;
+}
+.mo_meta_key_holder{
+    width: 15%;
+    float: left;
+}
+.mo_meta_key_holder .inside{
+    background: #F0F7FD;
+}
+
+.mo_meta_key_list ul{
+    padding-left: 10px;
+}
+.mo_meta_key_list ul li{
+    padding-left: 35px;
+    list-style: inherit;
+}
+.mo_meta_key_use{
+    width: 75%;
+    float: right;
+}
+
+.mo_type_manage_option{
+    padding: 5px 0;
+}
+.mo_type_manage{
+    float: left;
+}
+
+.mo_type_manage .mo_edit{
+    background: url('../images/edit_icon.png') no-repeat center center;
+    width:16px;
+    height: 16px;
+    float: left;
+    padding: 2px;
+}
+
+.mo_type_manage .mo_delete{
+    background: url('../images/trash.png') no-repeat center center;
+    width:16px;
+    height: 16px;
+    float: right;
+    padding: 2px;
+}
+
+/* manage Group */
+
+
+#mo_manage_group{
+    overflow: hidden;
+    padding: 0 0 10px 0;
+}
+
+/* Post Type and Taxonomy */
+
+.pm_menu_button{
+    margin: 20px 0 10px 0;
+     
+} 
+
