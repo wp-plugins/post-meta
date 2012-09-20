@@ -11,21 +11,7 @@ if( !class_exists( 'pmPostMetaController' ) ) :
             add_action( 'wp_ajax_mo_add_field', array($this, 'meta_option_add_field' ) );
             add_action( 'wp_ajax_mo_change_field', array($this, 'meta_option_change_field' ) );
             add_action( 'wp_ajax_meta_option_group_save', array($this, 'meta_option_group_save' ) );
-            add_action('wp_enqueue_scripts', array($this,'load_fe_scripts'));
-
-                    
             
-        }
-        function set_my_js_var() {
-            // logic here for setting the right JS var
-            return "some value";
-        }
-        function load_fe_scripts() {
-            
-            $localize_array = array(
-                'my_js_var' => set_my_js_var()
-            );
-            wp_localize_script( 'meta-option-post-script', 'my_global', $localize_array );
         }
 
         function meta_option_menu(){
