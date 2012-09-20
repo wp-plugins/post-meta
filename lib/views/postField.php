@@ -139,18 +139,20 @@ if( $field['type'] == 'datetime' ){
     endif;
 }
 
-
+if($field['duplicate']){
+    $abbButton ="<a class='repeatable-add button' href='#'>Add</a> ";
+}
 
         if( $validation ) $class .= "validate[" . rtrim( $validation, ',') . "]";
         
-                        $html .= $pluginCore->create_input("mofields[{$field['meta_key']}]",$field['type'], array( 
+                        $html .= $pluginCore->create_input("mofields[{$field['meta_key']}][8][7]",$field['type'], array( 
                                         "value"             =>isset($meta)?$meta: null,
                                         "label"             => "<span class='name'>$field[title]</span>",
                                         "label_class"     => "mo_field_title",
                                         "label_extra"       =>$label_extra,
                                         "id"                => "mo_field_$field[id]",
                                         "class"             =>  $class,
-                                        "after"             => "<span class='mo_note'>{$field['desc']}</span>",
+                                        "after"             => "<span class='mo_note'>{$field['desc']} $abbButton</span>",
                                         "option_after" =>   isset($option_after)  ? $option_after : null,
                                         "placeholder"       =>  isset($placeholder)?$placeholder:null,
                                         "style"             =>  isset($style)?$style:null, 

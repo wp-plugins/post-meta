@@ -14,9 +14,9 @@ class initModel {
             'pmPostMetaController',
             'pmPostTypeController',
             'pmTaxonomyController',
-            'moPostController',
-            'moHelpController',
-            'moSettingsController'        
+            'pmPostController',
+            'pmHelpController',
+            'pmSettingsController'        
         );
     }
     function loadControllers(){

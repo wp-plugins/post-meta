@@ -21,28 +21,28 @@ $html .= $pluginCore->create_input("pm_posttype[type]","text", array(
                         "label_extra"       =>"<span class='pm_required'>*</span>",
                         "id"        => "pm_posttype_type",
                         "class"     => "pm_input validate[required,custom[onlyLc]]",
-                        //"onclick"     => "moChangeFieldTitle(this)",
-                        //"onmouseout"  =>  "moChangeFieldTitle(this)",
                         "after"     => "<div class='pm_note'>(e.g. movies)The type must have less than 20 characters and only are accepted lowercases letters and undescores. Once created the post type, the type cannot be changed</div>",
+                        "field_enclose"     =>  "div class='pm_field_item'",
+                        "enclose"   => "div class='pm_field'",
+                     ));
+$html .= $pluginCore->create_input("pm_posttype[name]","text", array( 
+                        "value"     => isset($postType['name'])?$postType['name']:null, 
+                        "label"     => "Label",
+                        "label_extra"       =>"<span class='pm_required'>*</span>",
+                        "id"        => "pm_posttype_name",
+                        "class"     => "pm_input validate[required]",
+                        "onkeyup"     => "pmPostTypeSuggetion(this)",
+                        "onkeypress"  =>  "pmPostTypeSuggetion(this)",
+                        "after"     => "<div class='pm_note'>(e.g. Movie)Singular label of the post type.</div>",
                         "field_enclose"     =>  "div class='pm_field_item'",
                         "enclose"   => "div class='pm_field'",
                      ));
 $html .= $pluginCore->create_input("pm_posttype[label]","text", array( 
                         "value"     => isset($postType['label'])?$postType['label']:null, 
-                        "label"     => "Label",
-                        "label_extra"       =>"<span class='pm_required'>*</span>",
-                        "id"        => "pm_posttype_labal",
-                        "class"     => "pm_input validate[required]",
-                        "after"     => "<div class='pm_note'>(e.g. Movie)Singular label of the post type.</div>",
-                        "field_enclose"     =>  "div class='pm_field_item'",
-                        "enclose"   => "div class='pm_field'",
-                     ));
-$html .= $pluginCore->create_input("pm_posttype[plabels]","text", array( 
-                        "value"     => isset($postType['plabels'])?$postType['plabels']:null, 
                         "label"     => "Labels",
-                        "id"        => "pm_posttype_plabels",
+                        "id"        => "pm_posttype_label",
                         "class"     => "pm_input",
-                        "after"     => "<div class='pm_note'>(e.g. Movie)Plural label of the post type.</div>",
+                        "after"     => "<div class='pm_note'>(e.g. Movies)Plural label of the post type.</div>",
                         "field_enclose"     =>  "div class='pm_field_item'",
                         "enclose"   => "div class='pm_field'",
                      ));                     

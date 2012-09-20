@@ -4,39 +4,25 @@ if( !class_exists( 'pmPostMetaController' ) ) :
     class pmPostMetaController {
         
         function __construct() {
-            
-            add_action('admin_menu', array( $this, 'meta_option_menu' ) );
-            add_action( 'wp_ajax_mo_manage_group', array($this, 'meta_option_manage_group' ) );
-            add_action( 'wp_ajax_mo_add_group', array($this, 'meta_option_add_group' ) );   
-            add_action( 'wp_ajax_mo_add_field', array($this, 'meta_option_add_field' ) );
-            add_action( 'wp_ajax_mo_change_field', array($this, 'meta_option_change_field' ) );
-            add_action( 'wp_ajax_meta_option_group_save', array($this, 'meta_option_group_save' ) );
-            add_action('wp_enqueue_scripts', array($this,'load_fe_scripts'));
+            add_action('admin_menu', array( $this, 'post_meta_menu' ) );
+            add_action( 'wp_ajax_mo_manage_group', array($this, 'post_meta_manage_group' ) );
+            add_action( 'wp_ajax_mo_add_group', array($this, 'post_meta_add_group' ) );   
+            add_action( 'wp_ajax_mo_add_field', array($this, 'post_meta_add_field' ) );
+            add_action( 'wp_ajax_mo_change_field', array($this, 'post_meta_change_field' ) );
+            add_action( 'wp_ajax_meta_option_group_save', array($this, 'post_meta_group_save' ) );
 
                     
-            
-        }
-        function set_my_js_var() {
-            // logic here for setting the right JS var
-            return "some value";
-        }
-        function load_fe_scripts() {
-            
-            $localize_array = array(
-                'my_js_var' => set_my_js_var()
-            );
-            wp_localize_script( 'meta-option-post-script', 'my_global', $localize_array );
         }
 
-        function meta_option_menu(){
+
+        function post_meta_menu(){
             $page = add_menu_page( 'Post Meta', 'Post Meta', 'administrator', 'post-meta', array( $this, 'post_meta_menu_page' ) , PM_ASSECTS_URL.'images/icon_gray.png',52); 
             $page = add_submenu_page( 'post-meta', 'Manage Post Meta', 'Manage Post Meta', 'administrator', 'post-meta', array( $this, 'post_meta_menu_page' ));
-            
-        //$page = add_options_page('Meta Option', 'Meta Option','manage_options' ,'meta_option', array( $this, 'meta_option_menu_page' ));
-        add_action('admin_print_styles-' . $page,array( $this,'meta_option_sc'));
+        
+        add_action('admin_print_styles-' . $page,array( $this,'post_meta_sc'));
         }   
         
-        function meta_option_sc(){
+        function post_meta_sc(){
         wp_enqueue_script('jquery-ui-tabs');
         wp_enqueue_script('jquery-ui-sortable');
         wp_enqueue_script('jquery-ui-draggable');
@@ -63,7 +49,7 @@ if( !class_exists( 'pmPostMetaController' ) ) :
         
                  
         }
-        function meta_option_manage_group(){
+        function post_meta_manage_group(){
             global $pluginCore;
             
             $pluginCore->render('manageForm',array('post_type'=>$_POST['post_type']));
@@ -71,7 +57,7 @@ if( !class_exists( 'pmPostMetaController' ) ) :
             die();
             
         }
-        function meta_option_add_group(){
+        function post_meta_add_group(){
             global $pluginCore;
             $meta_box['id']="group_".$_POST['id'];
             $meta_box['title']="New Group ";
@@ -79,7 +65,7 @@ if( !class_exists( 'pmPostMetaController' ) ) :
             
             die();
         }
-        function meta_option_add_field(){
+        function post_meta_add_field(){
             global $pluginCore;
             $field['title']="$_POST[field_type] Field $_POST[field_id]";
             $field['type']=$_POST['field_type'];
@@ -88,7 +74,7 @@ if( !class_exists( 'pmPostMetaController' ) ) :
             die();
         }
         
-        function meta_option_change_field(){
+        function post_meta_change_field(){
             global $pluginCore;
             $data =  $_REQUEST ;
             $group_id_array= array_keys($data[group]);
@@ -103,10 +89,10 @@ if( !class_exists( 'pmPostMetaController' ) ) :
         }
         
         
-        function meta_option_group_save(){
+        function post_meta_group_save(){
             global $postMeta,$pluginCore;
             
-            if ( wp_verify_nonce( $_REQUEST['mo_nonce'],'nonce') ){
+            if ( wp_verify_nonce( $_REQUEST['pm_nonce'],'nonce') ){
                 
                 $post_type = $_POST['post_type']; 
                 
@@ -115,9 +101,29 @@ if( !class_exists( 'pmPostMetaController' ) ) :
                 unset( $_REQUEST['action'] );
                 unset( $_REQUEST['post_type'] );
                  
-                $groups =  $_REQUEST ;           
+                $groups =  $_REQUEST ;  
                 
-                update_option($postMeta->options[$post_type], $groups );
+                $pm_options = get_option($postMeta->options['post_meta']);
+                if(!is_array($pm_options)){
+                    $pm_options=array();
+                }   
+                
+                 foreach($pm_options as $key => $pm_option){
+                    if($key==$post_type){
+                            $pm_options[$post_type]=$groups;
+                            update_option($postMeta->options['post_meta'],$pm_options);
+                            echo $pluginCore->showMessage("Successfully Update", 'success');
+                            die();
+                        //echo $pluginCore->showMessage("This post type allready exist", 'error');
+                        //die();
+                    }
+                    
+                }
+                
+                 
+                 //    unset($a[$_REQUEST['post_type']]);
+                $pm_options[$post_type]=$groups;
+                update_option($postMeta->options['post_meta'],$pm_options);
                 
                 echo $pluginCore->showMessage("Settings Successfully Saved", 'success');
                 die();

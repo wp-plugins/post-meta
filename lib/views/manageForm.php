@@ -16,12 +16,11 @@ global $postMeta,$pluginCore;
                     <div id="mo_group_container" class="meta-group-holder  ui-sortable ui-droppable">             
                                 
                                 <?php
-                                    wp_nonce_field( 'nonce', 'mo_nonce' );
+                                    wp_nonce_field( 'nonce', 'pm_nonce' );
                                     
-                                    
-                                    
-                                     $meta_boxs=get_option($postMeta->options[$post_type]);
-                                     if($meta_boxs){
+                                    $pm_options = get_option($postMeta->options['post_meta']);
+                                    $meta_boxs =$pm_options[$post_type];
+                                     if(is_array($meta_boxs) && !empty($meta_boxs)){
                                      
                                              $i=0;
                                           foreach($meta_boxs['group'] as $meta_box_id => $meta_box):

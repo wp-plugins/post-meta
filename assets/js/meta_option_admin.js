@@ -8,7 +8,6 @@ function pmUpdatePostType(element){
                     jQuery('.pc_success').remove(); 
                     }else{
                         arg=jQuery( element ).serialize();
-                        alert(arg);
                         bindElement =jQuery('#submit');
                         jQuery('.pc_error').remove(); 
                         jQuery('.pc_success').remove();
@@ -57,6 +56,49 @@ function addPostType(element){
     });
 }
 
+
+function pmPostTypeSuggetion(element){
+    
+        jQuery('#advanced-label input[name*=pm_posttype]:text').each(function(index,value) {
+              rel = jQuery(this).attr('rel');
+              label = jQuery('#pm_posttype_name').val();
+              if(!rel){
+                rel =label;
+              }else{
+                
+                if(rel=='All'){
+                    rel='All '+label;
+                }else if(rel=='Add'){
+                    rel='Add '+label;
+                }else if(rel=='All New'){
+                    rel='All New '+label;
+                }else if(rel=='Add'){
+                    rel='Edit '+label;
+                }else if(rel=='Edit'){
+                    rel='Edit '+label;
+                }else if(rel=='New'){
+                    rel='New '+label;
+                }else if(rel=='View'){
+                    rel='View '+label;
+                }else if(rel=='No found'){
+                    rel='No '+label+' found';
+                }else if(rel=='No found in Trash'){
+                    rel='No '+label+' found in Trash';
+                }else if (rel =='Parent:'){
+                    rel='Parent '+label+':';
+                }else{
+                    rel=jQuery(this).attr('rel')+label;
+                }
+                
+              }
+              jQuery(this).val(rel);
+            });
+            jQuery('#pm_posttype_label').val(jQuery(element).val()+'s');
+    
+}
+    
+
+
 /*  End */
 
 /* Taxonomy manage page */
@@ -76,7 +118,7 @@ function pmUpdateTaxonomy(element){
                             jQuery('.msg').children(".pc_error").remove();
                             jQuery('.msg').html(data);
                             //jQuery('#pm_posttype_menu').append("<div class='mo_type_manage_option'><div class='mo_type_option'><b>{$post_type['type']}</b><span class='mo_edit_link'> <a href='#Edit' rel='$key' onclick='editPostType(this); return false;' >Edit</a> | | <a href='#Delete' rel='$key' onclick='deletePostType(this); return false;' >Delete</a></span></div></div>");
-                             window.location.reload(true);
+                             //window.location.reload(true);
                         });
                         
                         /*JsonAjaxCall( jQuery(element), "pm_post_type_update", '', function(data){

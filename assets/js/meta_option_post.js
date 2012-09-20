@@ -69,6 +69,22 @@ jQuery(document).ready(function() {
          return false;
     });
     
+    
+        jQuery('.repeatable-add').click(function() {  
+            field = jQuery(this).closest('.mo_field').clone(true);  
+            fieldLocation = jQuery(this).closest('.mo_field');  
+            jQuery('input', field).val('').attr('name', function(index, name) { 
+                pattern =  /mofields.\]/i;
+                        var item =  pattern.exec(name);
+                        alert(item);
+                return name.replace(/(\d+)/, function(fullMatch, n) {  
+                    return Number(n) + 1;  
+                });  
+            })  
+            field.insertAfter(fieldLocation, jQuery(this).closest('.mo_field'))  
+            return false;  
+        }); 
+    
 });
 
 function pmDeleteFile(element){

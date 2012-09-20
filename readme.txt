@@ -49,12 +49,14 @@ An answer to that question.
 
 == Changelog ==
 
-1.2
+<h4>1.3</h4>
+* Fixed some Internal error
+* Make compatible with Custom post type and taxonomy
 
+<h4>1.2</h4>
 * Manage custom post type and taxonomy
 
-1.0
-
+<h4>1.0</h4>
 * Initial Release
 
 == Upgrade notice ==

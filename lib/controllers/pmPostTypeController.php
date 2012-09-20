@@ -4,7 +4,7 @@ if( !class_exists( 'pmPostTypeController' ) ) :
     class pmPostTypeController {
         
         function __construct() {
-            add_action('admin_menu', array( $this, 'meta_option_menu' ) );
+            add_action('admin_menu', array( $this, 'post_type_menu' ) );
             add_action( 'wp_ajax_pm_post_type_add', array($this, 'pm_post_type_add' ) );
             add_action( 'wp_ajax_pm_post_type_edit', array($this, 'pm_post_type_edit' ) );
             add_action( 'wp_ajax_pm_post_type_delete', array($this, 'pm_post_type_delete' ) );
@@ -13,11 +13,10 @@ if( !class_exists( 'pmPostTypeController' ) ) :
            
            add_action('init', array( &$this, 'pm_register_post_types' ) );
         }
-        function meta_option_menu(){
+        function post_type_menu(){
             
             $page = add_submenu_page( 'post-meta', 'Manage Custom Post Types', 'Manage Post Types', 'administrator', 'manage-post-types', array( $this, 'post_types_menu_page' ));
-            
-        //$page = add_options_page('Meta Option', 'Meta Option','manage_options' ,'meta_option', array( $this, 'meta_option_menu_page' ));
+        
         add_action('admin_print_styles-' . $page,array( $this,'post_types_sc'));
         }
         
@@ -62,73 +61,86 @@ if( !class_exists( 'pmPostTypeController' ) ) :
             die();
         }
         function pm_post_type_edit(){
-            global $pluginCore;
-            if($_REQUEST['post_type_key'] || $_REQUEST['post_type_key'] ==0){
-               $pm_options = get_option( 'pm_post_types' );
+            global $postMeta,$pluginCore;
+            $editKey = intval( $_REQUEST['post_type_key'] );
+            if(isset($editKey)|| $editKey ==0){
+               $pm_options = get_option( $postMeta->options['post_types'] );
                
-               echo $pluginCore->render('postType', array('data'=>$pm_options[$_REQUEST['post_type_key']]));
+               echo $pluginCore->render('postType', array('data'=>$pm_options[$editKey],'editKey'=>$editKey));
                die();
             }
         }
         function pm_post_type_update(){
-            //delete_option('pm_post_types');
-            global $pluginCore;
-                unset( $_REQUEST['_wp_http_referer'] );
-                unset( $_REQUEST['mo_nonce'] );
-                unset( $_REQUEST['action'] );
-                unset( $_REQUEST['post_type'] );
-                 
-                $postType =  $_REQUEST['pm_posttype']; 
-                
-              	$pm_options = get_option( 'pm_post_types' );
-                
-                
-                
-                
-
-        		//check if option exists, if not create an array for it
-        		if ( !is_array( $pm_options ) ) {
-        			$pm_options = array();
-        		}
-                
-
-                foreach($pm_options as $key => $pm_option){
-                    if($pm_option['type']==$postType['type']){
+              global $postMeta,$pluginCore;
+              
+          if ( wp_verify_nonce( $_REQUEST['pm_nonce'],'nonce') ){
+                        unset( $_REQUEST['_wp_http_referer'] );
+                        unset( $_REQUEST['mo_nonce'] );
+                        unset( $_REQUEST['action'] );
+                        unset( $_REQUEST['post_type'] );
+                         
+                        $postType =  $_REQUEST['pm_posttype']; 
                         
-                        if($_REQUEST['edit']){
-                            $pm_options[$key]=$postType;
-                            update_option('pm_post_types', $pm_options );
-                            echo $pluginCore->showMessage("Successfully Update", 'success');
-                            die();
+                        $pm_options = get_option( $postMeta->options['post_types'] );
+                        
+                        
+                        //check if option exists, if not create an array for it
+                        if ( !is_array( $pm_options ) ) {
+                        	$pm_options = array();
                         }
                         
-                        echo $pluginCore->showMessage("This post type allready exist", 'error');
+                        $editKey = intval( $_REQUEST['edit_key'] );
+                        
+                        foreach($pm_options as $key => $pm_option){
+                            if($pm_option['type']==$postType['type']){
+                                
+                                if($_REQUEST['edit'] && isset($editKey)){
+                                    $pm_options[$key]=$postType;
+                                    update_option($postMeta->options['post_types'], $pm_options );
+                                    echo $pluginCore->showMessage("Successfully Update", 'success');
+                                    die();
+                                }
+                                
+                                echo $pluginCore->showMessage("This post type allready exist", 'error');
+                                die();
+                            }
+                            
+                        } 
+                        
+                        if($_REQUEST['edit'] && isset($editKey)){
+                                    $pm_options[$editKey]=$postType;
+                                    update_option($postMeta->options['post_types'], $pm_options );
+                                    echo $pluginCore->showMessage("Successfully Update", 'success');
+                                    die();
+                                }
+                        
+                        
+                        		//insert new custom post type into the array*/
+                        	array_push( $pm_options, $postType );
+                        
+                        	//save new custom post type array in the CPT option
+                        	update_option( $postMeta->options['post_types'], $pm_options );         
+                        
+                        echo $pluginCore->showMessage("Settings Successfully Saved", 'success');
+                        
                         die();
-                    }
-                    
-                } 
-                //$pm_options[$postType['type']]=$postType;
-                		//insert new custom post type into the array*/
-            		array_push( $pm_options, $postType );
-            
-            		//save new custom post type array in the CPT option
-            		update_option( 'pm_post_types', $pm_options );         
+                }else{
+                    echo $pluginCore->showMessage("Security Error", 'error');
+                    die();
+                }
                 
-                echo $pluginCore->showMessage("Settings Successfully Saved", 'success');
-            
-            die();
         }
         
         function pm_post_type_delete(){
-            global $pluginCore;
+            global $postMeta,$pluginCore;
             
             if($_REQUEST['post_type_key']|| $_REQUEST['post_type_key']==0){
-               $pm_options = get_option( 'pm_post_types' );
+               $pm_options = get_option( $postMeta->options['post_types'] );
                $delType = intval( $_REQUEST['post_type_key'] );
                unset($pm_options[$delType]);
                $pm_options = array_values( $pm_options );
 
-		      update_option( 'pm_post_types', $pm_options );
+		      update_option( $postMeta->options['post_types'], $pm_options );
               
               print_r($pm_options);
                
@@ -141,11 +153,12 @@ if( !class_exists( 'pmPostTypeController' ) ) :
         
         
         function pm_register_post_types(){
+            global $postMeta;
             
-            $pm_postTyps = get_option( 'pm_post_types' );
+            $pm_postTypes = get_option( $postMeta->options['post_types'] );
             
-            if($pm_postTyps){
-                        foreach($pm_postTyps as $postType){
+            if($pm_postTypes){
+                        foreach($pm_postTypes as $postType){
                             
                             $name = $postType['type'];
                             $postType['labels'] =  (is_array($postType['labels']))?$postType['labels']:array();  

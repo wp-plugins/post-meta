@@ -4,7 +4,7 @@ Plugin Name: Post Meta
 Plugin URI: http://post-meta.com
 Description: This is a post meta generator plugin.
 Author: Mahbubur Rahman
-Version: 1.2
+Version: 1.3
 Author URI: http://post-meta.com
 */
 
@@ -27,6 +27,8 @@ if (!class_exists( 'postMeta' )){
         public $pluginUrl;
         public $assetsUrl;
         
+        public $options;
+        
         
         function __construct(){ 
             global $pluginCore;
@@ -44,13 +46,16 @@ if (!class_exists( 'postMeta' )){
             define('PM_PLUGIN_URL',plugins_url( '' , __FILE__ )).'/';
             define('PM_ASSECTS_URL', PM_PLUGIN_URL.'/assets/');
             
-          $posttypes=$pluginCore->pm_get_post_types();
-          foreach($posttypes as  $pt){
-            $this->options[$pt->name]='meta_options_'.$pt->name;
-            //$this->all_fields[$pt->name]=array();
-          }
           
+          $this->options=array(
+                            'post_meta' =>'pm_post_meta',
+                            'post_types' =>'pm_post_types',
+                            'taxonomies'  =>'pm_taxonomies'
+                            );
+          
+
         }
+        
         
     }
     global $postMeta;

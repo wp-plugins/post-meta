@@ -59,25 +59,31 @@ if( !class_exists( 'pmTaxonomyController' ) ) :
         
         
     function pm_taxonomy_update(){
-        global $pluginCore;
+        global $postMeta,$pluginCore;
+        
+        if ( wp_verify_nonce( $_REQUEST['pm_nonce'],'nonce') ){
                 unset( $_REQUEST['_wp_http_referer'] );
                 unset( $_REQUEST['pc_nonce'] );
                 unset( $_REQUEST['action'] );
                  
                 $taxonomy =  $_REQUEST['pm_taxonomy']; 
                 
-              	$pm_options = get_option( 'pm_taxonomies' );
+                $pm_options = get_option( $postMeta->options['taxonomies']);
                 
-        		//check if option exists, if not create an array for it
-        		if ( !is_array( $pm_options ) ) {
-        			$pm_options = array();
-        		}
+                //check if option exists, if not create an array for it
+                if ( !is_array( $pm_options ) ) {
+                	$pm_options = array();
+                }
+                
+                $editKey = intval( $_REQUEST['edit_key'] );
+                
                 foreach($pm_options as $key => $pm_option){
                     if($pm_option['type']==$taxonomy['type']){
                         
-                        if($_REQUEST['edit']){
+                        if($_REQUEST['edit'] && isset($editKey)){
+                            
                             $pm_options[$key]=$taxonomy;
-                            update_option('pm_taxonomies', $pm_options ); //Update existing custom Taxonomy array in the CPT option  
+                            update_option($postMeta->options['taxonomies'], $pm_options ); //Update existing custom Taxonomy array in the CPT option  
                             echo $pluginCore->showMessage("Taxonomy successfully update", 'success');
                             die();
                         }
@@ -87,39 +93,49 @@ if( !class_exists( 'pmTaxonomyController' ) ) :
                     }
                     
                 } 
+                if($_REQUEST['edit'] && isset($editKey)){
+                            $pm_options[$editKey]=$taxonomy;
+                            update_option($postMeta->options['taxonomies'], $pm_options ); //Update existing custom Taxonomy if type name can ne change 
+                            echo $pluginCore->showMessage("Taxonomy successfully update", 'success');
+                            die();
+                    }
                 
                 		
-            		array_push( $pm_options, $taxonomy );//insert new custom post type into the array
-            
-            		
-            		update_option( 'pm_taxonomies', $pm_options );  //save new custom Taxonomy array in the CPT option       
+                	array_push( $pm_options, $taxonomy );//insert new custom post type into the array
+                
+                	
+                	update_option( $postMeta->options['taxonomies'], $pm_options );  //save new custom Taxonomy array in the CPT option       
                 
                 echo $pluginCore->showMessage("Taxonomy successfully saved", 'success');
-            
-            die();
+                
+                die();
+            }else{
+                echo $pluginCore->showMessage("Security Error", 'error');
+                die();
+            }
     }
     
     function pm_taxonomy_edit(){
-        global $pluginCore;
+        global $postMeta,$pluginCore;
             if($_REQUEST['taxonomy_key'] || $_REQUEST['taxonomy_key'] ==0){
-               $pm_options = get_option( 'pm_taxonomies' );
+               $pm_options = get_option( $postMeta->options['taxonomies'] );
                $editKey = intval( $_REQUEST['taxonomy_key'] );
-               echo $pluginCore->render('taxonomy', array('data'=>$pm_options[$editKey]));
+               echo $pluginCore->render('taxonomy', array('data'=>$pm_options[$editKey],'editKey'=>$editKey));
                die();
             }
     }
     
     function pm_taxonomy_delete(){
-        global $pluginCore;
+        global $postMeta,$pluginCore;
             
             if($_REQUEST['taxonomy_key']|| $_REQUEST['taxonomy_key']==0){
-               $pm_options = get_option( 'pm_taxonomies' );
+               $pm_options = get_option( $postMeta->options['taxonomies'] );
                $deleteKey = intval( $_REQUEST['taxonomy_key'] );
                unset($pm_options[$deleteKey]);
                
                $pm_options = array_values( $pm_options );
 
-		      update_option( 'pm_taxonomies', $pm_options );
+		      update_option( $postMeta->options['taxonomies'], $pm_options );
               
                echo $pluginCore->showMessage("Taxonomy Successfully Deleted", 'success');
                die();
@@ -130,7 +146,7 @@ if( !class_exists( 'pmTaxonomyController' ) ) :
     
     function pm_register_taxonomies(){
         
-        $taxonomies = get_option( 'pm_taxonomies' );
+        $taxonomies = get_option( $postMeta->options['taxonomies'] );
         if($taxonomies){
             foreach($taxonomies as $taxonomy){
                 $name = $taxonomy['type'];

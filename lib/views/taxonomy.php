@@ -3,7 +3,7 @@ global $pluginCore;
 
 if($data){
     $title = "Edit your custom taxonomy :( $data[type] )";
-    $hidden = "<input type='hidden' name='edit' value='edit' />";
+    $hidden = "<input type='hidden' name='edit' value='edit' /><input type='hidden' name='edit_key' value='$editKey' />";
     $button_txt ="Update Custom Taxonomy";
 }else{
     $title ="Add new custom Taxonomy";
@@ -17,6 +17,7 @@ if($data){
       <div class="inside" style="padding:10px 10px;">
           <div class="msg"></div>
           <form id="pm_taxonomy_form" action="" method="post" onsubmit="pmUpdateTaxonomy(this); return false;" >
+            <?php wp_nonce_field( 'nonce', 'pm_nonce' );  ?>
             <div id="pm_tabs" style="padding: 10px;">
                 <ul>
                     <li><a href="#options"><span>Options</span></a></li>
@@ -52,29 +53,7 @@ if($data){
 </div>
 <script type="text/javascript">
 jQuery(function() { 
-    jQuery( "#pm_tabs" ).tabs();
-    
-    jQuery('#pm_posttype_labal').keyup(function(){
-        jQuery('#advanced-label input[name*=pm_posttype]:text').each(function(index,value) {
-              rel = jQuery(this).attr('rel');
-              label = jQuery('#pm_posttype_labal').val();
-              if(!rel){
-                rel =label;
-              }else{
-                if(rel=='No found'){
-                    rel='No '+label+' found';
-                }else if(rel=='No found in Trash'){
-                    rel='No '+label+' found in Trash';
-                }else{
-                    rel=jQuery(this).attr('rel')+label;
-                }
-                
-              }
-              jQuery(this).val(rel);
-            });
-            jQuery('#pm_posttype_plabels').val(jQuery(this).val()+'s');
-    });
-    
+    jQuery( "#pm_tabs" ).tabs();    
 });
 
 

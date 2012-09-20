@@ -75,6 +75,10 @@ $fieldRequired = $pluginCore->create_input( "group[$group_id][field][$id][requir
                                         "value"     => isset($field['required']) ? $field['required'] : null,
                                         "after"     => " Required <br />",
                                      ) ); 
+$fieldDuplicate = $pluginCore->create_input( "group[$group_id][field][$id][duplicate]", "checkbox", array( 
+                                        "value"     => isset($field['duplicate']) ? $field['duplicate'] : null,
+                                        "after"     => "Allow Duplicate <br />",
+                                     ) );                                     
 
 $fieldAlignment = $pluginCore->create_input( "group[$group_id][field][$id][alignment]", "radio", array( 
                                         "value"     => isset($field['alignment']) ? $field['alignment'] : "vertical",
@@ -196,7 +200,7 @@ $fieldDateTimeSelection = $pluginCore->create_input( "group[$group_id][field][$i
 
 $output = "$fielsTitle $fieldType $fieldMetaKey $fieldDescription $fieldId $fieldSize";
 $output .= "<div class='mo_field_segment'>";
-$output .= "$fieldRequired";
+$output .= "$fieldRequired ";//$fieldDuplicate
     
     if($field['type'] == 'checkbox' || $field['type'] == 'radio'){
         $output .= "$fieldAlignment";
