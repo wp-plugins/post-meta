@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: Post Meta, Meta, Option Meta, Custom post field, custom field, custom taxonomy
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.3
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,14 +49,14 @@ An answer to that question.
 
 == Changelog ==
 
-<h4>1.3</h4>
+<h4>1.0.2</h4>
 * Fixed some Internal error
 * Make compatible with Custom post type and taxonomy
 
-<h4>1.2</h4>
+<h4>1.0.1</h4>
 * Manage custom post type and taxonomy
 
-<h4>1.0</h4>
+<h4>1.0.0</h4>
 * Initial Release
 
 == Upgrade notice ==
