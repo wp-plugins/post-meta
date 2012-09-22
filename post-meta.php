@@ -17,7 +17,7 @@ require_once ( 'lib/init.php' );
 if (!class_exists( 'postMeta' )){
     class postMeta extends pluginCore {
         public $name    = 'Post Meta';
-        public $version = '1.0';
+        public $version = '1.0.2';
         public $prefix  = 'pm_';      
         
         public $pluginPath;
