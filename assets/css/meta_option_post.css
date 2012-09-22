@@ -1,0 +1,128 @@
+/*common */
+.mo_note{
+    font-style: italic;
+    font-size: 10px;
+}
+
+.mo_group { 
+    padding: 0; 
+    border-top: 1px solid #EAEAEA; 
+    background: #F8F8F8; 
+    }
+.mo_group .mo_field{
+    padding: 10px;
+}
+.mo_group .mo_field:hover { background: #F0F7FD; }
+
+.mo_group .mo_field label { 
+    font-weight:bold; 
+    margin-bottom: 8px; 
+    margin-top: 0; 
+    font-size:12px; 
+    }
+
+/* input and textarea  */
+
+.mo_group .mo_field input[type=text], .mo_group .mo_field textarea { 
+    clear:both;
+    width: 50%; 
+    display:block;
+    outline:none; 
+    background:#FFF;
+    }
+
+/* Checkbox */
+
+.mo_group .mo_field_item{
+    padding: 10px 0;
+    
+}
+
+/* Select */
+
+.mo_group .mo_field select{
+    min-width: 200px;
+}
+
+
+/* validation */
+
+.mo_field_item label {
+margin-left: 4px;
+margin-top: 2px;
+overflow: hidden;
+zoom: 100%;
+color: red;
+padding: 0px 6px 0px 24px;
+line-height: 20px;
+font-size: 10px;
+height: auto;
+display: block;
+background: #FFC url(../images/error-magicfields.png) no-repeat 4px 1px;
+float: left;
+border: 1px solid #DCCD4D;
+}
+
+#mo-publish-errors {
+  float: none;
+  margin-left: 0;
+  margin-top: 6px;
+  line-height: 14px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 28px;
+  background-position: 6px 4px; 
+}
+#mo-publish-errors {
+  margin-left: 4px;
+  margin-top: 2px;
+  overflow: hidden;
+  zoom: 100%;
+  color: red;
+  padding: 0px 6px 0px 24px;
+  line-height: 20px;
+  font-size: 10px;
+  height: auto;
+  display: block;
+  background: #FFFFCC url(../images/error.png) no-repeat 4px 1px;
+  border: 1px solid #DCCD4D;
+}
+
+
+
+/* Message  */
+
+
+.mo_ajax{
+    
+    width: 100%;
+    
+}
+
+.mo_ajax .mo_success{
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    
+}
+
+/* file */
+
+.file_wrapper{
+    display: inline-block;
+}
+.file_preview_thum{
+    margin-right: 20px;
+    width: 155px;
+    float: left;
+    background: #fff;
+    text-align: center;
+    position: relative;
+}
+.file_thum_manage{
+    position: absolute;
+    right: 0px;    
+}
+.file_input{
+    padding: 0 20px;
+    float: left;
+}
