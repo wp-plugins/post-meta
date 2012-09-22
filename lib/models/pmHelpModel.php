@@ -11,17 +11,16 @@ class pmHelpModel {
      function getMetaKeyList(){
         global $postMeta,$pluginCore;
         
-            $posttypes=$pluginCore->pm_get_post_types();
+            $postTypes=get_option($postMeta->options['post_meta']);
             $html = '';
             
             $html .= "<div class='mo_meta_key_list'>";
-                  foreach($posttypes as  $pt):
+                  foreach($postTypes as  $key => $postType):
             
-                        $data = get_option($postMeta->options[$pt->name]);
-                       $html .="<h4>Meta Key For $pt->name </h4>";
+                       $html .="<h4>Meta Key For $key </h4>";
                        
-                        if($data['group']){
-                           foreach($data['group'] as $group){
+                        if($postType['group']){
+                           foreach($postType['group'] as $group){
                                 if($group['field']){
                                         foreach($group['field'] as $field){
                                             $html .="<ul>"; 
