@@ -8,7 +8,7 @@ Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Wordpress custom post field, post type, taxonomy management Plugin 
+Wordpress custom post field, post type and taxonomy management Plugin
 
 == Description ==
 Post Meta is a wordpress CMS custom post meta field generator. It has smart and modern (ajax and jquery based) interface to create post meta option or custom meta field as group or field. Can easily manage custom post type and taxonomy.
