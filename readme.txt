@@ -77,9 +77,7 @@ An answer to that question.
 
 == Screenshots ==
 
-[More screenshots can be found here.](http://post-meta.com/screenshots/)
-
-[Post Meta running on live websites can be found here.](http://demo.post-meta.com/)
+[More screenshots can be found here.](http://post-meta.com/screenshots/) | [Post Meta running on live websites can be found here.](http://demo.post-meta.com/)
 
 
 1. screenshot-1
