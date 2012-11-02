@@ -87,7 +87,7 @@ An answer to that question.
 
 == Changelog ==
 
-<h4>1.0.3</h4>
+<h4>1.0.3 (2nd Novenber, 2012)</h4>
 * Add extra custom meta field
 * Shortcode with ui is added (Only for pro version)
 * Include Import export feature (Only for pro version)
