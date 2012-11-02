@@ -1,6 +1,6 @@
 <?php
 
-$deleteLink = $deleteIcon ? "<div class='mo_trash' title='Click to Romove' onclick='moRemoveMetaBox(this);'></div>" : null;
+$deleteLink = $deleteIcon ? "<div class='pm_trash' title='Click to Romove' onclick='moRemoveMetaBox(this);'></div>" : null;
 $display    = !$isOpen ? "style='display:none'" : "";
 $toggle  = $toggle? "onclick='meta_option_toggole(this);'":null;
 $html = "

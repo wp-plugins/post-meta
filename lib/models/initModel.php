@@ -11,75 +11,23 @@ class initModel {
      */
     function controllersOrder(){
         return array(
+            'pmPreloadsController',
             'pmPostMetaController',
             'pmPostTypeController',
             'pmTaxonomyController',
             'pmPostController',
-            'pmHelpController',
-            'pmSettingsController'        
+            'pmImportExportController',
+            'pmSettingsController',
+            'pmVersionController',
+            'postMetaPro'      
         );
     }
-    function loadControllers(){
-        global $pluginCore;
-                                 
-        $classes = array();
-        foreach( scandir( $pluginCore->controllersPath ) as $file ) {
-            if( preg_match( "/.php$/i" , $file ) )
-                $classes[ str_replace( ".php", "", $file ) ] = $pluginCore->controllersPath . $file;            
-        }          
-        /*
-        $pluginCore->isPro = true;
-        if( @$pluginCore->isPro ){
-            $proDir = $pluginCore->controllersPath . 'pro/';
-            if( file_exists( $proDir ) ){
-                foreach( scandir( $proDir ) as $file ) {
-                    if( preg_match( "/.php$/i" , $file ) )
-                        $classes[ str_replace( ".php", "", $file ) ] = $proDir . $file; 
-                }                  
-            }          
-        }*/
         
-        foreach( $classes as $classPath )
-            require_once( $classPath );
             
-        /*foreach( $classes as $className => $classPath ){
-            require_once( $classPath );     
-            $instance[] = new $className;   
-        }*/
+    /**
+     * Calling views. if pro then render from pro directory
+     */
 
-                
-        $controllersOrder = $pluginCore->controllersOrder();
-        foreach( $controllersOrder as $className ){
-            if( class_exists( $className ) )
-                $instance[] = new $className;
-        }
-        
-        
-        return $instance;        
-    }
-    
-    function loadUi($uis=array()){
-        if($uis){
-            foreach($uis as $ui){
-            wp_register_style( 'pluginCore-style-'.$ui, PM_ASSECTS_URL.'css/ui/jquery.ui.'.$ui.'.css' );
-            wp_register_style('pluginCore-style-'.$ui);
-            wp_register_script( 'pluginCore-script-'.$ui, PM_ASSECTS_URL.'js/ui/jquery.ui.'.$ui.'.js'); 
-            wp_enqueue_script('pluginCore-script-'.$ui);
-            } 
-        }
-        
-    }
-    
-        /**
-         * Render view file
-         * @param string $viewName: name of view file without extension
-         */
-        function render( $viewName, $parameter = array() ){
-            global $pluginCore;
-            if( $parameter ) extract($parameter);            
-            include( $pluginCore->viewsPath . $viewName . '.php' );
-            if( isset($html) ) return $html;
-        }
         
         function create_input($name='', $type='text', $attr=array(), $options=array()){
             $name   = trim($name);
@@ -91,8 +39,8 @@ class initModel {
             $value  = isset( $attr['value'] ) ? $attr['value'] : null;           
             
             //filter attr for add
-            $excludeAttr = array( 'before', 'after', 'enclose', 'field_enclose','label', 'by_key', 'label_class', 'label_enclose', 'label_extra', 'combind', 'option_before', 'option_after' );      
-            $excludeType = array( 'select', 'radio', 'label', 'checkbox' );  //exclude adding value                          
+            $excludeAttr = array( 'before', 'after', 'enclose', 'field_enclose', 'field_control', 'label', 'by_key', 'label_class', 'label_enclose', 'label_extra', 'combind', 'option_before', 'option_after', 'file_filter');      
+            $excludeType = array( 'select', 'radio', 'label', 'checkbox','textarea' );  //exclude adding value                          
             if(in_array( $type, $excludeType )) $excludeAttr[] = 'value';   
             $include = null;                  
             if($attr){
@@ -109,6 +57,8 @@ class initModel {
             $label_class    = isset( $attr['label_class'] )    ? $attr['label_class']   : null;  
             $label_extra    = isset( $attr['label_extra'] )    ? $attr['label_extra']   : null; 
             $field_enclose    = isset( $attr['field_enclose'] )    ? $attr['field_enclose']   : null;
+            $field_control    = isset( $attr['field_control'] )    ? $attr['field_control']   : null;
+            $file_filter    = isset( $attr['file_filter'] )    ? $attr['file_filter']   : null;
             
             $html = '';          
             if( $type == 'select' ){
@@ -153,33 +103,21 @@ class initModel {
             }elseif($type == 'textarea'){
                 $html .= "<textarea $name $include>$value</textarea>";
             }elseif($type == 'file'){
-                $html .= "<input type='$type' $name $include />";
-                //$form_name = isset($config['form_name']) ? $config['form_name'] : '';                
-            	/*?><script type="text/javascript">
-            		var form = document.getElementById($form_name);
-            		form.encoding = 'multipart/form-data';
-            		form.setAttribute('enctype', 'multipart/form-data');
-            	</script><?php  */        
-            }elseif( $type == 'label' ){        
-                $for   = isset($attr['for']) ? "for='{$attr['for']}'" : '';
-                $html .= "<label $for $include>$value</label>";
-            }elseif( $type == 'hidden'){
-                $html .= "<input type='$type' $name $include />";
-                
-            }elseif($type == 'image_media'){
-                global $pluginCore;
+                global $postMeta;
                 if($attr['value']){
                     $style ="block";
-                    $preview_url= $pluginCore->generate_thumb($attr['value'],150,150);
+                    $upload_dir = wp_upload_dir();
+                    $dl_url=$upload_dir['baseurl'].$attr['value'];
+                    $preview_url= PM_ASSECTS_URL.'images/folder.png';
                 }else{
                     $style ="none";
-                    $preview_url = PM_ASSECTS_URL.'images/nopreview.gif';
+                    $preview_url = PM_ASSECTS_URL.'images/no_preview.png';
                 }
                 
                 $img_media='';
                 $img_media .="<div class='file_wrapper'>";
                     $img_media .="<div class ='file_preview'>";
-                    $img_media .="<div class='file_thum_manage' style='display:$style;'><a href='#delete' class='delete' onclick='pmDeleteFile(this); return false' >delete</a></div>";
+                    $img_media .="<div class='file_thum_manage' style='display:$style;'><a target='_blank' href='$dl_url' class='dl' > Download </a><a href='#Delete' class='delete' onclick='pmDeleteFile(this); return false' >Delete</a></div>";
                                 $img_media .="<div class='file_preview_thum'><img src='$preview_url' /></div>";
                     $img_media .="</div>";  
                     $img_media .="<div class='file_input'>";
@@ -187,7 +125,125 @@ class initModel {
                         $img_media .="<input type='hidden' $name $include  value='' />";
                         //$img_media .="<input type='text' class='upload-url'  value='' />";
                         //                        $img_media .="<a class='button thickbox update_field_media_upload' id='thumb_{$attr['id']}' href='media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=1&amp;width=640&amp;height=255'>Set Image</a>";
-                        $img_media .="<input id='media_upload_{$attr['id']}' class='button pc_media_upload_button' type='button' name='pc_media_upload_button' value='Upload Image' />";
+                        $img_media .="<div id='file_upload_{$attr['id']}' pm_field_id='{$attr['id']}' class='pm_file_upload_button' $file_filter name='pc_file_upload_button'> File Upload </div>";
+                    $img_media .="</div>";
+                
+                $img_media .="</div>";
+                
+                $html .=$img_media;     
+            }elseif($type == 'image'){
+                global $postMeta;
+                if($attr['value']){
+                    $style ="block";
+                    $preview_url= $postMeta->generate_thumb($attr['value'],150,150);
+                    $upload_dir = wp_upload_dir();
+                    $view_url=$upload_dir['baseurl'].$attr['value'];
+                }else{
+                    $style ="none";
+                    $preview_url = PM_ASSECTS_URL.'images/no_preview.png';
+                }
+                
+                $img_media='';
+                $img_media .="<div class='file_wrapper'>";
+                    $img_media .="<div class ='file_preview'>";
+                    $img_media .="<div class='file_thum_manage' style='display:$style;'><a target='_blank' href='$view_url' class='dl' > View </a><a href='#Delete' class='delete' onclick='pmDeleteFile(this); return false' >Delete</a></div>";
+                                $img_media .="<div class='file_preview_thum'><img src='$preview_url' /></div>";
+                    $img_media .="</div>";  
+                    $img_media .="<div class='file_input'>";
+                        $img_media .= "<div id='upload_response_{$attr['id']}'></div>";
+                        $img_media .="<input type='hidden' $name $include  value='' />";
+                        //$img_media .="<input type='text' class='upload-url'  value='' />";
+                        //                        $img_media .="<a class='button thickbox update_field_media_upload' id='thumb_{$attr['id']}' href='media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=1&amp;width=640&amp;height=255'>Set Image</a>";
+                        $img_media .="<div id='img_upload_{$attr['id']}' pm_field_id='{$attr['id']}' class='pm_img_upload_button' $file_filter name='pc_media_upload_button'> Upload Image </div>";
+                    $img_media .="</div>";
+                
+                $img_media .="</div>";
+                
+                $html .=$img_media;
+                        
+            }elseif($type == 'audio'){
+                global $postMeta;
+                if($attr['value']){
+                    $style ="block";
+                    $preview_url= $postMeta->render('preview_audio',array('file'=>$attr['value'],'id'=>$attr['id']));
+                    $upload_dir = wp_upload_dir();
+                    $dl_url=$upload_dir['baseurl'].$attr['value'];
+                }else{
+                    $style ="none";
+                    $preview_url = "<img src='".PM_ASSECTS_URL."images/no_preview.png' />";
+                }
+                
+                $img_media='';
+                $img_media .="<div class='file_wrapper'>";
+                    $img_media .="<div class ='file_preview'>";
+                    $img_media .="<div class='file_thum_manage' style='display:$style;'><a target='_blank' href='$dl_url' class='dl' > Download </a><a href='#Delete' class='delete' onclick='pmDeleteFile(this); return false' >Delete</a></div>";
+                                $img_media .="<div class='file_preview_thum'>$preview_url</div>";
+                    $img_media .="</div>";  
+                    $img_media .="<div class='file_input'>";
+                        $img_media .= "<div id='upload_response_{$attr['id']}'></div>";
+                        $img_media .="<input type='hidden' $name $include  value='' />";
+                        //$img_media .="<input type='text' class='upload-url'  value='' />";
+                        //                        $img_media .="<a class='button thickbox update_field_media_upload' id='thumb_{$attr['id']}' href='media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=1&amp;width=640&amp;height=255'>Set Image</a>";
+                        $img_media .="<div id='audio_upload_{$attr['id']}' class='pm_audio_upload_button' $file_filter name='pm_audio_upload_button'> Audio Upload </div>";
+                    $img_media .="</div>";
+                
+                $img_media .="</div>";
+                
+                $html .=$img_media;      
+            }elseif($type == 'video'){
+                global $postMeta;
+                if($attr['value']){
+                    $style ="block";
+                    $preview_url= $postMeta->render('preview_video',array('file'=>$attr['value'],'id'=>$attr['id']));
+                    $upload_dir = wp_upload_dir();
+                    $dl_url=$upload_dir['baseurl'].$attr['value'];
+                }else{
+                    $style ="none";
+                    $preview_url = "<img src='".PM_ASSECTS_URL."images/no_preview.png' />";
+                }
+                
+                $img_media='';
+                $img_media .="<div class='file_wrapper'>";
+                    $img_media .="<div class ='file_preview'>";
+                    $img_media .="<div class='file_thum_manage' style='display:$style;'><a target='_blank' class='dl' href='$dl_url' > Download </a><a href='#Delete' class='delete' onclick='pmDeleteFile(this); return false' >Delete</a></div>";
+                                $img_media .="<div class='file_preview_thum'>$preview_url</div>";
+                    $img_media .="</div>";  
+                    $img_media .="<div class='file_input'>";
+                        $img_media .= "<div id='upload_response_{$attr['id']}'></div>";
+                        $img_media .="<input type='hidden' $name $include  value='' />";
+                        
+                        $img_media .="<div id='video_upload_{$attr['id']}' class='pm_video_upload_button' $file_filter name='pm_video_upload_button'> Video Upload </div>";
+                    $img_media .="</div>";
+                
+                $img_media .="</div>";
+                
+                $html .=$img_media;      
+            }elseif( $type == 'label' ){        
+                $for   = isset($attr['for']) ? "for='{$attr['for']}'" : '';
+                $html .= "<label $for $include>$value</label>";
+            }elseif( $type == 'hidden'){
+                $html .= "<input type='$type' $name $include />";
+                
+            }elseif($type == 'image_media'){
+                global $postMeta;
+                if($attr['value']){
+                    $style ="block";
+                    $preview_url= $postMeta->generate_thumb($attr['value'],150,150);
+                }else{
+                    $style ="none";
+                    $preview_url = PM_ASSECTS_URL.'images/no_preview.png';
+                }
+                
+                $img_media='';
+                $img_media .="<div class='file_wrapper'>";
+                    $img_media .="<div class ='file_preview'>";
+                    $img_media .="<div class='file_thum_manage' style='display:$style;'><a target='_blank' href='{$attr['value']}' class='dl' > view </a><a href='#delete' class='delete' onclick='pmDeleteFile(this); return false' >delete</a></div>";
+                                $img_media .="<div class='file_preview_thum'><img src='$preview_url' /></div>";
+                    $img_media .="</div>";  
+                    $img_media .="<div class='file_input'>";
+                        $img_media .= "<div id='upload_response_{$attr['id']}'></div>";
+                        $img_media .="<input type='hidden' $name $include  value='' />";
+                        $img_media .="<div id='media_upload_{$attr['id']}' class='button pc_media_upload_button' type='button' name='pc_media_upload_button'>Upload Image via media </div>";
                     $img_media .="</div>";
                 
                 $img_media .="</div>";
@@ -208,12 +264,11 @@ class initModel {
                 $enclose = $attr['field_enclose'];
                 $encloseTag = explode( ' ', trim($enclose) );
                 $encloseTag = $encloseTag[0];
-                //$output = "<$enclose>$label_html $html</$encloseTag>";
                 $html = "<$enclose>$html</$encloseTag>";
             }
             
             //Add lebel if required
-            $label_class =  $label_class ? $label_class : 'mo_label';            
+            $label_class =  $label_class ? $label_class : 'pm_label';            
             if( isset($attr['label']) ){
                 $for   = isset($attr['id']) ? "for='{$attr['id']}'" : '';
                 $label_html = "<label class='$label_class' $for>{$attr['label']} {$label_extra}</label>";
@@ -223,7 +278,6 @@ class initModel {
                                 $encloseTag = $encloseTag[0];
                                 $label_html = "<$enclose>$label_html</$encloseTag>";                    
                                 } 
-                //$html = "<label class='$label_class' $for>{$attr['label']}</label>" . $html;
             }
                                                              
             //Enclose by other html element
@@ -232,7 +286,7 @@ class initModel {
                 $encloseTag = explode( ' ', trim($enclose) );
                 $encloseTag = $encloseTag[0];
                 //$output = "<$enclose>$label_html $html</$encloseTag>";
-                $html = "<$enclose>$label_html $html</$encloseTag>";
+                $html = "<$enclose>$label_html $html $field_control</$encloseTag>";
             }
                  
             
@@ -254,14 +308,14 @@ class initModel {
         
             
             //   
-            function generate_thumb($file, $width, $height, $cut = true){
+            function generate_thumb($file, $width, $height, $crop = false){
                 
                 
                 $uploads    = wp_upload_dir();
                 $fullPath   = $uploads['basedir'] . $file;
                 $fullUrl    = $uploads['baseurl'] . $file;
                 
-                if(preg_match('/\/wp-content\/uploads\//',$file ,$match)){
+                if(@preg_match('/\/wp-content\/uploads\//',$file ,$match)){
                     
                    $fullPath = $uploads['basedir'].str_replace( $uploads['baseurl'] , '', $file);
                    $fullUrl = $file;
@@ -275,7 +329,7 @@ class initModel {
                 // In case of image
                 if( is_array( getimagesize( "$fullUrl" ) ) ){
                     if( @$width AND @$height ){
-                        $resizedImage = image_resize( $fullPath, $width, $height );
+                        $resizedImage = image_resize( $fullPath, $width, $height ,$crop);
                         if( is_wp_error($resizedImage) )
                             $error[] = $resizedImage->get_error_message();               
                         if( !isset($error) )

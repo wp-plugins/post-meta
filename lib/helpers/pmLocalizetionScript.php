@@ -12,7 +12,7 @@ class pmLocalizetionScript {
         $data = array(
                 'on_preview'=>'images/noimage.gif',       
         );
-        wp_localize_script( 'meta-option-post-script', 'js', $data );
+        wp_localize_script( 'post-meta-post-script', 'js', $data );
      
     }
               

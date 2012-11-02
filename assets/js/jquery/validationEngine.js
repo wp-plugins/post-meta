@@ -990,6 +990,10 @@
                 prompt.remove();
                 field.before("<div class='pc-error'>This field is required</div>");
                }
+               if(field.hasClass('theEditor')){
+                prompt.remove();
+                field.before("<div class='pc-error'>This field is required</div>");
+               }
                 field.addClass('vError'); // Rasel
 
             var pos = methods._calculatePosition(field, prompt, options);

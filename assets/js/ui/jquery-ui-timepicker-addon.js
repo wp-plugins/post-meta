@@ -19,6 +19,11 @@
 */
 
 (function($) {
+    
+    $.ui.timepicker = $.ui.timepicker || {};
+        if ($.ui.timepicker.version) {
+        return;
+        }
 
 $.extend($.ui, { timepicker: { version: "0.9.8" } });
 

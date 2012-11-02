@@ -19,7 +19,7 @@ if( @$file ) :
                 // In case of image
                 if( is_array( getimagesize( "$fullUrl" ) ) ){
                     if( @$width AND @$height ){
-                        $resizedImage = image_resize( $fullPath, $width, $height );
+                        $resizedImage = image_resize( $fullPath, $width, $height, false);
                         if( is_wp_error($resizedImage) )
                             $error[] = $resizedImage->get_error_message();               
                         if( !isset($error) )

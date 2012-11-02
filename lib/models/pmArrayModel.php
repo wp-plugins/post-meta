@@ -3,20 +3,12 @@ if( !class_exists( 'pmArrayModel' ) ) :
 
 class pmArrayModel {
 
-           function moFields(){
+           function pmFields(){
             
-            $meta_option_field_list=array(
+            $post_meta_field_list=array(
                                         'text' => array(
-                                            'title'         => 'Textbox',
+                                            'title'         => 'Text box',
                                             'is_free'       => true,  
-                                        ), 
-                                        'textarea' => array(
-                                            'title'         => 'Paragraph',
-                                            'is_free'       => true,   
-                                        ),
-                                        'rich_text' => array(
-                                            'title'         => 'Rich Text',
-                                            'is_free'       => true,   
                                         ),
                                         'email' => array(
                                             'title'         => 'Email',
@@ -26,13 +18,21 @@ class pmArrayModel {
                                             'title'         => 'Website',
                                             'is_free'       => true,  
                                         ),
-                                        'Phone' => array(
+                                        'phone' => array(
                                             'title'         => 'Phone',
                                             'is_free'       => true,  
                                         ),
                                         'number' => array(
                                             'title'         => 'Number',
                                             'is_free'       => true,  
+                                        ),
+                                        'textarea' => array(
+                                            'title'         => 'Paragraph',
+                                            'is_free'       => true,   
+                                        ),
+                                        'wp_edior' => array(
+                                            'title'         => 'WP Editor',
+                                            'is_free'       => true,   
                                         ),
                                         'datetime' => array(
                                             'title'         => 'Date / Time',
@@ -51,49 +51,82 @@ class pmArrayModel {
                                             'is_free'       => true,  
                                         ),
                                         'hidden' => array(
-                                            'title'         => 'Hidden Field',
+                                            'title'         => 'Hidden',
                                             'is_free'       => true,   
                                         ),
                                         'image_media' => array(
                                             'title'         => 'Image Media',
                                             'is_free'       => true,   
-                                        )     
-                                        /*'datetime' => array(
-                                            'title'         => 'Date / Time',
+                                        ),
+                                        'image' => array(
+                                            'title'         => 'Image Upload',
                                             'is_free'       => false,
-                                        ),   
-                                        'email' => array(
-                                            'title'         => 'Email',
+                                        ),
+                                        'audio' => array(
+                                            'title'         => 'Audio Upload',
                                             'is_free'       => false,
-                                        ),             
+                                        ),
+                                        'video' => array(
+                                            'title'         => 'Video Upload',
+                                            'is_free'       => false,
+                                        ),
                                         'file' => array(
                                             'title'         => 'File Upload',
                                             'is_free'       => false,
-                                        ), 
-                                        'image_url' => array(
-                                            'title'         => 'Image URL',
-                                            'is_free'       => false,
-                                        ),                   
-                                        'phone' => array(
-                                            'title'         => 'Phone Number',
-                                            'is_free'       => false,
-                                        ), 
-                                        'number' => array(
-                                            'title'         => 'Number',
-                                            'is_free'       => false, 
-                                        ), 
-                                        'url' => array(
-                                            'title'         => 'Website',
-                                            'group_id'      => $id,
-                                            'is_free'       => false,
-                                        )*/
+                                        )  
                                 
                                 );
                                 
-                   return $meta_option_field_list;          
+                   return $post_meta_field_list;          
             
            }
-
+           
+    function pmAllExts(){
+        $pmAllExts = array(
+                    'file'=>array(
+                                'zip'=>'ZIP',
+                                'rar'=>'RAR',
+                                '7z'=>'7Z',
+                                'exe'=>'EXE',
+                                'iso'=>'ISO',
+                                'dmg'=>'DMG'
+                            ),
+                    'audio'=>array(
+                                'mp3'=>'MP3 (Preview)',
+                                'wav'=>'WAV',
+                                'wma'=>'WMA'
+                            ),
+                    'document'=>array(
+                                'pdf'=>'PDF',
+                                'doc'=>'DOC',
+                                'ppt'=>'PPT',
+                                'txt'=>'txt'
+                            ),
+                    'image'=>array(
+                                'jpg'=>'JPG',
+                                'jpeg'=>'JPEG',
+                                'png'=>'PNG',
+                                'gif'=>'GIF',
+                                'tif'=>'TIF',
+                                'psd'=>'PSD'
+                            ),
+                    'video'=>array(
+                                'mp4'=>'MP4 (Preview)',
+                                'flv'=>'FLV (Preview)',
+                                'avi'=>'AVI',
+                                'wmv'=>'WMV',
+                                'mpg'=>'MPG',
+                                'mov'=>'MOV',
+                                '3gp'=>'3GP'
+                            )
+                    );
+        return $pmAllExts;
+    }
+           
+           
+    function nonceText(){
+        return "postmeta_nonce";
+    }
 
 }
 

@@ -1,12 +1,9 @@
 <?php
-        global $pluginCore;
-        global $post;
-        // get value of this field if it exists for this post  
-        $meta = get_post_meta($post->ID, $field['meta_key'], true);
-        
+        global $postMeta;
+        global $post;        
         
         $fieldType      = 'text';
-        $class          = 'mo_post_input ';
+        $class          = 'pm_post_input ';
         $divClass       = null;
         $divStyle       = null;
         $fieldOptions   = null;
@@ -15,10 +12,6 @@
         $maxlength      = null;
         $option_after   = null;
         $by_key         = false;
-        $label_class    = null;
-        $fieldTitle     = null;
-        $fieldID        = "um_field_{$field['id']}";
-        $showInputField = true;   
         
         
         if( isset( $field['required'] ) ){
@@ -35,7 +28,10 @@
         if($field['type']=="phone"){
             $validation .= "custom[phone],";
         }       
-
+        if($field[ 'type' ]=='hidden'){
+            $value = ($field['hidden_value'])?$field['hidden_value']:'1';
+            $divStyle .="display:none; ";
+         }
         
         if( isset( $field['css_class'] ) ){
             $divClass .= "{$field['css_class']} ";
@@ -56,17 +52,16 @@
          if($field['height']){
             $style .= "height:{$field['height']} ";
          }
-         
-         if($field['rich_text']){
-            $class .='pm_rich_text ';
+         if($field['type']=="wp_edior"){
+            $field['type'] ="textarea";
+            $class .= "pm_wp_edior pm_add_wp_edior ";
         }
-         
-         
          
         if($field['type']=='textarea'){
             
-            $style ="$style 'cols='60' rows='4";
+            $style ="$style 'cols='60' rows='10";
          }
+         
          
          if($field['type']=='checkbox'){
             if( isset( $field['required'] ) ) :
@@ -75,12 +70,33 @@
             if($field['alignment']=='horizontal'){
                 $option_after = "<br />";
             }
+            
+            if(!$value){
+                $value=array();
+                $values = (array)preg_split("/\\n/",$field['default_value']);
+                foreach($values as $val){
+                    $value[]=trim($val);
+                }
+            }
+            
             $combind        = true;
          }
          
          if($field['type']=='radio'){
             if($field['alignment']=='horizontal'){
                 $option_after = "<br />";
+            }
+            if(!$value){
+                $value=trim($field['default_value']);
+            }
+         }
+         if( $field['type']=='select'){
+            
+            if($field['multiple']){
+                $multiple="multiple";
+            }
+            if(!$value){
+                $value=trim($field['default_value']);
             }
          }
          
@@ -89,7 +105,7 @@
             }
          
         if(  $field['options']  ){
-                $temp = explode( ",", $field['options'] );
+                $temp = (array)preg_split("/\\n/",$field['options']);
                 foreach( $temp as $val ){
                     $option     = explode( "=", $val );
                     $optionKey  = trim($option[0]);
@@ -102,18 +118,18 @@
          if($field['type']=='text' || $field['type']=='textarea'){
             $placeholder = $field['title'];
          }
-        // begin a table row with  
-        $required = ($field['required'])?"<span class='required_label'>*</span>":"";
-        $label_extra = "<em style='display: none; '>(<span class='mo_field_count'>1</span>)</em>$required";
         
-        if($field['type']=='image_media'){
-            $class .='pc_uploaded_url ';
+        if($field['type']=='image_media' || $field['type']=='image' || $field['type']=='file' || $field['type']=='audio' || $field['type']=='video'){
+            $class .='pm_uploaded_url ';
         }
-        if( $field['type'] == 'rich_text' ){  
-            $field['type'] = 'textarea';
-            $class    .= "pm_rich_text ";
-          }
-          
+
+        if($field['type'] == 'image' || $field['type'] == 'audio' || $field['type'] == 'video' || $field['type']=='file'){
+            $ext_default = ($field['allowed_extension'])?implode(',',$field['allowed_extension']):null;
+            $ext_custom = ($field['allowed_extension_custom'])?','.$field['allowed_extension_custom']:null;
+            $ext = $ext_default.$ext_custom;
+            $file_filter =($ext)?" extension='$ext'":null;
+            $file_filter .=(isset($field['max_file_size']))?" maxsize='".$field['max_file_size']*1024*1024 ."'":null;
+        }  
 
 if( $field['type'] == 'number' ){  
     $validation     .= "custom[integer],";
@@ -126,7 +142,7 @@ if( $field['type'] == 'number' ){
 }
   
 
-if( $field['type'] == 'datetime' ){ 
+if( $field['type'] == 'datetime' ){
     if( $field['datetime_selection'] == 'date' ) :
         $validation .= "custom[date],";
         $class      .= "pm_date ";
@@ -139,26 +155,48 @@ if( $field['type'] == 'datetime' ){
     endif;
 }
 
+$required = ($field['required'])?"<span class='required_label'>*</span>":""; 
+
 if($field['duplicate']){
-    $abbButton ="<a class='repeatable-add button' href='#'>Add</a> ";
+    // begin a table row with  
+        $keyIndex=($key)?$key:'';
+        $labelCountVisibility=($label_count)?'inline':'none';
+        $label_repeat = "<em style='display: $labelCountVisibility; '>(<span class='pm_field_index'>$keyIndex</span>)</em>";
+        
+    $arrayKey=($key)?"[$key]":'';
+    $repeatClass ="repeat-{$field['meta_key']} ";
+    if($pm_load_group){
+        $removeVisibility='none';
+    }else{
+        $removeVisibility=($remove_field)?'inline':'none';
+    }
+    
+    $field_control ="<div class='pm-field-control'><span class='hndle' style='display:$removeVisibility'></span><a class='duplicate-add' meta_key='{$field['meta_key']}' href='#Add Field'>Add</a><a class='duplicate-remove' style='display:$removeVisibility' meta_key='{$field['meta_key']}' href='#Remove Field'>Remove</a> </div> ";
+}
+if($group_count){
+    $arrayKey=($group_count)?"[$group_count]":'';
+    $arrayKey .=($key)?"[$key]":'';
 }
 
         if( $validation ) $class .= "validate[" . rtrim( $validation, ',') . "]";
         
-                        $html .= $pluginCore->create_input("mofields[{$field['meta_key']}]",$field['type'], array( 
-                                        "value"             =>isset($meta)?$meta: null,
-                                        "label"             => "<span class='name'>$field[title]</span>",
-                                        "label_class"     => "mo_field_title",
-                                        "label_extra"       =>$label_extra,
-                                        "id"                => "mo_field_$field[id]",
+        
+                        $html .= $postMeta->create_input("mofields[{$field['meta_key']}]$arrayKey",$field['type'], array( 
+                                        "value"             =>isset($value)?$value: null,
+                                        "label"             => "<span class='name'>$field[title]</span> $label_repeat $required",
+                                        "label_class"     => "pm_field_title",
+                                        "id"                => "pm_field_$field[id]_{$group_count}_$key",
                                         "class"             =>  $class,
-                                        "after"             => "<span class='mo_note'>{$field['desc']} $abbButton</span>",
+                                        "multiple"          =>  $multiple,
+                                        "after"             => "<span class='pm_note'>{$field['desc']} </span>",
                                         "option_after" =>   isset($option_after)  ? $option_after : null,
                                         "placeholder"       =>  isset($placeholder)?$placeholder:null,
                                         "style"             =>  isset($style)?$style:null, 
-                                        "field_enclose"     =>  "div class='mo_field_item'",
+                                        "field_enclose"     =>  "div class='pm_field_item'",
                                         "maxlength"         => isset($maxlength)?$maxlength:null,
-                                        "enclose"           =>  "div class='mo_field $divClass' $divStyle ",
+                                        "file_filter"       => $file_filter,
+                                        "field_control"     => $field_control,
+                                        "enclose"           =>  "div class='pm_field $repeatClass $divClass' $divStyle ",
                                         
                                         "onblur"    => isset($onBlur)           ? $onBlur : null,
                                         "combind"   => isset($combind)          ? $combind : false,
@@ -166,6 +204,6 @@ if($field['duplicate']){
                                      ),$fieldOptions); 
                                      
                                      
-        $html = "<div class='mo_group'>$html</div>";
+        $html = "$html";
 
 ?>

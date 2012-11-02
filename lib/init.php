@@ -6,41 +6,18 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
 
 if (!class_exists( 'pluginCore' )){
     class pluginCore {
-        public $version = '1.0.0';
-        public $prefix  = 'pc_';
-        
-        public $frameworkPath;
-        public $modelsPath;
-        public $controllersPath;
-        public $viewsPath;
-        public $pluginPath;
-        
-        public $frameworkUrl;
-        public $pluginUrl;
-        public $assetsUrl;
-               
-        public $scripts = array();
-        
+        public $coreVersion = '1.0.0';
+        public $corePrefix  = 'pc_';
         
         function __construct(){                          
-            $this->pluginCorePath   = dirname( __FILE__ );
-            $this->modelsPath      = $this->pluginCorePath . '/models/';
-            $this->controllersPath = $this->pluginCorePath . '/controllers/';
-            $this->viewsPath       = $this->pluginCorePath . '/views/';
-            $this->helpersPath       = $this->pluginCorePath . '/helpers/';
             
-            $this->loadModels( $this->modelsPath );
-            //$this->loadModels( $this->helpersPath );
-            //$this->pluginPath      = $this->directoryUp( $this->frameworkPath );            
-            //$this->frameworkUrl    = plugins_url( '' , __FILE__ );                                         
-            //$this->pluginUrl       = $this->directoryUp( $this->frameworkUrl );
-            //$this->assetsUrl       = $this->pluginUrl . '/assets/';                         
         }
+        
          /**
          * Load all class from models directory
          */
-        function loadModels( $dir ){
-            $classes = $this->loadDirectory( $dir );
+        function loadModels( $dir ,$enc=false ){
+            $classes = !$enc ? $this->loadDirectory( $dir ) : $this->loadEncDirectory( $dir );
             foreach( $classes as $class )
                 $this->objects[] = $class;
         }
@@ -59,7 +36,23 @@ if (!class_exists( 'pluginCore' )){
             }
             return $classes;
         }
-                /**
+        
+        function loadEncDirectory( $dir ){
+            if (!file_exists($dir)) return;
+            foreach (scandir($dir) as $item) {
+                if( preg_match( "/.php$/i" , $item ) ) {
+                    eval( base64_decode( file_get_contents( $dir . $item ) ) );
+                    $className = str_replace( ".php", "", $item );
+                    if( class_exists( $className ) )
+                        $classes[] = new $className;
+                }      
+            }
+            return isset( $classes ) ? $classes : false;           
+        }
+        
+        
+        
+        /**
          * Dynamicaly call any  method from models class
          * by pluginFramework instance
          */
@@ -92,8 +85,6 @@ if (!class_exists( 'pluginCore' )){
     if( !is_object( $pluginCore ) )
         $pluginCore = new pluginCore;
         
-    $pluginCore->loadControllers( $pluginCore->controllersPath );
-    
     
 }
 
