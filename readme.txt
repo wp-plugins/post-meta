@@ -1,7 +1,7 @@
 === Post Meta ===
 Contributors: Mahbubur Rahman
 Donate link: http://post-meta.com/donation/ 
-Tags: Post Meta, Meta field, Option Meta, Custom post field, custom field, custom taxonomy, taxonomy, custom post type, post type,
+Tags: Post Meta, Meta field, Option Meta, Custom post field, custom field, custom taxonomy, taxonomy, custom post type, post type,admin, advanced, custom, custom field, edit, field, file, image, magic fields, matrix, more fields, Post, repeater, simple fields, text, textarea, type
 Requires at least: 3.0
 Tested up to: 3.4
 Stable tag: 1.0.3
