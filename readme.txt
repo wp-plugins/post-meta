@@ -83,9 +83,6 @@ An answer to that question.
 
 == Screenshots ==
 
-[screenshots](http://post-meta.com/screenshots/) | [Post Meta running on live websites can be found here.](http://demo.post-meta.com/)
-
-
 1. screenshot-1
 2. screenshot-2
 3. screenshot-3
@@ -93,7 +90,7 @@ An answer to that question.
 
 == Changelog ==
 
-<h4>1.0.3 (2nd Novenber, 2012)</h4>
+<h4>1.0.3 (2nd November, 2012)</h4>
 * Add extra custom meta field
 * Shortcode with ui is added (Only for pro version)
 * Include Import export feature (Only for pro version)
