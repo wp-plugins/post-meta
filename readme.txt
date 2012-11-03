@@ -52,8 +52,14 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 * Will add more custom field
 * ...and any suggestions that we may receive... 
 
+
+= Please Vote and Enjoy =
+* Your votes really make a difference! Thanks.
+
 = NB =
 * Duplicate Group, Uploaded field, Shortcode and Impoer & Expoert are only supported in pro version. [Get it Now](http://post-meta.com)
+
+
 
 == Installation ==
 
