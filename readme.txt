@@ -4,11 +4,11 @@ Donate link: http://post-meta.com/donation/
 Tags: Post Meta, Meta field, Option Meta, Custom post field, custom field, custom taxonomy, taxonomy, custom post type, post type,admin, advanced, custom, custom field, edit, field, file, image, magic fields, matrix, more fields, Post, repeater, simple fields
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. Shortcode with ui, Import & export and many more.
+Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. Shortcode with GUI, Import & export and many more. Every developer should have it.
 
 == Description ==
 
@@ -47,6 +47,15 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 * Audio Upload
 * Video Upload
 * File Upload
+
+= Shortcode with GUI =
+[Shortcode](http://post-meta.com/shortcode/)
+
+= Functions =
+
+ * get_label(), get_field(), get_duplicate_field(), get_group(), get_duplicate_group(), get_field_tpl(), get_duplicate_field_tpl(), get_group_tpl(), get_duplicate_group_tpl(),get_image(),get_audio(), get_video(), preview()
+ 
+ For details [Function](http://post-meta.com/documentation/)
 
 = Upcoming Features: =
 * Will add more custom field
