@@ -186,8 +186,8 @@ class qqFileUploader {
             }
         }
         
-        //$filepath = $uploads['subdir'] . "/$filename.$ext";
-        $filepath = $uploadUrl. "$filename.$ext";
+        $filepath = $uploads['subdir'] . "/$filename.$ext"; //only upload directory
+        //$filepath = $uploadUrl. "$filename.$ext"; // Full url
         
         
         if ($this->file->save($uploadPath . $filename . '.' . $ext)){

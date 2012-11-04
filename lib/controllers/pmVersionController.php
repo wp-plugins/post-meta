@@ -36,7 +36,7 @@ class pmVersionController {
     
     function pm_update_free_to_pro(){
         global $postMeta;
-        echo "<div class='error fade'><p>Recommended ,Update your <b>Post Meta</b> from free version to pro version for getting all feature and get better performance <a href={$postMeta->website}>Get it now <em>!</em></a></p></div>";
+        echo "<div class='error fade'><p>Recommended ,Update your <b>Post Meta</b> from free version to <b>Post Meta pro</b> version for getting all feature and get better performance <a href={$postMeta->website}>Get it now <em>!</em></a></p></div>";
     } 
     function pm_update_pro(){
         global $postMeta;

@@ -462,7 +462,7 @@ jQuery(".pm_file_upload_button").each(function(index){
             // path to server-side upload script
             //template:'<div>Upload image</div>',
             action: pm_jsvar.uploaderURL,
-            params: { },
+            params: { "pm_nonce":pm_nonce },
             allowedExtensions: allowedExtensions.split(","),
             sizeLimit: maxSize,
             onComplete: function(id, fileName, responseJSON){

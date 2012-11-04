@@ -4,7 +4,7 @@ Plugin Name: Post Meta
 Plugin URI: http://post-meta.com
 Description: Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. It has smart and modern (ajax and jquery based) interface to create post meta option or custom meta field as group or field.
 Author: Mahbubur Rahman
-Version: 1.0.3
+Version: 1.0.4
 Author URI: http://post-meta.com
 */
 
@@ -13,13 +13,14 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
 }
 
 require_once ( 'lib/init.php' );  
+require_once ( 'lib/api.php' ); 
 
 if (!class_exists( 'postMeta' )){
     class postMeta extends pluginCore {
         
         public $title       = 'Post Meta';
         public $name        = 'post-meta';
-        public $version     = '1.0.3';
+        public $version     = '1.0.4';
         public $prefix      = 'pm_';  
         public $prefixLong  = 'post_meta_';
         public $website     = 'http://post-meta.com';     
