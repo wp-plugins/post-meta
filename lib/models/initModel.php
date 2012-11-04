@@ -237,7 +237,7 @@ class initModel {
                 $img_media='';
                 $img_media .="<div class='file_wrapper'>";
                     $img_media .="<div class ='file_preview'>";
-                    $img_media .="<div class='file_thum_manage' style='display:$style;'><a target='_blank' href='{$attr['value']}' class='dl' > view </a><a href='#delete' class='delete' onclick='pmDeleteFile(this); return false' >delete</a></div>";
+                    $img_media .="<div class='file_thum_manage' style='display:$style;'><a target='_blank' href='{$attr['value']}' class='dl' > View </a><a href='#delete' class='delete' onclick='pmDeleteFile(this); return false' >delete</a></div>";
                                 $img_media .="<div class='file_preview_thum'><img src='$preview_url' /></div>";
                     $img_media .="</div>";  
                     $img_media .="<div class='file_input'>";

@@ -13,6 +13,7 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
 }
 
 require_once ( 'lib/init.php' );  
+require_once ( 'lib/api.php' ); 
 
 if (!class_exists( 'postMeta' )){
     class postMeta extends pluginCore {

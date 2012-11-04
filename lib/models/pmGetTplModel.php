@@ -11,15 +11,17 @@ class pmGetTplModel {
                 
                 $groups=$pm_options[$postType]['group'];
                 
-                foreach($groups as $group ){
-                foreach($group['field'] as $field){
-                      if($field['meta_key']== $metaKey){
-                            $fieldType = $field['type'];
-                            break;
-                        }           
-                    
-                }
-                
+                if($groups){
+                    foreach($groups as $group ){
+                        if($group['field']){
+                            foreach($group['field'] as $field){
+                                  if($field['meta_key']== $metaKey){
+                                        $fieldType = $field['type'];
+                                        break;
+                                    }
+                            }
+                        }
+                    }
                 }
                 
                 return $fieldType;
@@ -37,12 +39,14 @@ class pmGetTplModel {
                         }
                         $meta_data=get_post_meta($post_id,$metaKey,true);
                         
-                        if($groupIndex){
-                            $data=$meta_data[$groupIndex];
-                            if($fieldIndex){
-                                $data=$meta_data[$groupIndex][$fieldIndex];
-                            }
-                         } 
+                        if($meta_data){
+                            if($groupIndex){
+                                $data=$meta_data[$groupIndex];
+                                if($fieldIndex){
+                                    $data=$meta_data[$groupIndex][$fieldIndex];
+                                }
+                             }
+                        }
                         $label = $postMeta->get_label($metaKey);
                         
                         $fieldType=$this->get_field_type($metaKey);
@@ -67,7 +71,7 @@ class pmGetTplModel {
                  }
         }
         
-        function get_all_field_tpl($metaKey,$groupIndex=1,$post_id=null){
+        function get_duplicate_field_tpl($metaKey,$groupIndex=1,$post_id=null){
                     if($metaKey){
                         global $postMeta;
                         if(!$post_id){
@@ -76,9 +80,11 @@ class pmGetTplModel {
                         }
                         $meta_data=get_post_meta($post_id,$metaKey,true);
                         
-                        if($groupIndex){
-                            $data=$meta_data[$groupIndex];
-                         }
+                        if($meta_data){
+                            if($groupIndex){
+                                $data=$meta_data[$groupIndex];
+                             }
+                        }
                         $label = $postMeta->get_label($metaKey);
                         $fieldType=$this->get_field_type($metaKey);
                         
@@ -86,18 +92,30 @@ class pmGetTplModel {
                                     <label style='width:25%;float:left'>$label :</label>
                                     <div style='width=60%; display:inline-block;'>
                                     <ul style='list-style:none;'>";
-                                    foreach($data as $val){
-                                        $types = array('image_media','image','audio','video','file');
-                                        if($fieldType =='image_media'){
-                                            $fieldType ='image';
-                                        }
-                                        if(in_array( $fieldType, $types )){
-                                            $val = $postMeta->preview($val,$fieldType);
-                                       }
-                                        
-                                        
-                                    $html .= "<li>$val</li>";     
-                                    }    
+                                    if(is_array($data)){
+                                                foreach($data as $val){
+                                                    $types = array('image_media','image','audio','video','file','checkbox');
+                                                    if($fieldType =='image_media'){
+                                                        $fieldType ='image';
+                                                    }
+                                                    if(in_array( $fieldType, $types )){
+                                                        $val = $postMeta->preview($val,$fieldType);
+                                                   }
+                                                    
+                                                    $html .= "<li> $val</li>";     
+                                                } 
+                                            }else{
+                                                $types = array('image_media','image','audio','video','file','checkbox');
+                                                    if($fieldType =='image_media'){
+                                                        $fieldType ='image';
+                                                    }
+                                                    if(in_array( $fieldType, $types )){
+                                                        $val = $postMeta->preview($val,$fieldType);
+                                                   }
+                                                    
+                                                    $html .= "<li> $val</li>"; 
+                                                
+                                            }    
                         $html .=    "
                                     </ul>
                                     </div>
@@ -127,60 +145,61 @@ class pmGetTplModel {
                             
                             $groups=$pm_options[$postType]['group'];
                             
-                            foreach($groups as $group){
-                                if($group['meta_key']==$metaKey){
-                                    $groupTitle= $group['title'];
-                                    $fields=$group['field'];
-                                    break;
+                            if($groups){
+                                foreach($groups as $group){
+                                    if($group['meta_key']==$metaKey){
+                                        $groupTitle= $group['title'];
+                                        $fields=$group['field'];
+                                        break;
+                                    }
                                 }
-                                
                             }
-                            
                             $html = null;
-                            $html .="<b>$groupTitle</b>";
-                            foreach($fields as $field){
-                                
-                                $label = $postMeta->get_label($field['meta_key']);
-                                $fieldType=$this->get_field_type($field['meta_key']);
-                                $meta_data=get_post_meta($post_id,$field['meta_key'],true);
-                                if($groupIndex){
-                                    $data=$meta_data[$groupIndex];
-                                 }
-                            $html .="<div style='width=100%'>
-                                            <label style='width:25%;float:left'>$label :</label>
-                                            <div style='width=60%; display:inline-block;'>
-                                            <ul style='list-style:none;'>";
-                                            if(is_array($data)){
-                                                foreach($data as $val){
+                            $html .="<h2>$groupTitle</h2>";
+                            if($fields){
+                                foreach($fields as $field){
+                                    
+                                    $label = $postMeta->get_label($field['meta_key']);
+                                    $fieldType=$this->get_field_type($field['meta_key']);
+                                    $meta_data=get_post_meta($post_id,$field['meta_key'],true);
+                                    if($groupIndex){
+                                        $data=$meta_data[$groupIndex];
+                                     }
+                                $html .="<div style='width=100%'>
+                                                <label style='width:25%;float:left'>$label :</label>
+                                                <div style='width=60%; display:inline-block;'>
+                                                <ul style='list-style:none;'>";
+                                                if(is_array($data)){
+                                                    foreach($data as $val){
+                                                        $types = array('image_media','image','audio','video','file','checkbox');
+                                                        if($fieldType =='image_media'){
+                                                            $fieldType ='image';
+                                                        }
+                                                        if(in_array( $fieldType, $types )){
+                                                            $val = $postMeta->preview($val,$fieldType);
+                                                       }
+                                                        
+                                                        $html .= "<li> $val</li>";     
+                                                    } 
+                                                }else{
                                                     $types = array('image_media','image','audio','video','file','checkbox');
-                                                    if($fieldType =='image_media'){
-                                                        $fieldType ='image';
-                                                    }
-                                                    if(in_array( $fieldType, $types )){
-                                                        $val = $postMeta->preview($val,$fieldType);
-                                                   }
+                                                        if($fieldType =='image_media'){
+                                                            $fieldType ='image';
+                                                        }
+                                                        if(in_array( $fieldType, $types )){
+                                                            $val = $postMeta->preview($val,$fieldType);
+                                                       }
+                                                        
+                                                        $html .= "<li> $val</li>"; 
                                                     
-                                                    $html .= "<li> $val</li>";     
-                                                } 
-                                            }else{
-                                                $types = array('image_media','image','audio','video','file','checkbox');
-                                                    if($fieldType =='image_media'){
-                                                        $fieldType ='image';
-                                                    }
-                                                    if(in_array( $fieldType, $types )){
-                                                        $val = $postMeta->preview($val,$fieldType);
-                                                   }
-                                                    
-                                                    $html .= "<li> $val</li>"; 
-                                                
-                                            }
-                                               
-                                $html .=    "
-                                            </ul>
-                                            </div>
-                                        </div>";
+                                                }
+                                                   
+                                    $html .=    "
+                                                </ul>
+                                                </div>
+                                            </div>";
+                                }
                             }
-                            
                             
                             return $html;
                     
@@ -189,11 +208,11 @@ class pmGetTplModel {
        }
        
        /**
-        * Get all Group by meta key   with a meta key
+        * Get all Duplicate Group by meta key   with a meta key
         */
        
        
-       public function get_all_group_tpl($metaKey,$post_id=null){
+       public function get_duplicate_group_tpl($metaKey,$post_id=null){
                  if($metaKey){
                             global $postMeta,$post;
                             if(!$post_id){
@@ -207,13 +226,14 @@ class pmGetTplModel {
                             
                             $groups=$pm_options[$postType]['group'];
                             
-                            foreach($groups as $group){
-                                if($group['meta_key']==$metaKey){
-                                    $groupTitle= $group['title'];
-                                    $fields=$group['field'];
-                                    break;
+                            if($groups){
+                                foreach($groups as $group){
+                                    if($group['meta_key']==$metaKey){
+                                        $groupTitle= $group['title'];
+                                        $fields=$group['field'];
+                                        break;
+                                    } 
                                 }
-                                
                             }
                             $group_count_meta = get_post_meta($post->ID, 'group_count_'.$metaKey, true);
                             $group_count = ($group_count_meta)?$group_count_meta:1;
@@ -222,7 +242,12 @@ class pmGetTplModel {
                             $html = null;
                             
                             for($i=1;$i<=$group_count; $i++){
-                                $html .= "<h2>$groupTitle ($i)</h2>" ; 
+                                if($groupTitle){
+                                    $count_html="($i)";
+                                }
+                                
+                                $html .= "<h2>$groupTitle $count_html</h2>" ; 
+                                if($fields){
                                     foreach($fields as $field){
                                         
                                         $label = $postMeta->get_label($field['meta_key']);
@@ -234,23 +259,36 @@ class pmGetTplModel {
                                                     <label style='width:25%;float:left'>$label :</label>
                                                     <div style='width=60%; display:inline-block;'>
                                                     <ul style='list-style:none;'>";
-                                                    foreach($data as $val){
-                                                        $types = array('image_media','image','audio','video','file');
-                                                        if($fieldType =='image_media'){
-                                                            $fieldType ='image';
-                                                        }
-                                                        if(in_array( $fieldType, $types )){
-                                                            $val = $postMeta->preview($val,$fieldType);
-                                                       }
-                                                        
-                                                        
-                                                    $html .= "<li>$val</li>";     
-                                                    }    
+                                                    if(is_array($data)){
+                                                            foreach($data as $val){
+                                                                $types = array('image_media','image','audio','video','file','checkbox');
+                                                                if($fieldType =='image_media'){
+                                                                    $fieldType ='image';
+                                                                }
+                                                                if(in_array( $fieldType, $types )){
+                                                                    $val = $postMeta->preview($val,$fieldType);
+                                                               }
+                                                                
+                                                                $html .= "<li> $val</li>";     
+                                                            } 
+                                                        }else{
+                                                            $types = array('image_media','image','audio','video','file','checkbox');
+                                                                if($fieldType =='image_media'){
+                                                                    $fieldType ='image';
+                                                                }
+                                                                if(in_array( $fieldType, $types )){
+                                                                    $val = $postMeta->preview($val,$fieldType);
+                                                               }
+                                                                
+                                                                $html .= "<li> $val</li>"; 
+                                                            
+                                                        }    
                                         $html .=    "
                                                     </ul>
                                                     </div>
                                                 </div>";
                                     }
+                                }
                             }
                             
                             

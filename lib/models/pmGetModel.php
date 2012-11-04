@@ -29,19 +29,37 @@ class pmGetModel {
     
        public function get_field($metaKey,$groupIndex=1,$fieldIndex=1,$post_id=null){
                  if($metaKey){
+                    global $postMeta;
                         if(!$post_id){
                             global $post;
                             $post_id=$post->ID;
                         }
                         $meta_data=get_post_meta($post_id,$metaKey,true);
-                        
-                        if($groupIndex){
-                            $data=$meta_data[$groupIndex];
-                            if($fieldIndex){
-                                $data=$meta_data[$groupIndex][$fieldIndex];
+                        if($meta_data){
+                            if($groupIndex){
+                                $data=$meta_data[$groupIndex];
+                                if($fieldIndex){
+                                    $data=$meta_data[$groupIndex][$fieldIndex];
+                                }
+                             }
+                    
+                            if($data){
+                                $fieldType=$postMeta->get_field_type($metaKey);
+                                
+                                $types = array('image_media','image','audio','video','file');
+                                if(in_array( $fieldType, $types )){
+                                    $uploads    = wp_upload_dir();
+                                    
+                                    if(preg_match('/\/wp-content\/uploads\//',$data ,$match)){
+                                       $fullUrlData = $data;
+                                        
+                                    }else{
+                                        $fullUrlData = $uploads['baseurl'].$data;
+                                    }
+                                    $data = $fullUrlData;
+                               }
                             }
-                         }
-                     
+                     }
                      return $data;  
                  }
                  
@@ -54,18 +72,42 @@ class pmGetModel {
         */
        
        
-       public function get_all_field($metaKey,$groupIndex=1,$post_id=null){
+       public function get_duplicate_field($metaKey,$groupIndex=1,$post_id=null){
                  if($metaKey){
                     if(!$post_id){
                         global $post;
                         $post_id=$post->ID;
                     }
                     $meta_data=get_post_meta($post_id,$metaKey,true);
-                    
-                 if($groupIndex){
-                    $data=$meta_data[$groupIndex];
-                 }
+                   if($meta_data){ 
+                         if($groupIndex){
+                            $data=$meta_data[$groupIndex];
+                         }
+                    if(is_array($data)){
+                        $Newdata=array();
+                        global $postMeta;
+                        $fieldType=$postMeta->get_field_type($metaKey);
+                        $count=1;
+                        foreach($data as $d){
+                                $types = array('image_media','image','audio','video','file');
+                                if(in_array( $fieldType, $types )){
+                                    $uploads    = wp_upload_dir();
+                                    
+                                    if(preg_match('/\/wp-content\/uploads\//',$d ,$match)){
+                                       $fullUrlData = $d;
+                                        
+                                    }else{
+                                        $fullUrlData = $uploads['baseurl'].$d;
+                                    }
+                                    $dataUrl = $fullUrlData;
+                               }
+                           $Newdata[$count]=$dataUrl;
+                           $count++;
+                        }
+                        $data = $Newdata;
+                    }
                  
+                 }
                  return $data;
                     
                  }
@@ -90,21 +132,48 @@ class pmGetModel {
                             $pm_options= get_option($postMeta->options['post_meta']);
                             
                             $groups=$pm_options[$postType]['group'];
-                            
-                            foreach($groups as $group){
-                                if($group['meta_key']==$metaKey){
-                                    $fields=$group['field'];
-                                    break;
+                            if($groups){
+                                foreach($groups as $group){
+                                    if($group['meta_key']==$metaKey){
+                                        $fields=$group['field'];
+                                        break;
+                                    }
+                                    
                                 }
-                                
-                            }
-                            
-                            $data=array();
-                            foreach($fields as $field){
-                                $meta_data =get_post_meta($post_id, $field['meta_key'],true);
-                                $data[$field['meta_key']] =$meta_data[$groupIndex];
-                            }
-                            
+                             }   
+                             $data=array();
+                             if($fields){
+                                foreach($fields as $field){
+                                    $fieldType=$postMeta->get_field_type($field['meta_key']);
+                                    $meta_data =get_post_meta($post_id, $field['meta_key'],true);
+                                    
+                                    $types = array('image_media','image','audio','video','file');
+                                        if(is_array($meta_data[$groupIndex])){
+                                            $count=1;
+                                            $Newdata=array();
+                                            if(in_array( $fieldType, $types )){
+                                                foreach($meta_data[$groupIndex] as $fieldvalue){
+                                                        $uploads    = wp_upload_dir();
+                                                    
+                                                        if(preg_match('/\/wp-content\/uploads\//',$fieldvalue ,$match)){
+                                                           $fullUrlData = $fieldvalue;
+                                                            
+                                                        }else{
+                                                            $fullUrlData = $uploads['baseurl'].$fieldvalue;
+                                                        }
+                                                        $Newdata[$count]=$fullUrlData;
+                                                        $count++;
+                                                    }
+                                                    
+                                                    $data[$field['meta_key']] =$Newdata;
+                                                    
+                                               }else{
+                                                $data[$field['meta_key']] =$meta_data[$groupIndex];
+                                               }
+                                        }
+                                }
+                             }
+                             
                             
                             return $data;
                     
@@ -115,11 +184,11 @@ class pmGetModel {
        
        
        /**
-        * Get All Group by meta key   with a meta key
+        * Get All Duplicate Group by meta key   with a meta key
         */
        
        
-       public function get_all_group($metaKey,$post_id=null){
+       public function get_duplicate_group($metaKey,$post_id=null){
                  if($metaKey){
                             global $postMeta,$post;
                             if(!$post_id){
@@ -132,28 +201,51 @@ class pmGetModel {
                             $pm_options= get_option($postMeta->options['post_meta']);
                             
                             $groups=$pm_options[$postType]['group'];
-                            
-                            foreach($groups as $group){
-                                if($group['meta_key']==$metaKey){
-                                    $fields=$group['field'];
-                                    break;
+                            if($groups){
+                                foreach($groups as $group){
+                                    if($group['meta_key']==$metaKey){
+                                        $fields=$group['field'];
+                                        break;
+                                    }
+                                    
                                 }
-                                
                             }
-                            
                             $group_count_meta = get_post_meta($post->ID, 'group_count_'.$metaKey, true);
                             $group_count = ($group_count_meta)?$group_count_meta:1;
                             
                             $data=array();
                             $field_data=array();
                             for($i=1;$i<=$group_count; $i++){
-                                foreach($fields as $field){
-                                    $meta_data =get_post_meta($post_id, $field['meta_key'],true);
-                                    
-                                    $field_data[$field['meta_key']] =$meta_data[$i];
-                                    
+                                if($fields){
+                                    foreach($fields as $field){
+                                        $fieldType=$postMeta->get_field_type($field['meta_key']);
+                                        $meta_data =get_post_meta($post_id, $field['meta_key'],true);
+                                        $types = array('image_media','image','audio','video','file');
+                                        
+                                            $count=1;
+                                            $Newdata=array();
+                                            if(in_array( $fieldType, $types )){
+                                                foreach($meta_data[$i] as $fieldvalue){
+                                                        $uploads    = wp_upload_dir();
+                                                    
+                                                        if(preg_match('/\/wp-content\/uploads\//',$fieldvalue ,$match)){
+                                                           $fullUrlData = $fieldvalue;
+                                                            
+                                                        }else{
+                                                            $fullUrlData = $uploads['baseurl'].$fieldvalue;
+                                                        }
+                                                        $Newdata[$count]=$fullUrlData;
+                                                        $count++;
+                                                    }
+                                                    
+                                                    $field_data[$field['meta_key']] =$Newdata;
+                                                    
+                                               }else{
+                                                $field_data[$field['meta_key']] =$meta_data[$i];
+                                               }
+                                               
+                                    }
                                 }
-                                
                                $data[$i]= $field_data;//$field_data;
                                 
                                 
@@ -188,12 +280,15 @@ class pmGetModel {
                         $post_id=$post->ID;
                     }
                 $meta_data=get_post_meta($post->ID,$metaKey,true);
-                if($groupIndex){
-                    $data=$meta_data[$groupIndex];
-                    if($fieldIndex){
-                        $data=$meta_data[$groupIndex][$fieldIndex];
-                    }
-                 }
+                
+                if($meta_data){
+                    if($groupIndex){
+                        $data=$meta_data[$groupIndex];
+                        if($fieldIndex){
+                            $data=$meta_data[$groupIndex][$fieldIndex];
+                        }
+                     }
+                }
                 
                 if($data){
                     
@@ -244,12 +339,15 @@ class pmGetModel {
                         $post_id=$post->ID;
                     }
                 $meta_data=get_post_meta($post->ID,$metaKey,true);
-                if($groupIndex){
-                    $data=$meta_data[$groupIndex];
-                    if($fieldIndex){
-                        $data=$meta_data[$groupIndex][$fieldIndex];
-                    }
-                 }
+                
+                if($meta_data){
+                    if($groupIndex){
+                        $data=$meta_data[$groupIndex];
+                        if($fieldIndex){
+                            $data=$meta_data[$groupIndex][$fieldIndex];
+                        }
+                     }
+                }
                 $audio = $postMeta->render("preview_audio",array('file'=>$data,'id'=>rand(1,99)));
                
                 return $audio;
@@ -272,12 +370,14 @@ class pmGetModel {
                         $post_id=$post->ID;
                     }
                 $meta_data=get_post_meta($post->ID,$metaKey,true);
-                if($groupIndex){
-                    $data=$meta_data[$groupIndex];
-                    if($fieldIndex){
-                        $data=$meta_data[$groupIndex][$fieldIndex];
-                    }
-                 }
+                if($meta_data){
+                    if($groupIndex){
+                        $data=$meta_data[$groupIndex];
+                        if($fieldIndex){
+                            $data=$meta_data[$groupIndex][$fieldIndex];
+                        }
+                     }
+                }
                 $video = $postMeta->render("preview_video",array('file'=>$data,'id'=>rand(1,99)));
                
                 return $video;
