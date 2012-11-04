@@ -99,6 +99,10 @@ An answer to that question.
 
 == Changelog ==
 
+<h4>1.0.3 (4th November, 2012)</h4>
+* Add API with powerful function
+* Remove bug about File upload
+
 <h4>1.0.3 (2nd November, 2012)</h4>
 * Add extra custom meta field
 * Shortcode with ui is added (Only for pro version)
