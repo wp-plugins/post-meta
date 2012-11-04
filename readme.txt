@@ -1,18 +1,18 @@
 === Post Meta ===
 Contributors: Mahbubur Rahman
 Donate link: http://post-meta.com/donation/ 
-Tags: Post Meta, Meta field, Option Meta, Custom post field, custom field, custom taxonomy, taxonomy, custom post type, post type,
+Tags: Post Meta, Meta field, Option Meta, Custom post field, custom field, custom taxonomy, taxonomy, custom post type, post type,admin, advanced, custom, custom field, edit, field, file, image, magic fields, matrix, more fields, Post, repeater, simple fields
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.0.3
-License: GPLv2 or later 
-License URI: http://www.gnu.org/licenses/gpl-2.0.html 
+Stable tag: 1.0.4
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. Shortcode with ui, Import & export and may more
+Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. Shortcode with GUI, Import & export and many more. Every developer should have it.
 
 == Description ==
 
-[Plugin Homepage](http://post-meta.com) | [Documentation](http://post-meta.com/documentation/) 
+[Plugin Homepage](http://post-meta.com) | [Documentation](http://post-meta.com/documentation/) | [Screenshots](http://post-meta.com/screenshots/)
 
 Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. It has smart and modern (ajax and jquery based) interface to create post meta option or custom meta field as group or field. It also support smart shortcode with ui and Impot & export feature.
 
@@ -48,12 +48,27 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 * Video Upload
 * File Upload
 
+= Shortcode with GUI =
+[Shortcode](http://post-meta.com/shortcode/)
+
+= Functions =
+
+ * get_label(), get_field(), get_duplicate_field(), get_group(), get_duplicate_group(), get_field_tpl(), get_duplicate_field_tpl(), get_group_tpl(), get_duplicate_group_tpl(),get_image(),get_audio(), get_video(), preview()
+ 
+ For details [Function](http://post-meta.com/documentation/)
+
 = Upcoming Features: =
 * Will add more custom field
 * ...and any suggestions that we may receive... 
 
+
+= Please Vote and Enjoy =
+* Your votes really make a difference! Thanks.
+
 = NB =
 * Duplicate Group, Uploaded field, Shortcode and Impoer & Expoert are only supported in pro version. [Get it Now](http://post-meta.com)
+
+
 
 == Installation ==
 
@@ -77,11 +92,6 @@ An answer to that question.
 
 == Screenshots ==
 
-[More screenshots can be found here.](http://post-meta.com/screenshots/)
-
-[Post Meta running on live websites can be found here.](http://demo.post-meta.com/)
-
-
 1. screenshot-1
 2. screenshot-2
 3. screenshot-3
@@ -89,7 +99,11 @@ An answer to that question.
 
 == Changelog ==
 
-<h4>1.0.3</h4>
+<h4>1.0.3 (4th November, 2012)</h4>
+* Add API with powerful function
+* Remove bug about File upload
+
+<h4>1.0.3 (2nd November, 2012)</h4>
 * Add extra custom meta field
 * Shortcode with ui is added (Only for pro version)
 * Include Import export feature (Only for pro version)
