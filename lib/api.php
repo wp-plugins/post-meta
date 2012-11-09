@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Post meta API
+ * Post meta API for out upt integration
  * get_label()
  * get_field()
  * get_duplicate_field()
