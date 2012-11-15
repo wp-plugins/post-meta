@@ -12,9 +12,11 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 
 == Description ==
 
-[Plugin Homepage](http://post-meta.com) | [Documentation](http://post-meta.com/documentation/) | [Screenshots](http://post-meta.com/screenshots/)
+[Plugin Homepage](http://post-meta.com) | [Documentation](http://post-meta.com/documentation/) | [Video Tutorial](http://post-meta.com/video-tutorial/) | [Screenshots](http://post-meta.com/screenshots/)
 
 Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. It has smart and modern (ajax and jquery based) interface to create post meta option or custom meta field as group or field. It also support smart shortcode with ui and Impot & export feature. Every developer should have it.
+
+[youtube http://www.post-meta.com/wp-content/uploads/tutorial/Manage_post_meta.flv]
 
 = Features =
 * Fully jQuery and ajax based Management
