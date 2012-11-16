@@ -27,6 +27,33 @@ class pmGetTplModel {
                 return $fieldType;
              }
         }
+        
+        function get_file_display_label($metaKey){
+            if($metaKey){
+                global $postMeta,$post;
+                $postType= get_post_type( $post->ID );
+                
+                $pm_options= get_option($postMeta->options['post_meta']);
+                
+                $groups=$pm_options[$postType]['group'];
+                
+                if($groups){
+                    foreach($groups as $group ){
+                        if($group['field']){
+                            foreach($group['field'] as $field){
+                                  if($field['meta_key']== $metaKey){
+                                        $fieldDisplayLabel = $field['register_only'];
+                                        break;
+                                    }
+                            }
+                        }
+                    }
+                }
+                
+                return $fieldDisplayLabel;
+             }
+            
+        }
     
     
         function get_field_tpl($metaKey,$groupIndex=1,$fieldIndex=1,$post_id=null){
@@ -51,13 +78,17 @@ class pmGetTplModel {
                         
                         $fieldType=$this->get_field_type($metaKey);
                         
+                        if($fieldType=='file'){
+                            $fieldDsLabel=$this->get_file_display_label($metaKey);
+                        }
+                        
                         $types = array('image_media','image','audio','video','file');
                         if($fieldType =='image_media'){
                             $fieldType ='image';
                         }
                         if(in_array( $fieldType, $types )){
-                            $data = $postMeta->preview($data,$fieldType);
-                       }
+                            $data = $postMeta->preview($data,$fieldType,$fieldDsLabel);
+                        }
                         
                         $html="<div style='width=100%'>
                                     <label style='width:25%;float:left'>$label :</label>
@@ -88,6 +119,10 @@ class pmGetTplModel {
                         $label = $postMeta->get_label($metaKey);
                         $fieldType=$this->get_field_type($metaKey);
                         
+                        if($fieldType=='file'){
+                            $fieldDsLabel=$this->get_file_display_label($metaKey);
+                        }
+                        
                         $html="<div style='width=100%'>
                                     <label style='width:25%;float:left'>$label :</label>
                                     <div style='width=60%; display:inline-block;'>
@@ -99,7 +134,7 @@ class pmGetTplModel {
                                                         $fieldType ='image';
                                                     }
                                                     if(in_array( $fieldType, $types )){
-                                                        $val = $postMeta->preview($val,$fieldType);
+                                                        $val = $postMeta->preview($val,$fieldType,$fieldDsLabel);
                                                    }
                                                     
                                                     $html .= "<li> $val</li>";     
@@ -161,6 +196,9 @@ class pmGetTplModel {
                                     
                                     $label = $postMeta->get_label($field['meta_key']);
                                     $fieldType=$this->get_field_type($field['meta_key']);
+                                    if($fieldType=='file'){
+                                            $fieldDsLabel=$this->get_file_display_label($field['meta_key']);
+                                        }
                                     $meta_data=get_post_meta($post_id,$field['meta_key'],true);
                                     if($groupIndex){
                                         $data=$meta_data[$groupIndex];
@@ -176,7 +214,7 @@ class pmGetTplModel {
                                                             $fieldType ='image';
                                                         }
                                                         if(in_array( $fieldType, $types )){
-                                                            $val = $postMeta->preview($val,$fieldType);
+                                                            $val = $postMeta->preview($val,$fieldType,$fieldDsLabel);
                                                        }
                                                         
                                                         $html .= "<li> $val</li>";     
@@ -187,7 +225,7 @@ class pmGetTplModel {
                                                             $fieldType ='image';
                                                         }
                                                         if(in_array( $fieldType, $types )){
-                                                            $val = $postMeta->preview($val,$fieldType);
+                                                            $val = $postMeta->preview($val,$fieldType,$fieldDsLabel);
                                                        }
                                                         
                                                         $html .= "<li> $val</li>"; 
@@ -252,6 +290,10 @@ class pmGetTplModel {
                                         
                                         $label = $postMeta->get_label($field['meta_key']);
                                         $fieldType=$this->get_field_type($field['meta_key']);
+                                        if($fieldType=='file'){
+                                            $fieldDsLabel=$this->get_file_display_label($field['meta_key']);
+                                        }
+                                        
                                         $meta_data=get_post_meta($post_id,$field['meta_key'],true);
                                         $data=$meta_data[$i];
                                       
@@ -266,7 +308,7 @@ class pmGetTplModel {
                                                                     $fieldType ='image';
                                                                 }
                                                                 if(in_array( $fieldType, $types )){
-                                                                    $val = $postMeta->preview($val,$fieldType);
+                                                                    $val = $postMeta->preview($val,$fieldType,$fieldDsLabel);
                                                                }
                                                                 
                                                                 $html .= "<li> $val</li>";     
@@ -277,7 +319,7 @@ class pmGetTplModel {
                                                                     $fieldType ='image';
                                                                 }
                                                                 if(in_array( $fieldType, $types )){
-                                                                    $val = $postMeta->preview($val,$fieldType);
+                                                                    $val = $postMeta->preview($val,$fieldType,$fieldDsLabel);
                                                                }
                                                                 
                                                                 $html .= "<li> $val</li>"; 

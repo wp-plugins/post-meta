@@ -45,12 +45,13 @@ class pmHelpModel {
         $html .="<ul>";
         $html .="<li>Manage Post Meta > Manage Group/Fields </li>";
         $html .="<li>After creating custom field or group use shortcode or loop function for display them.</li>";
-        $html .="<li>Get your <a href='{$postMeta->website}/documentation/' >Documentation</a>.</li>";
-        $html .="<li>Premium forum support <a href='{$postMeta->website}/forums/'>here</a></li>";
-        $html .="<li>If you have any question or problem , Contact us <a href='{$postMeta->website}/contact-us/'>here</a>.</li>";
+        $html .="<li>Post Meta <a href='{$postMeta->website}/documentation/' target='_blank' >Documentation.</a></li>";
+        $html .="<li>Posy Meta <a href='{$postMeta->website}/video-tutorial/' target='_blank' >Video Tutorial.</a></li>";
+        $html .="<li>Premium support <a href='{$postMeta->website}/forums/' target='_blank'>forum here.</a></li>";
+        $html .="<li>If you have any question or problem , Contact us <a href='{$postMeta->website}/contact-us/' target='_blank'>here.</a></li>";
         $html .="</ul>";
         
-        $html .="<div style='padding:10px'><i><b>Please help us to develop a useful plugin by giving us advice and guideline <a href='{$postMeta->website}/contact-us/'>Click here</a></b></i></div>";
+        $html .="<div style='padding:10px'><i><b>Please help us to develop a useful plugin by giving us advice and guideline <a href='{$postMeta->website}/contact-us/' target='_blank'>Click here</a></b></i></div>";
         
         if(!$postMeta->isPro()){
             $html .="</br></br>";
@@ -91,16 +92,17 @@ class pmHelpModel {
     
     function getStart(){
         global $postMeta;
-        $html ='';
-        $html .='<b>Post Meta</b>';
-        $html .='<p><b>Step 1.</b> <a href="/wp-admin/admin.php?page=post-meta">Post Meta ></a> Manage Groups/fields > Set your Group and field with proper settings (Meta key).<p>'; 
-        $html .='<p><b>Step 2.</b> Write shortcode in your post, page or your custom post type  </p>';
-        $html .='<div class="pm-hr"></div>';
-        $html .='<b>Custom post type</b>';
-        $html .='<p><a href="/wp-admin/admin.php?page=manage-post-types"> Post Types</a> > Make sure the label and other fields </p>';
-        $html .='<div class="pm-hr"></div>';
-        $html .='<b>Custom Taxonomy</b>';
-        $html .='<p><a href="/wp-admin/admin.php?page=manage-taxonomies"> Taxonomies</a> > Make sure the label and other fields </p>';
+        $base_url = get_bloginfo('url');
+        $html ="";
+        $html .="<b>Post Meta</b>";
+        $html .="<p><b>Step 1.</b> <a href='$base_url/wp-admin/admin.php?page=post-meta'>Post Meta ></a> Manage Groups/fields > Set your Group and field with proper settings (Meta key).<p>"; 
+        $html .="<p><b>Step 2.</b> Write shortcode in your post, page or your custom post type  </p>";
+        $html .="<div class='pm-hr'></div>";
+        $html .="<b>Custom post type</b>";
+        $html .="<p><a href='$base_url/wp-admin/admin.php?page=manage-post-types'> Post Types</a> > Make sure the label and other fields </p>";
+        $html .="<div class='pm-hr'></div>";
+        $html .="<b>Custom Taxonomy</b>";
+        $html .="<p><a href='$base_url/wp-admin/admin.php?page=manage-taxonomies'> Taxonomies</a> > Make sure the label and other fields </p>";
         
         $html .="<center><a class='button-primary' href='{$postMeta->website}/documentation/' target='_blank'> Documentation </a></center>";  
                 

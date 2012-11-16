@@ -387,7 +387,7 @@ class pmGetModel {
         
         }
         
-      public function preview($url,$type='image',$attr=array('thumb'=>true)){//
+      public function preview($url,$type='image',$dispayLabel=false,$attr=array('thumb'=>true)){//
                 if($url){
                     global $postMeta;
                         switch ($type){
@@ -442,7 +442,17 @@ class pmGetModel {
                             
                             case 'file':
                             
-                                $file = "<a href='$url' > Download </a>";
+                                if($dispayLabel){
+                                    if ( is_user_logged_in() ) {
+                                           $file = "<a href='$url' > Download </a>";  
+                                        }else{
+                                            $file = "<i>Need to Register to see the download link</i>";
+                                        }
+                                      
+                                }else{
+                                    $file = "<a href='$url' > Download </a>";
+                                }
+                                
                                 return $file;
                             
                             break;

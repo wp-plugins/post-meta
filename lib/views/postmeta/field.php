@@ -226,7 +226,11 @@ $fieldRequired = $postMeta->create_input( "group[$group_id][field][$id][required
 $fieldDuplicate = $postMeta->create_input( "group[$group_id][field][$id][duplicate]", "checkbox", array( 
                                         "value"     => isset($field['duplicate']) ? $field['duplicate'] : null,
                                         "after"     => " Allow Duplicate <br />",
-                                     ) );                                     
+                                     ) );  
+$fieldDlRegisterOnly = $postMeta->create_input( "group[$group_id][field][$id][register_only]", "checkbox", array( 
+                                        "value"     => isset($field['register_only']) ? $field['register_only'] : null,
+                                        "after"     => "Display Download link Only for Register User<br />",
+                                     ) );                                                                  
 
 $fieldAlignment = $postMeta->create_input( "group[$group_id][field][$id][alignment]", "radio", array( 
                                         "value"     => isset($field['alignment']) ? $field['alignment'] : "vertical",
@@ -324,8 +328,8 @@ $fieldHiddenValue = $postMeta->create_input( "group[$group_id][field][$id][hidde
 $output = "$fielsTitle $fieldType $fieldMetaKey $fieldDescription $fieldId $fieldSize";
 $output .= "<div class='pm_field_segment'>";
 $output .= "$fieldRequired $fieldDuplicate";//$fieldDuplicate
-    if($field['type']!='datetime' && $field['type']!='rich_text'){
-       //$output .= "$fieldDuplicate";
+    if($field['type']=='file'){
+       $output .= "$fieldDlRegisterOnly";
     }
     
     if($field['type'] == 'checkbox' || $field['type'] == 'radio'){

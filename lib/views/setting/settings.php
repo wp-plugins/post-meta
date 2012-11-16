@@ -5,7 +5,6 @@ $settings=get_option($postMeta->options['settings']);
 ?>
         
           <form id="pm_settings_form" action="" method="post" onsubmit="pmUpdateSettings(this); return false;" >
-            <?php wp_nonce_field( 'nonce', 'pm_nonce' );  ?>
             <div id="pm_tabs" style="padding: 10px;">
                 <ul>
                     <li><a href="#pm_settings_file"><span>File</span></a></li>
