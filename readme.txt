@@ -12,9 +12,10 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 
 == Description ==
 
-[Plugin Homepage](http://post-meta.com) | [Documentation](http://post-meta.com/documentation/) | [Screenshots](http://post-meta.com/screenshots/)
+[Plugin Homepage](http://post-meta.com) | [Documentation](http://post-meta.com/documentation/) | [Video Tutorial](http://post-meta.com/video-tutorial/) | [Screenshots](http://post-meta.com/screenshots/)
 
 Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. It has smart and modern (ajax and jquery based) interface to create post meta option or custom meta field as group or field. It also support smart shortcode with ui and Impot & export feature. Every developer should have it.
+
 
 = Features =
 * Fully jQuery and ajax based Management
@@ -23,8 +24,8 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 * Sorting group and field by dragging
 * Preview image field with thumbnail size
 * Audio preview with player
-* Video pre view with video player
-* Smart shortcode supported with ui
+* Video preview with video player
+* Smart shortcode supported with GUI
 * Import & export
 * Managing Custom Post type
 * Managing Custom Taxonomy
@@ -55,7 +56,7 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 
  * get_label(), get_field(), get_duplicate_field(), get_group(), get_duplicate_group(), get_field_tpl(), get_duplicate_field_tpl(), get_group_tpl(), get_duplicate_group_tpl(),get_image(),get_audio(), get_video(), preview()
  
- For details [Function](http://post-meta.com/documentation/)
+ For [Function details](http://post-meta.com/documentation/) 
 
 = Upcoming Features: =
 * Will add more custom field
@@ -99,23 +100,28 @@ An answer to that question.
 
 == Changelog ==
 
-<h4>1.0.3 (4th November, 2012)</h4>
-* Add API with powerful function
-* Remove bug about File upload
+=1.0.5 (16 November, 2012)=
+* Fixed Some linking error
+* Add User privacy for file download link
+* Add New function for API
 
-<h4>1.0.3 (2nd November, 2012)</h4>
+=1.0.4 (4th November, 2012)=
+* Add API with powerful function
+* Remove bug about File upload 
+
+=1.0.3 (2nd November, 2012)=
 * Add extra custom meta field
 * Shortcode with ui is added (Only for pro version)
 * Include Import export feature (Only for pro version)
 
-<h4>1.0.2</h4>
+=1.0.2=
 * Fixed some Internal error
 * Make compatible with Custom post type and taxonomy
 
-<h4>1.0.1</h4>
+=1.0.1=
 * Manage custom post type and taxonomy
 
-<h4>1.0.0</h4>
+=1.0.0=
 * Initial Release
 
 == Upgrade notice ==
