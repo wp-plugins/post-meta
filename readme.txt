@@ -52,10 +52,10 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 = Shortcode with GUI =
 [Shortcode](http://post-meta.com/shortcode/)
 
-For single field value : [post-meta type=field metakey=post_1_image groupindex=1 fieldindex=1]
-For duplicate field value : [post-meta type=field metakey=post_1_image groupindex=1 fieldindex=all]
-For single group : [post-meta type=group metakey=post_1 groupindex=1]
-For duplicate group: [post-meta type=group metakey=post_1 groupindex=all]
+* For single field value : [post-meta type=field metakey=post_1_image groupindex=1 fieldindex=1]
+* For duplicate field value : [post-meta type=field metakey=post_1_image groupindex=1 fieldindex=all]
+* For single group : [post-meta type=group metakey=post_1 groupindex=1]
+* For duplicate group: [post-meta type=group metakey=post_1 groupindex=all]
 
 
 = Functions =
