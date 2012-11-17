@@ -52,6 +52,12 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 = Shortcode with GUI =
 [Shortcode](http://post-meta.com/shortcode/)
 
+For single field value : [post-meta type=field metakey=post_1_image groupindex=1 fieldindex=1]
+For duplicate field value : [post-meta type=field metakey=post_1_image groupindex=1 fieldindex=all]
+For single group : [post-meta type=group metakey=post_1 groupindex=1]
+For duplicate group: [post-meta type=group metakey=post_1 groupindex=all]
+
+
 = Functions =
 
  * [get_label()](http://post-meta.com/get_label/), [get_field()](http://post-meta.com/get_field/), [get_duplicate_field()](http://post-meta.com/get_duplicate_field/), [get_group()](http://post-meta.com/get_group/), [get_duplicate_group()](http://post-meta.com/get_duplicate_group/), [get_field_tpl()](http://post-meta.com/get_field_tpl/), [get_duplicate_field_tpl()](http://post-meta.com/get_duplicate_field_tpl/), [get_group_tpl()](http://post-meta.com/get_group_tpl/), [get_duplicate_group_tpl()](http://post-meta.com/get_duplicate_group_tpl/),[get_image()](http://post-meta.com/get_image/),[get_audio()](http://post-meta.com/get_audio/), [get_video()](http://post-meta.com/get_video/), [preview()](http://post-meta.com/preview/)
