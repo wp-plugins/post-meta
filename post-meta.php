@@ -59,7 +59,7 @@ if (!class_exists( 'postMeta' )){
         }
         function init(){
             
-            $this->pluginInit();        
+            $this->pluginInit();       
         }
         
         
