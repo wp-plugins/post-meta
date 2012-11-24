@@ -44,7 +44,7 @@ class pmHelpModel {
         $html .="----------------------------------------------------</br></br>";
         $html .="<ul>";
         $html .="<li>Manage Post Meta > Manage Group/Fields </li>";
-        $html .="<li>After creating custom field or group use shortcode or loop function for display them.</li>";
+        $html .="<li>After creating custom field or group use shortcode or loop function to display them.</li>";
         $html .="<li>Post Meta <a href='{$postMeta->website}/documentation/' target='_blank' >Documentation.</a></li>";
         $html .="<li>Posy Meta <a href='{$postMeta->website}/video-tutorial/' target='_blank' >Video Tutorial.</a></li>";
         $html .="<li>Premium support <a href='{$postMeta->website}/forums/' target='_blank'>forum here.</a></li>";

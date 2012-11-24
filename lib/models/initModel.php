@@ -312,14 +312,15 @@ class initModel {
                 
                 
                 $uploads    = wp_upload_dir();
-                $fullPath   = $uploads['basedir'] . $file;
-                $fullUrl    = $uploads['baseurl'] . $file;
                 
                 if(@preg_match('/\/wp-content\/uploads\//',$file ,$match)){
                     
                    $fullPath = $uploads['basedir'].str_replace( $uploads['baseurl'] , '', $file);
                    $fullUrl = $file;
                     
+                }else{
+                    $fullPath   = $uploads['basedir'] . $file;
+                    $fullUrl    = $uploads['baseurl'] . $file;
                 }
                 $fileData   = pathinfo( $fullPath );
                 $fileName   = $fileData['basename'];
@@ -327,7 +328,7 @@ class initModel {
                 if( !file_exists( $fullPath ) ) return;               
             
                 // In case of image
-                if( is_array( getimagesize( "$fullUrl" ) ) ){
+                if( is_array( getimagesize( "$fullPath" ) ) ){
                     if( @$width AND @$height ){
                         $resizedImage = image_resize( $fullPath, $width, $height ,$crop);
                         if( is_wp_error($resizedImage) )

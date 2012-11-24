@@ -150,10 +150,11 @@ border: 1px solid #DCCD4D;
     position: relative;
 }
 .file_preview_thum{
-        background: white;
-        text-align: center;
-        padding: 4px;
-        border: 1px groove;
+    background: white;
+    text-align: center;
+    padding: 4px;
+    border: 1px groove;
+    line-height: 0px;
 }
 .file_thum_manage{
     padding: 5px;

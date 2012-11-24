@@ -44,8 +44,6 @@ if( !class_exists( 'pmPostController' ) ) :
             }
             
         function meta_option_script(){
-            wp_register_script( 'jquery-fileuploader', PM_ASSECTS_URL.'js/jquery/fileuploader.js');
-                wp_enqueue_script('jquery-fileuploader' );
                 global $post_type;                
                 
                 if (($_GET['post_type']) || ($post_type)) :
@@ -57,9 +55,15 @@ if( !class_exists( 'pmPostController' ) ) :
                     }
                 
                 wp_enqueue_script('jquery');
-                wp_register_style( 'pluginCore-css', PM_ASSECTS_URL.'/css/pluginCore.css' );
+                wp_enqueue_script('jquery-ui-core');
+                wp_enqueue_script( 'jquery-ui-widget');
+                wp_enqueue_script( 'jquery-ui-mouse');
+                wp_register_script( 'jquery-ui-slider', PM_ASSECTS_URL.'js/ui/jquery.ui.slider.js',array('jquery-ui-core','jquery-ui-mouse','jquery-ui-widget') );
+                wp_enqueue_script('jquery-ui-slider' );
+                
+                wp_register_style( 'pluginCore-css', PM_ASSECTS_URL.'css/pluginCore.css' );
                 wp_enqueue_style('pluginCore-css' ); 
-                wp_register_style( 'post-meta-post-style', PM_ASSECTS_URL.'/css/post_meta_post.css' );
+                wp_register_style( 'post-meta-post-style', PM_ASSECTS_URL.'css/post_meta_post.css' );
                 wp_enqueue_style('post-meta-post-style' );
                 wp_register_script( 'jquery-fileuploader', PM_ASSECTS_URL.'js/jquery/fileuploader.js');
                 wp_enqueue_script('jquery-fileuploader' );
@@ -89,27 +93,21 @@ if( !class_exists( 'pmPostController' ) ) :
                     wp_localize_script( 'jquery-fileuploader', 'fileuploader', $fileupload );
                     
                  
-                           
-                wp_enqueue_script('jquery-ui-core');
-                wp_enqueue_script( 'jquery-ui-widget');
-                wp_enqueue_script( 'jquery-ui-mouse');
+                 
 
                 wp_register_script( 'jquery-ui-datepicker', PM_ASSECTS_URL.'js/ui/jquery.ui.datepicker.js',array('jquery') );
                 wp_enqueue_script('jquery-ui-datepicker' );
-                
-                wp_register_script( 'jquery-ui-slider', PM_ASSECTS_URL.'js/ui/jquery.ui.slider.js',array('jquery','jquery-ui-mouse','jquery-ui-core','jquery-ui-widget') );
-                wp_enqueue_script('jquery-ui-slider' );
-                wp_register_script( 'jquery-ui-timepicker-addon', PM_ASSECTS_URL.'js/ui/jquery-ui-timepicker-addon.js',array('jquery') );
+                wp_register_script( 'jquery-ui-timepicker-addon', PM_ASSECTS_URL.'js/ui/jquery-ui-timepicker-addon.js',array('jquery','jquery-ui-slider','jquery-ui-datepicker' ) );
                 wp_enqueue_script('jquery-ui-timepicker-addon' );
                 wp_register_style( 'jquery-ui-all', PM_ASSECTS_URL.'css/ui/jquery.ui.all.css');
                 wp_enqueue_style('jquery-ui-all' );
                 
                 
-                wp_register_style( 'post-meta-validationEngine-css', PM_ASSECTS_URL.'/css/jquery/validationEngine.css' );
+                wp_register_style( 'post-meta-validationEngine-css', PM_ASSECTS_URL.'css/jquery/validationEngine.css' );
                 wp_enqueue_style('post-meta-validationEngine-css' );
-                wp_register_script( 'post-meta-validationEngine', PM_ASSECTS_URL.'/js/jquery/validationEngine.js'); 
+                wp_register_script( 'post-meta-validationEngine', PM_ASSECTS_URL.'js/jquery/validationEngine.js'); 
                 wp_enqueue_script('post-meta-validationEngine'); 
-                wp_register_script( 'post-meta-validationEngine-en', PM_ASSECTS_URL.'/js/jquery/validationEngine-en.js'); 
+                wp_register_script( 'post-meta-validationEngine-en', PM_ASSECTS_URL.'js/jquery/validationEngine-en.js'); 
                 wp_enqueue_script('post-meta-validationEngine-en');
                 
                  wp_register_script( 'post-meta-admin-script', PM_ASSECTS_URL.'js/post_meta_admin.js' );

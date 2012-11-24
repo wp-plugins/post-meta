@@ -18,10 +18,10 @@ if( !class_exists( 'pmSettingsController' ) ) :
             wp_enqueue_script('jquery-ui-tabs');
             wp_register_style( 'pluginCore-style', PM_ASSECTS_URL.'css/pluginCore.css' );
                 wp_enqueue_style('pluginCore-style' );
-            wp_register_style( 'post-meta-admin-style', PM_ASSECTS_URL.'/css/post_meta_admin.css' );
+            wp_register_style( 'post-meta-admin-style', PM_ASSECTS_URL.'css/post_meta_admin.css' );
             wp_enqueue_style('post-meta-admin-style' );
              
-            wp_register_script( 'post-meta-admin-script', PM_ASSECTS_URL.'/js/post_meta_admin.js'); 
+            wp_register_script( 'post-meta-admin-script', PM_ASSECTS_URL.'js/post_meta_admin.js'); 
             wp_enqueue_script('post-meta-admin-script' ); 
             wp_register_style( 'jquery-ui-all', PM_ASSECTS_URL.'css/ui/jquery.ui.all.css');
             wp_enqueue_style('jquery-ui-all' );

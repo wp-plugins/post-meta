@@ -113,7 +113,7 @@ jQuery(document).ready(function() {
                 jQuery(this).find('.duplicate-remove').show();
                 jQuery(this).find('.hndle').show();
                 if(arrayIndex>1){
-                    jQuery(this).find('input, select, textarea, .pm_img_upload_button, .pm_audio_upload_button, .pm_video_upload_button').attr('id',function(key,name){
+                    jQuery(this).find('input, select, textarea, .pm_img_upload_button, .pm_audio_upload_button, .pm_video_upload_button, .pm_file_upload_button').attr('id',function(key,name){
                         name =name+'_'+arrayIndex;
                         return name ;                 
                     });
