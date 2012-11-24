@@ -97,8 +97,15 @@ An answer to that question.
 2. screenshot-2
 3. screenshot-3
 4. screenshot-4
+5. screenshot-5
 
 == Changelog ==
+
+=1.0.5 (24 November, 2012)=
+* Fixed some jquery conflicting
+* Fixed preview function and shortcode(image,audio,video)
+* Add new audio player
+* Some Bug Free.
 
 =1.0.5 (16 November, 2012)=
 * Fixed Some linking error
