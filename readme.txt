@@ -55,13 +55,14 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 * For single group : **[post-meta type=group metakey=post_1 groupindex=1]**
 * For duplicate group: **[post-meta type=group metakey=post_1 groupindex=all]**
 
+NB: Shortcode will allow only for pro version [Get it Now](http://post-meta.com)
 For [Shortcode details](http://post-meta.com/shortcode/)
 
 = Functions =
 
  * [get_label()](http://post-meta.com/get_label/), [get_field()](http://post-meta.com/get_field/), [get_duplicate_field()](http://post-meta.com/get_duplicate_field/), [get_group()](http://post-meta.com/get_group/), [get_duplicate_group()](http://post-meta.com/get_duplicate_group/), [get_field_tpl()](http://post-meta.com/get_field_tpl/), [get_duplicate_field_tpl()](http://post-meta.com/get_duplicate_field_tpl/), [get_group_tpl()](http://post-meta.com/get_group_tpl/), [get_duplicate_group_tpl()](http://post-meta.com/get_duplicate_group_tpl/),[get_image()](http://post-meta.com/get_image/),[get_audio()](http://post-meta.com/get_audio/), [get_video()](http://post-meta.com/get_video/), [preview()](http://post-meta.com/preview/)
  
- For [Function details](http://post-meta.com/documentation/) 
+For [Function details](http://post-meta.com/documentation/) 
 
 = Upcoming Features: =
 * Will add more custom field
