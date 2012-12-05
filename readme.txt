@@ -23,7 +23,7 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 * Duplicate Field or Group supported
 * Sorting group and field by dragging
 * Preview image field with thumbnail size
-* Audio preview with player
+* Audio preview with player 
 * Video preview with video player
 * Smart shortcode supported with GUI
 * Import & export
