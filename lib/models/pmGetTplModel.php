@@ -190,7 +190,7 @@ class pmGetTplModel {
                                 }
                             }
                             $html = null;
-                            $html .="<h2>$groupTitle</h2>";
+                            /* $html .="<h2>$groupTitle</h2>"; */
                             if($fields){
                                 foreach($fields as $field){
                                     
@@ -284,7 +284,7 @@ class pmGetTplModel {
                                     $count_html="($i)";
                                 }
                                 
-                                $html .= "<h2>$groupTitle $count_html</h2>" ; 
+                                /* $html .= "<h2>$groupTitle $count_html</h2>" ; */ 
                                 if($fields){
                                     foreach($fields as $field){
                                         

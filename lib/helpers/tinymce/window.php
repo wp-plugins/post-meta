@@ -9,6 +9,7 @@ if ( !defined('ABSPATH') )
 <head>
 	<title>Add Post Meta Shortcode</title>
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php echo get_option('blog_charset'); ?>" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script language="javascript" type="text/javascript" src="<?php echo site_url(); ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
 	<script language="javascript" type="text/javascript" src="<?php echo site_url(); ?>/wp-includes/js/tinymce/utils/mctabs.js"></script>
 	<script language="javascript" type="text/javascript" src="<?php echo site_url(); ?>/wp-includes/js/jquery/jquery.js"></script>
@@ -19,7 +20,7 @@ if ( !defined('ABSPATH') )
 </head>
 <style>
 .pm_loading{
-    background: url('<?php echo PM_ASSECTS_URL ?>/css/jquery/loading.gif') no-repeat center center;
+    background: url('<?php echo PM_ASSECTS_URL ?>css/jquery/loading.gif') no-repeat center center;
     padding: 10px;
 }
 </style>
