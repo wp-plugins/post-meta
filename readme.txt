@@ -128,7 +128,7 @@ An answer to that question.
 * Include Import export feature (Only for pro version)
 
 = 1.0.2 =
-* Fixed some Internal error
+* Fixed some Internal error 
 * Make compatible with Custom post type and taxonomy
 
 = 1.0.1 =
