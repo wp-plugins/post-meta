@@ -38,7 +38,7 @@
 }
 .meta_option_field_selecor {
     display: inline-block;
-    margin: 2px;
+    margin: 2px !important;
     padding: 8px;
     text-align: center;
     width: 115px;
