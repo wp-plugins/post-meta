@@ -18,7 +18,7 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 
 
 = Features =
-* Fully jQuery and ajax based Management 
+* Fully jQuery and ajax based Management
 * Custom post Group and Field
 * Duplicate Field or Group supported
 * Sorting group and field by dragging
