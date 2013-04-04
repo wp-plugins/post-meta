@@ -27,7 +27,7 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 * Video preview with video player
 * Smart shortcode supported with GUI
 * Import & export
-* Managing Custom Post type
+* Managing Custom Post type 
 * Managing Custom Taxonomy
 
 = Custom availble field list =
