@@ -284,34 +284,6 @@ jQuery(document).ready(function() {
                 
                 });     
                 
-                /*
-                 metaKey = element.attr('meta_key');
-                        jQuery('#last_'+metaKey).val(function(e,n){ // Set the last meta key value
-                            return Number(n)-1;
-                        })
-                        targetClass= 'repeat-'+metaKey;
-                        //classSize = jQuery('.'+targetClass).size();
-                        a = jQuery(this).closest('.pm_group').find('.'+targetClass);
-                        classSize = jQuery(this).closest('.pm_group').find('.'+targetClass).size();
-                        alert(classSize);
-                        b=jQuery(this).parent().parent().parent().html();
-                            alert(b);
-                        if(classSize==2){
-                            jQuery('.'+targetClass).find('.pm_field_index').parents('em').hide();
-                            jQuery('.'+targetClass).find('input, select, textarea').attr('name','mofields['+metaKey+']');
-                            jQuery('.'+targetClass).find('.duplicate-remove').hide();
-                            jQuery('.'+targetClass).find('.hndle').hide();
-                            a.closest('.pm_field_group').css('border','none');
-                            
-                        }else{
-                            jQuery('.'+targetClass).each(function (index, value){
-                                jQuery(this).find('.pm_field_index').parents('em').css('display','inline');
-                                jQuery(this).find('.pm_field_index').html(index+1);
-                                arrayIndex=index+1;
-                                jQuery(this).find('input, select, textarea').attr('name','mofields['+metaKey+']['+arrayIndex+']');
-                             });
-                            
-                        } */
                    
              return false;
         });
@@ -515,7 +487,7 @@ function pmDeleteFile(element){
                 		type: "post",
                         url: ajaxurl,
                         data: data,
-                		beforeSend: function() { jQuery('.file_preview_thum').append(jQuery('Loading..')); },
+                		beforeSend: function() { jQuery('.file_preview_thum').append(jQuery("<span class='pm_loading'></span>")); },
                 		success: function( data ){
                 		      item.parents('.file_input').children('.pc-error').remove();
                              item.parents('.file_input').parents('.file_wrapper').children('.file_preview').children('.file_preview_thum').html(data);
