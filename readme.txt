@@ -101,34 +101,34 @@ An answer to that question.
 
 == Changelog ==
 
-=1.0.5 (24 November, 2012)=
+= 1.0.5 (24 November, 2012) =
 * Fixed some jquery conflicting
 * Fixed preview function and shortcode(image,audio,video)
 * Add new audio player
 * Some Bug Free.
 
-=1.0.5 (16 November, 2012)=
+= 1.0.5 (16 November, 2012) =
 * Fixed Some linking error
 * Add User privacy for file download link
 * Add New function for API
 
-=1.0.4 (4th November, 2012)=
+= 1.0.4 (4th November, 2012) =
 * Add API with powerful function
 * Remove bug about File upload 
 
-=1.0.3 (2nd November, 2012)=
+= 1.0.3 (2nd November, 2012) =
 * Add extra custom meta field
 * Shortcode with ui is added (Only for pro version)
 * Include Import export feature (Only for pro version)
 
-=1.0.2=
+= 1.0.2 =
 * Fixed some Internal error
 * Make compatible with Custom post type and taxonomy
 
-=1.0.1=
+= 1.0.1 =
 * Manage custom post type and taxonomy
 
-=1.0.0=
+= 1.0.0 =
 * Initial Release
 
 == Upgrade notice ==
