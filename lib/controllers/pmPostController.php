@@ -110,10 +110,15 @@ if( !class_exists( 'pmPostController' ) ) :
                 wp_register_script( 'post-meta-validationEngine-en', PM_ASSECTS_URL.'js/jquery/validationEngine-en.js'); 
                 wp_enqueue_script('post-meta-validationEngine-en');
                 
-                 wp_register_script( 'post-meta-admin-script', PM_ASSECTS_URL.'js/post_meta_admin.js' );
+                wp_register_script( 'post-meta-admin-script', PM_ASSECTS_URL.'js/post_meta_admin.js' );
                 wp_enqueue_script('post-meta-admin-script' );
-                 wp_register_script( 'post-meta-post-script', PM_ASSECTS_URL.'js/post_meta_post.js',array('jquery','media-upload','thickbox','jquery-fileuploader') );
-                wp_enqueue_script('post-meta-post-script' );       
+                 
+                $screen = get_current_screen();
+                if ( $screen->base != "edit" ){
+	                wp_register_script( 'post-meta-post-script', PM_ASSECTS_URL.'js/post_meta_post.js',array('jquery','media-upload','thickbox','jquery-fileuploader') );
+					wp_enqueue_script('post-meta-post-script' ); 
+                 
+                }       
                 
                 endif;
             }
