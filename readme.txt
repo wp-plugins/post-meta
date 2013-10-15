@@ -101,11 +101,12 @@ An answer to that question.
 
 == Changelog ==
 
-= 1.0.5 (24 November, 2012) =
-* Fixed some jquery conflicting
-* Fixed preview function and shortcode(image,audio,video)
-* Add new audio player
-* Some Bug Free.
+= 1.0.7 (24 May, 2013) =
+* Change some UI Design 
+* Also fixed some Jquery problem
+
+= 1.0.6 (1 January, 2013) =
+* Compatible with newer wordpress version 
 
 = 1.0.5 (16 November, 2012) =
 * Fixed Some linking error
