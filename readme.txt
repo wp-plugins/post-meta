@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. Shortcode with GUI, Import & export and many more.
 
-== Description == 
+== Description ==
 
 [Plugin Homepage](http://post-meta.com) | [Documentation](http://post-meta.com/documentation/) | [Video Tutorial](http://post-meta.com/video-tutorial/) | [Screenshots](http://post-meta.com/screenshots/)
 
