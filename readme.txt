@@ -104,6 +104,7 @@ An answer to that question.
 = 1.0.7 (24 May, 2013) =
 * Change some UI Design 
 * Also fixed some Jquery problem
+* Update some API function
 
 = 1.0.6 (1 January, 2013) =
 * Compatible with newer wordpress version 
