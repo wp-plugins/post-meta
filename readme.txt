@@ -3,8 +3,8 @@ Contributors: Mahbubur Rahman
 Donate link: http://post-meta.com/donation/ 
 Tags: Post Meta, Meta field, Option Meta, Custom post field,Post extra field,Post extra options custom field, custom taxonomy, taxonomy, custom post type, post type,admin, advanced, custom, custom field, edit, field, file, image, magic fields, matrix, more fields, Post, repeater, simple fields, Meta field, Custom Field
 Requires at least: 3.0
-Tested up to: 3.6
-Stable tag: 1.0.7
+Tested up to: 3.8
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,13 +101,30 @@ An answer to that question.
 
 == Changelog ==
 
+= 1.0.8 (14 December, 2013) =
+* Change some UI Design for wp v3.8
+* Using Jquery Online library 
+* Also fixed some Jquery problem
+* Update some API function to remove blank label entry
+
+= 1.0.7 (24 May, 2013) =
+* Change some UI Design 
+* Also fixed some Jquery problem
+* Update some API function
+
+= 1.0.6 (1 January, 2013) =
+* Compatible with newer wordpress version 
+
+= 1.0.5 (16 November, 2012) =
+* Fixed Some linking error
+* Add User privacy for file download link
+* Add New function for API
+
 =1.0.5 (24 November, 2012)=
 * Fixed some jquery conflicting
 * Fixed preview function and shortcode(image,audio,video)
 * Add new audio player
 * Some Bug Free.
-
-=1.0.5 (16 November, 2012)=
 * Fixed Some linking error
 * Add User privacy for file download link
 * Add New function for API
