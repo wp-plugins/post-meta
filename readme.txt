@@ -101,6 +101,12 @@ An answer to that question.
 
 == Changelog ==
 
+= 1.0.8 (14 December, 2013) =
+* Change some UI Design for wp v3.8
+* Using Jquery Online library 
+* Also fixed some Jquery problem
+* Update some API function to remove blank label entry
+
 = 1.0.7 (24 May, 2013) =
 * Change some UI Design 
 * Also fixed some Jquery problem
@@ -110,6 +116,15 @@ An answer to that question.
 * Compatible with newer wordpress version 
 
 = 1.0.5 (16 November, 2012) =
+* Fixed Some linking error
+* Add User privacy for file download link
+* Add New function for API
+
+=1.0.5 (24 November, 2012)=
+* Fixed some jquery conflicting
+* Fixed preview function and shortcode(image,audio,video)
+* Add new audio player
+* Some Bug Free.
 * Fixed Some linking error
 * Add User privacy for file download link
 * Add New function for API
