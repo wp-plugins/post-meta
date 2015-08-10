@@ -1,14 +1,14 @@
 === Post Meta ===
 Contributors: Mahbubur Rahman
-Donate link: http://post-meta.com/donation/ 
+Donate link: http://post-meta.com/donation/
 Tags: Post Meta, Meta field, Option Meta, Custom post field,Post extra field,Post extra options custom field, custom taxonomy, taxonomy, custom post type, post type,admin, advanced, custom, custom field, edit, field, file, image, magic fields, matrix, more fields, Post, repeater, simple fields, Meta field, Custom Field
 Requires at least: 3.0
-Tested up to: 3.8
-Stable tag: 1.0.8 
+Tested up to: 4.2.4
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. Shortcode with GUI, Import & export and many more. 
+Post Meta is a wordpress custom post field, post type and taxonomy management Plugin. Shortcode with GUI, Import & export and many more.
 
 == Description ==
 
@@ -44,7 +44,7 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 * Select One (Radio)
 * Hidden Field
 * Image Media
-* Image Upload 
+* Image Upload
 * Audio Upload
 * Video Upload
 * File Upload
@@ -55,12 +55,12 @@ Post Meta is a wordpress custom post field, post type and taxonomy management Pl
 = Functions =
 
  * get_label(), get_field(), get_duplicate_field(), get_group(), get_duplicate_group(), get_field_tpl(), get_duplicate_field_tpl(), get_group_tpl(), get_duplicate_group_tpl(),get_image(),get_audio(), get_video(), preview()
- 
- For [Function details](http://post-meta.com/documentation/) 
+
+ For [Function details](http://post-meta.com/documentation/)
 
 = Upcoming Features: =
 * Will add more custom field
-* ...and any suggestions that we may receive... 
+* ...and any suggestions that we may receive...
 
 
 = Please Vote and Enjoy =
@@ -103,17 +103,17 @@ An answer to that question.
 
 = 1.0.8 (14 December, 2013) =
 * Change some UI Design for wp v3.8
-* Using Jquery Online library 
+* Using Jquery Online library
 * Also fixed some Jquery problem
 * Update some API function to remove blank label entry
 
 = 1.0.7 (24 May, 2013) =
-* Change some UI Design 
+* Change some UI Design
 * Also fixed some Jquery problem
 * Update some API function
 
 = 1.0.6 (1 January, 2013) =
-* Compatible with newer wordpress version 
+* Compatible with newer wordpress version
 
 = 1.0.5 (16 November, 2012) =
 * Fixed Some linking error
@@ -131,7 +131,7 @@ An answer to that question.
 
 = 1.0.4 (4th November, 2012) =
 * Add API with powerful function
-* Remove bug about File upload 
+* Remove bug about File upload
 
 = 1.0.3 (2nd November, 2012) =
 * Add extra custom meta field
